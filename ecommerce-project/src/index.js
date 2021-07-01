@@ -10,7 +10,7 @@ import ReactDOM from "react-dom";
 import { create } from "jss";
 import { createMuiTheme } from "@material-ui/core";
 import rtl from "jss-rtl";
-// import store from "./redux/store";
+import store from "./redux/store";
 
 const theme = createMuiTheme({
   // overrides: {
@@ -35,13 +35,13 @@ const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <Provider store={store}> */}
+    <Provider store={store}>
       <StylesProvider jss={jss}>
         <ThemeProvider theme={theme}>
           <App />
         </ThemeProvider>
       </StylesProvider>
-    {/* </Provider> */}
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
