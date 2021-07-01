@@ -13,6 +13,20 @@ import rtl from "jss-rtl";
 // import store from "./redux/store";
 
 const theme = createMuiTheme({
+  // overrides: {
+  //   MuiOutlinedInput: {
+  //     root: {
+  //       // height:"15px",
+  //       backgroundColor: 'rgba(255,255,255,0.8)',
+  //       '&:hover': {
+  //         backgroundColor: 'rgba(255,255,255,1)'
+  //       },
+  //       '&.Mui-focused': {
+  //         backgroundColor: 'rgba(255,255,255,1)'
+  //       }
+  //     }
+  //   }
+  // },
   direction: "rtl",
 });
 
