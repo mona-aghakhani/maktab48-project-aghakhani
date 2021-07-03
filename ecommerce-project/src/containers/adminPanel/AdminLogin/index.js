@@ -15,10 +15,10 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { login } from "../../api/login";
+import { login } from "../../../api/login";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setToken, getProducts } from "../../redux/actions/productActions";
+import { setToken, getProducts } from "../../../store/actions/productActions";
 // function Copyright() {
 //   return (
 //     <Typography variant="body2" color="textSecondary" align="center">
@@ -36,15 +36,14 @@ const theme = createMuiTheme({
 });
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(12),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    // minWidth:"300px",
+    padding:theme.spacing(4)
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
+ 
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
@@ -54,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({}) {
+export default function AdminLogin({}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
@@ -87,13 +86,11 @@ export default function SignIn({}) {
   return (
      
     
-      <Container  component="main" maxWidth="sm">
-           <Card minWidth="sm">
+      <Container component="main" maxWidth="sm">
+           <Card className={classes.paper}>
         {/* <CssBaseline /> */}
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            {/* <LockOutlinedIcon /> */}
-          </Avatar>
+        {/* <div className={classes.paper}> */}
+        
           <Typography component="h1" variant="h5">
             فرم ورود
           </Typography>
@@ -191,10 +188,10 @@ export default function SignIn({}) {
               </Grid>
             </Grid>
           </form>
-        </div>
-        <Box mt={8}>{/* <Copyright /> */}</Box>
+        {/* </div> */}
+        
         </Card>
-      </Container>
+       </Container>
     
    
   );

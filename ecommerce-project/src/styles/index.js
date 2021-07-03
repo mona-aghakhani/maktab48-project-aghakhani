@@ -20,6 +20,9 @@ export const theme = createMuiTheme({
       ].join(','),
     },
     palette: {
+      background: {
+        default: "rgb(243,239,248)"
+      },
         primary: {
           // light: will be calculated from palette.primary.main,
           main: "rgb(255,126,101)",

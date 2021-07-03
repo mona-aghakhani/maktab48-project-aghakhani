@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -67,13 +68,13 @@ import { useStyles, useOutlinedInputStyles } from "./styles";
 //   },
 // }));
 
-function Header() {
+function MainHeader() {
   const { container, pargraph, header, headerText, icon, appbar, search,searchIcon ,inputRoot,inputInput} =
     useStyles();
   const outlinedInputClasses = useOutlinedInputStyles();
   return (
     <>
-      <AppBar className={appbar}>
+      <AppBar className={appbar} >
         <Toolbar className={header}>
           
           <Typography variant="h6" noWrap>
@@ -95,7 +96,9 @@ function Header() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          
+          <NavLink to="/admin/login" exact >
+      login
+      </NavLink>
             {/* <div
             // className={classes.searchIcon}
             >
@@ -130,4 +133,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default MainHeader;

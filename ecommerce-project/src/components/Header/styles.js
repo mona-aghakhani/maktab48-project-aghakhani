@@ -22,6 +22,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   appbar:{
       display:"flex",
+      flexGrow: 1,
   },
 //   search:{
 //       height:"15px",
