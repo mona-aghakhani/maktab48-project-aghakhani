@@ -4,15 +4,16 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  InputBase,
+  InputBase,Box,
   OutlinedInput,
-  TextField,IconButton
+  TextField,IconButton, Button, Grid
 } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import { useStyles, useOutlinedInputStyles } from "./styles";
+import logome from "../../images/logome.png"
 // const useStyles = makeStyles((theme) => ({
 //   root: {
 //     flexGrow: 1,
@@ -74,12 +75,20 @@ function MainHeader() {
   const outlinedInputClasses = useOutlinedInputStyles();
   return (
     <>
-      <AppBar className={appbar} position="relative" >
-        <Toolbar className={header}>
-          
+      <AppBar color="secondary" className={appbar} position="relative" >
+        <Toolbar  className={header}>
+          <Grid container  alignItems="center"> 
+            <Grid item>
+          {/* <Box > */}
+            <img src={logome} style={{width:"100px",height:"50px"}}  />
+            </Grid>
+            {/* </Box> */}
+            <Grid item>
           <Typography variant="h6" noWrap>
             فروشگاه من
           </Typography>
+          </Grid>
+          </Grid>
           {/* <div
           //    className={classes.search}
           > */}
@@ -96,9 +105,7 @@ function MainHeader() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <NavLink to="/admin/login" exact >
-      login
-      </NavLink>
+        
             {/* <div
             // className={classes.searchIcon}
             >
@@ -125,7 +132,7 @@ function MainHeader() {
               //   }}
               inputProps={{ "aria-label": "search" }}
             /> */}
-            <HomeIcon className={icon} />
+            <HomeIcon color="primary"/>
           {/* </div> */}
         </Toolbar>
       </AppBar>

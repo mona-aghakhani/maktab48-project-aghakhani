@@ -13,7 +13,7 @@ export const ProtectedRouters=(props)=>{
         {/* <ProtectedHeader/> */}
         <AppBar position="relative">protected</AppBar>
         <Switch>
-        <Route path="/admin/login" exact component={AdminLogin} />
+        {/* <Route path="/admin/login" exact component={AdminLogin} /> */}
             <ProtectedRoute path="/admin/products" exact component={Products} />
             <ProtectedRoute path="/admin/prices" exact component={Prices} />
             <ProtectedRoute path="/admin/orders" exact component={Orders} />

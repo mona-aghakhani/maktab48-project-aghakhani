@@ -2,5 +2,6 @@ export const COLORS = {
     mainColor: "rgb(213,171,235)",
     boldColor: "rgb(38,49,104)",
     iconColor: "rgb(255,126,101)",
-    hoverColorInput:"rgb(217,99,77)"
+    hoverColorInput:"rgb(217,99,77)",
+    textColor:"rgba(0, 0, 0, 0.87)"
   };

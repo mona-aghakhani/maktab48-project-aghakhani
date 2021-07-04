@@ -8,6 +8,7 @@ import ShoppingCart from "../containers/eCommerce/ShoppingCart";
 import Payment from "../containers/eCommerce/Payment";
 import SuccessPayment from "../containers/eCommerce/SuccessPayment";
 import FailedPayment from "../containers/eCommerce/FailedPayment";
+import PublicHeader from "../components/PublicHeader"
 // import AdminLogin from "../containers/eCommerce/AdminLogin";
 /*
  * separate public eCommerce website pages
@@ -15,8 +16,8 @@ import FailedPayment from "../containers/eCommerce/FailedPayment";
 export const PublicRouters = (props) => {
   return (
     <>
-      {/* <PublicHeader/> */}
-      <AppBar position="relative">public</AppBar>
+      <PublicHeader/>
+     
       <Switch>
         <Route path="/" exact component={ProductListing} />
         <Route

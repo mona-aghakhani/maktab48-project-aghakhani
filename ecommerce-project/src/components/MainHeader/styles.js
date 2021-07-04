@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     color: COLORS.textColor,
   },
   header: {
-    backgroundColor: COLORS.mainColor,
+    // backgroundColor: COLORS.mainColor,
     color:COLORS.boldColor,
     justifyContent:"space-between"
   },

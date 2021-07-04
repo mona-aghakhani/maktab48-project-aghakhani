@@ -24,7 +24,7 @@ const ProductListing = () => {
       };
       console.log(tasks);
     return (
-        <div style={{width:"100%",height:"500px",background:"yellow"}}>
+        <div style={{width:"100%",height:"500px"}}>
            {/* {tasks.map((task)=>(
                <>
                <div>{task.title}</div>

@@ -36,7 +36,7 @@ const theme = createMuiTheme({
 });
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(12),
+    margin: theme.spacing(12),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -97,11 +97,11 @@ export default function AdminLogin({}) {
           <form
             onSubmit={handleLogin}
             className={classes.form}
-            dir="rtl"
+           
             noValidate
             autoComplete="off"
           >
-            <div dir="rtl">
+            <div >
               <TextField
                 variant="outlined"
                 margin="normal"
