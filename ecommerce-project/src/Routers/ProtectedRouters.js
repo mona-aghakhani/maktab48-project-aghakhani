@@ -6,12 +6,13 @@ import AdminLogin from "../containers/adminPanel/AdminLogin"
 import Products from '../containers/adminPanel/Products';
 import Prices from '../containers/adminPanel/Prices';
 import Orders from '../containers/adminPanel/Orders';
-import NotFound from "../containers/NotFound"
+import NotFound from "../containers/NotFound";
+import ProtectedHeader from "../components/ProtectedHeader"
 export const ProtectedRouters=(props)=>{
     return(
         <>
-        {/* <ProtectedHeader/> */}
-        <AppBar position="relative">protected</AppBar>
+        <ProtectedHeader/>
+      
         <Switch>
         {/* <Route path="/admin/login" exact component={AdminLogin} /> */}
             <ProtectedRoute path="/admin/products" exact component={Products} />
