@@ -25,14 +25,14 @@ const ProductListing = () => {
       console.log(tasks);
     return (
         <div style={{width:"100%",height:"500px",background:"yellow"}}>
-           {tasks.map((task)=>(
+           {/* {tasks.map((task)=>(
                <>
                <div>{task.title}</div>
                <img style={{width:"100px",height:"100px"}} src={task.image}/>
                </>
            ))
 
-           }
+           } */}
         </div>
     )
 }

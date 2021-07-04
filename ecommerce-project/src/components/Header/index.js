@@ -74,7 +74,7 @@ function MainHeader() {
   const outlinedInputClasses = useOutlinedInputStyles();
   return (
     <>
-      <AppBar className={appbar} >
+      <AppBar className={appbar} position="relative" >
         <Toolbar className={header}>
           
           <Typography variant="h6" noWrap>
