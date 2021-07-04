@@ -1,9 +1,9 @@
 import { createMuiTheme} from "@material-ui/core";
-const primary = "#d204f2";
-const secondary = "#FF5C93";
-const warning = "#FFC260";
-const success = "#3CD4A0";
-const info = "#9013FE";
+// const primary = "#d204f2";
+// const secondary = "#FF5C93";
+// const warning = "#FFC260";
+// const success = "#3CD4A0";
+// const info = "#9013FE";
 export const theme = createMuiTheme({
     typography: {
       fontFamily: [
