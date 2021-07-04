@@ -1,0 +1,19 @@
+import { makeStyles } from "@material-ui/core";
+export const useStyles = makeStyles((theme) => ({
+    paper: {
+      margin: theme.spacing(12),
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      // minWidth:"300px",
+      padding:theme.spacing(4)
+    },
+   
+    form: {
+      width: "100%", // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));

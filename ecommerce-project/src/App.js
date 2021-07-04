@@ -16,10 +16,14 @@ function App() {
       <Router>
         <PageLayout>
           <Switch>
-            <Route path="/admin/login" exact component={AdminLogin} />
-
-            <Route path="/" component={PublicRouters} />
-            <Route path="/admin" component={ProtectedRouters} />
+         
+           
+          <Route path="/login" exact component={AdminLogin} />
+            
+            <Route path="/admin"  component={ProtectedRouters} />
+            <Route path="/"  component={PublicRouters} />
+            
+          
           </Switch>
         </PageLayout>
       </Router>

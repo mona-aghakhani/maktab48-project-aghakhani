@@ -31,12 +31,13 @@ export const theme = createMuiTheme({
         },
         secondary: {
           // light: '#0066ff',
-          main: "rgb(205,242,208)",
+          main: "rgb(214,230,215)",
           // dark: will be calculated from palette.secondary.main,
           contrastText: '#ffcc00',
         },
         text:{
-          secondary:"rgb(205,242,208)"
+          // secondary:"rgb(205,242,208)"
+          secondary:"rgb(214,230,215)"
         },
         // Used by `getContrastText()` to maximize the contrast between
         // the background and the text.

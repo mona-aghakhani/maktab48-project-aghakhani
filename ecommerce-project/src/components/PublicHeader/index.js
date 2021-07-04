@@ -23,7 +23,7 @@ const PublicHeader = () => {
                         <Grid item> */}
                         <Box className={box}>
                             <div>
-                    <NavLink to="/admin/login" exact className={link}  >
+                    <NavLink to="/login" exact className={link}  >
                         مدیریت 
                     </NavLink >
                       {/* <NavLink to="/admin/login" exact >

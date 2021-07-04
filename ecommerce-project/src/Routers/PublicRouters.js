@@ -21,7 +21,7 @@ export const PublicRouters = (props) => {
       <Switch>
         <Route path="/" exact component={ProductListing} />
         <Route
-          path="/products/:productCategory"
+          path="/listProducts/:productCategory"
           exact
           component={ProductGroup}
         />

@@ -1,57 +1,13 @@
 import React, { useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Card from "@material-ui/core/Card";
-
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { login } from "../../../api/login";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import {Button,TextField,FormControlLabel,Checkbox,Grid,Card,Container,Typography} from "@material-ui/core";
+import { useStyles } from "./styles";
+import { login } from "../../../api/login";
 import { setToken, getProducts } from "../../../store/actions/productActions";
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
-const theme = createMuiTheme({
-  direction: "rtl",
-});
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    margin: theme.spacing(12),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    // minWidth:"300px",
-    padding:theme.spacing(4)
-  },
- 
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+
+
+
 
 export default function AdminLogin({}) {
   const [email, setEmail] = useState("");
@@ -64,10 +20,11 @@ export default function AdminLogin({}) {
     if ((email, password)) {
       login(email, password)
         .then((res) => {
-          localStorage.setItem("token", res.data.token);
+          // localStorage.setItem("token", res.data.token);
           // window.location.reload();
-          dispatch(setToken(res.data.token));
-          history.push("/dashboard");
+          // dispatch(setToken(res.data.token));
+          localStorage.setItem("token", res.data.token);
+          history.push("/admin/products");
         })
         .catch((err) => console.error(err));
     }
@@ -151,6 +108,7 @@ export default function AdminLogin({}) {
               type="submit"
               fullWidth
               variant="contained"
+              disabled={!email && !password}
               color="primary"
               className={classes.submit}
             >
