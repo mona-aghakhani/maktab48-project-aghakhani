@@ -16,11 +16,11 @@ borderBottom:"1px solid rgb(234,149,63,0.9)"
 }
   },
   img:{
-    objectFit:'contain',
+    objectFit:'cover',
     objectPosition:'center',
-    width:50,
-    height:50,
-    borderRadius:0.5,
+    width:"60px",
+    height:"60px",
+    borderRadius:"50%",
   },
  
 });

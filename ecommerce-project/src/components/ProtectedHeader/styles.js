@@ -50,12 +50,12 @@ export const useStyles=makeStyles((theme)=>({
         // width:"60vw",
         minHeight:"10px",
         background:"beige",
-      
+    //   direction:"ltr"
         
 
     },
     indicator: {
-        backgroundColor: "blue"
+        backgroundColor: "rgb(103,182,108)"
       },
     tab:{
         fontSize: '12px',
