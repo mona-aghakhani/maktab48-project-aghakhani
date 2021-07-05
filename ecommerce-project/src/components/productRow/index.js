@@ -5,8 +5,16 @@ import { makeStyles } from '@material-ui/core/styles';
 // import Table from '@material-ui/core/Table';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
+import Box from '@material-ui/core/Box';
 const useStyles = makeStyles({
- 
+  box:{
+    textAlign:"center",
+    cursor:"pointer",
+// margin:"5px",
+'&:hover':{
+borderBottom:"1px solid rgb(234,149,63,0.9)"
+}
+  },
   img:{
     objectFit:'contain',
     objectPosition:'center',
@@ -39,8 +47,8 @@ function ProductRow({product}) {
             {product?.category}
             </TableCell>
             <TableCell align="left">
-           <span>ویرایش</span>
-           <span>حذف</span>
+           <Box className={classes.box}>ویرایش</Box>
+           <Box className={classes.box}>حذف</Box>
             </TableCell>
         
         

@@ -4,7 +4,8 @@ import { useHistory } from "react-router-dom";
 import {Button,TextField,FormControlLabel,Checkbox,Grid,Card,Container,Typography} from "@material-ui/core";
 import { useStyles } from "./styles";
 import { login } from "../../../api/login";
-import { setToken, getProducts } from "../../../store/actions/productActions";
+import {isLoggedIn} from "../../../utils/auth"
+// import { setToken, getProducts } from "../../../store/actions/productActions";
 
 
 
@@ -15,22 +16,29 @@ export default function AdminLogin({}) {
   const history = useHistory();
   const dispatch = useDispatch();
   const classes = useStyles();
+  /*
+  * chech token 
+  */
   const handleLogin = (e) => {
     e.preventDefault();
     if ((email, password)) {
       login(email, password)
         .then((res) => {
-          // localStorage.setItem("token", res.data.token);
-          // window.location.reload();
+          // console.log(res.data,"data");
           // dispatch(setToken(res.data.token));
           localStorage.setItem("token", res.data.token);
-          history.push("/admin/products");
+          // window.location.reload();
+          if (isLoggedIn()) {
+            history.push("/admin/products");
+          }
+          
         })
         .catch((err) => console.error(err));
     }
-    //  else {
-    //   toast.error("email and password fields could not be empty! ");
-    // }
+     else {
+      // toast.error("email and password fields could not be empty! ");
+      console.error("err")
+    }
   };
   const handleChange = (e) => {
     if (e.target.name === "email") {
@@ -104,7 +112,7 @@ export default function AdminLogin({}) {
             label="Remember me"
           /> */}
             <Button
-              onClick={handleLogin}
+              // onClick={handleLogin}
               type="submit"
               fullWidth
               variant="contained"

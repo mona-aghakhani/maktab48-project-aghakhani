@@ -102,9 +102,18 @@ const useStyles2 = makeStyles({
   table: {
     minWidth: 650,
     // direction:'rtl',
-    marginTop: 50,
-    borderTop: "1px solid gray",
+    // marginTop: 50,
+    // borderTop: "1px solid gray",
   },
+  paper:{
+    width:"80%",
+    // height:"200px",
+    // margin: theme.spacing(5),
+    // padding: theme.spacing(3)
+    margin:"20px auto",
+    // background:"lightgray"
+    background:"rgb(214,230,215,0.6)",
+  }
 });
 const Products = () => {
 /*
@@ -144,7 +153,9 @@ const products = useSelector((state) => state.allProducts.products);
   
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer 
+     className={classes.paper} 
+     component={Paper}>
       {products !== "Not found" && (
         <Table
           className={classes.table}
@@ -186,12 +197,12 @@ const products = useSelector((state) => state.allProducts.products);
             <TableRow>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "کل", value: -1 }]}
-                colSpan={4}
+                colSpan={3}
                 count={products.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{
-                  inputProps: { "aria-label": "تعداد ردیف در هر صفحه" },
+                  inputProps: { "aria-label": " rows per page " },
                   native: true,
                 }}
                 onChangePage={handleChangePage}
