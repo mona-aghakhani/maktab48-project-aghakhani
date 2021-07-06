@@ -17,7 +17,7 @@ export default function AdminLogin({}) {
   const dispatch = useDispatch();
   const classes = useStyles();
   /*
-  * chech token 
+  * check  admin-token 
   */
   const handleLogin = (e) => {
     e.preventDefault();

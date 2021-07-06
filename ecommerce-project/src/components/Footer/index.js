@@ -9,7 +9,9 @@ const Footer = () => {
   // let theme=useContext(ThemeContext)
 
   return (
-    <footer>
+    <footer
+    //  style={{margin:"90vh 0"}}
+     >
       <Box bgcolor="text.secondary">
         <Container maxWidth="lg">
           <Box textAlign="center">

@@ -10,9 +10,9 @@ import {
   jssPreset,
 } from "@material-ui/core/styles";
 import { create } from "jss";
-import { createMuiTheme,CssBaseline } from "@material-ui/core";
+import {CssBaseline } from "@material-ui/core";
 import rtl from "jss-rtl";
-import {theme} from "./styles/index"
+import {theme} from "./theme/index"
 
 
 // Configure JSS

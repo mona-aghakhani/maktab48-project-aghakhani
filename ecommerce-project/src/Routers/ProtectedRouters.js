@@ -12,7 +12,7 @@ export const ProtectedRouters=(props)=>{
     return(
         <>
         <ProtectedHeader/>
-      
+      {/* <main style={{height:"80vh"}}> */}
         <Switch>
         {/* <Route path="/admin/login" exact component={AdminLogin} /> */}
             <ProtectedRoute path="/admin/products" exact component={Products} />
@@ -21,6 +21,7 @@ export const ProtectedRouters=(props)=>{
             {/* <Route path="/admin/dashboard" exact component={Dashboard} /> */}
             <Route path="*" component={NotFound} />
         </Switch>
+        {/* </main> */}
         </>
     )
 }

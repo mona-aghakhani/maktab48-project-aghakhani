@@ -8,8 +8,10 @@ btn:{
     margin:"10px",
     // borderRadius:"50%",
     fontSize:"10px"
-   
-}
+},
+dialogTitle:{
+    fontSize:"17px",
+},
 
 
 }))

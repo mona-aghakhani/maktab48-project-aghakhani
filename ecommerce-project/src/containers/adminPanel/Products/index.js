@@ -24,6 +24,7 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import ProductRow from "../../../components/productRow";
 import {CustomDialog} from "../../../components/CustomDialog"
+import AddProduct from "../../../components/AddProduct";
 const useStyles1 = makeStyles((theme) => ({
   root: {
     flexShrink: 0,
@@ -128,7 +129,10 @@ const useStyles2 = makeStyles({
     "&:hover":{
       background:"primary",
     }
-  }
+  },
+  dialogTitle:{
+    fontSize:"17px",
+},
 });
 const Products = () => {
   /*
@@ -207,7 +211,7 @@ const handleDialogClose=()=>{
                       page * rowsPerPage + rowsPerPage
                     )
                   : products
-                ).map((row) => <ProductRow product={row} />)}
+                ).map((row) => <ProductRow key={row.id} product={row} />)}
 
               {emptyRows > 0 && (
                 <TableRow style={{ height: 53 * emptyRows }}>
@@ -237,8 +241,9 @@ const handleDialogClose=()=>{
         )}
       </TableContainer>
       </Container>
-      <CustomDialog isOpen={isOpen} handleClose={handleDialogClose} title='افزودن/ویرایش کالا'>
-        <h1>hi </h1>
+      <CustomDialog isOpen={isOpen} handleClose={handleDialogClose} className={classes.dialogTitle} title='افزودن/ویرایش کالا'>
+        {/* <h1>hi </h1> */}
+        <AddProduct/>
       </CustomDialog>
     </main>
   );

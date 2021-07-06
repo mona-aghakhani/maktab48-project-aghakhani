@@ -3,22 +3,26 @@ import {Button,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle,
 import {useStyles} from "./styles"
 // import PropTypes from 'prop-types'
 export const CustomDialog= ({isOpen,handleClose,title,subtitle,children}) =>{
-    const {btn} = useStyles();
+    const {btn,dialogTitle} = useStyles();
     return(
         <>
         <Dialog fullWidth maxWidth='xs' open={isOpen} onClose={handleClose}
         //  aria-labelledby='max-width-dialog-title'
          >
-             <Grid container justify="space-between">
-             <DialogTitle id="max-width-dialog-title">
+             <Grid container justify="space-between" alignItems="center">
+                 <Grid item >
+             <DialogTitle variant="h6" className={dialogTitle} >
                  {title}
              </DialogTitle>
+             </Grid>
+             <Grid item >
              <Button className={btn} onClick={handleClose} >
                      x
                  </Button>
                  </Grid>
+                 </Grid>
              <DialogContent>
-                 <DialogContentText>{subtitle}</DialogContentText>
+                 {/* <DialogContentText>{subtitle}</DialogContentText> */}
              {children}
              </DialogContent>
              <DialogActions>
