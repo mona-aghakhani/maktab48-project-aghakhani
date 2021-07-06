@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../../../store/actions/productActions";
 import PropTypes from "prop-types";
@@ -13,6 +13,9 @@ import {
   TableRow,
   TablePagination,
   Paper,
+  Typography,
+  Grid,
+  Button,Container
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
@@ -20,7 +23,7 @@ import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import ProductRow from "../../../components/productRow";
-
+import {CustomDialog} from "../../../components/CustomDialog"
 const useStyles1 = makeStyles((theme) => ({
   root: {
     flexShrink: 0,
@@ -105,22 +108,34 @@ const useStyles2 = makeStyles({
     // marginTop: 50,
     // borderTop: "1px solid gray",
   },
-  paper:{
-    width:"80%",
+  paper: {
+    width: "90%",
     // height:"200px",
     // margin: theme.spacing(5),
     // padding: theme.spacing(3)
-    margin:"20px auto",
+    margin: "20px auto",
     // background:"lightgray"
-    background:"rgb(214,230,215,0.6)",
+    background: "rgb(214,230,215,0.6)",
+  },
+  grid:{
+    width: "90%",
+    margin: "20px auto",
+
+  },
+  btn:{
+    background: "rgb(103,182,108)",
+    padding:" 5px 10px",
+    "&:hover":{
+      background:"primary",
+    }
   }
 });
 const Products = () => {
-/*
-* useselector & get products
-*/
-const products = useSelector((state) => state.allProducts.products);
-// console.log("products",products);
+  /*
+   * useselector & get products
+   */
+  const products = useSelector((state) => state.allProducts.products);
+  // console.log("products",products);
 
   /*
    * const states for pagination table
@@ -141,7 +156,6 @@ const products = useSelector((state) => state.allProducts.products);
     setPage(0);
   };
 
-
   const dispatch = useDispatch();
   /*
    * dispatch async action and get data
@@ -149,71 +163,84 @@ const products = useSelector((state) => state.allProducts.products);
   useEffect(() => {
     dispatch(getProducts());
   }, []);
+/*
+* setState for handle CustomDialog
+*/
+const [isOpen, setIsOpen] = useState(false)
 
-  
-
+const handleDialogOpen=()=>{
+  setIsOpen(true)
+}
+const handleDialogClose=()=>{
+  setIsOpen(false)
+}
   return (
-    <TableContainer 
-     className={classes.paper} 
-     component={Paper}>
-      {products !== "Not found" && (
-        <Table
-          className={classes.table}
-          size="small"
-          
-        >
-          <TableHead>
-            <TableRow>
-              {/* <TableCell>#</TableCell> */}
-              {/* <TableCell>code</TableCell> */}
-              <TableCell align="left">تصویر</TableCell>
-              <TableCell align="left">نام کالا</TableCell>
+    <main>
+      <Container maxWidth="md">
+      <Grid container justify="space-between" className={classes.grid} >
+        <Grid item>
+          <Typography>مدیریت کالاها</Typography>
+        </Grid>
+        <Grid item>
+          <Button className={classes.btn} onClick={handleDialogOpen} >افزودن کالا</Button>
+        </Grid>
+      </Grid>
+      <TableContainer className={classes.paper} component={Paper}>
+        {products !== "Not found" && (
+          <Table className={classes.table} size="small">
+            <TableHead>
+              <TableRow>
+                {/* <TableCell>#</TableCell> */}
+                {/* <TableCell>code</TableCell> */}
+                <TableCell align="left">تصویر</TableCell>
+                <TableCell align="left">نام کالا</TableCell>
 
-              <TableCell align="left">دسته بندی</TableCell>
-              <TableCell align="left">#</TableCell>
-             
-            </TableRow>
-          </TableHead>
-          <TableBody stripedRows>
-            {products !== "Not found" &&
-              (rowsPerPage > 0
-                ? products.slice(
-                    page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
-                  )
-                : products
-              ).map((row) => (
-                <ProductRow product={row} />
-          
-              ))}
-
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
+                <TableCell align="left">دسته بندی</TableCell>
+                <TableCell align="left">#</TableCell>
               </TableRow>
-            )}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[5, 10, 25, { label: "کل", value: -1 }]}
-                colSpan={3}
-                count={products.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                SelectProps={{
-                  inputProps: { "aria-label": " rows per page " },
-                  native: true,
-                }}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
-              />
-            </TableRow>
-          </TableFooter>
-        </Table>
-      )}
-    </TableContainer>
+            </TableHead>
+            <TableBody stripedRows>
+              {products !== "Not found" &&
+                (rowsPerPage > 0
+                  ? products.slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
+                  : products
+                ).map((row) => <ProductRow product={row} />)}
+
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )}
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25, { label: "کل", value: -1 }]}
+                  colSpan={3}
+                  count={products.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  SelectProps={{
+                    inputProps: { "aria-label": " rows per page " },
+                    native: true,
+                  }}
+                  onChangePage={handleChangePage}
+                  onChangeRowsPerPage={handleChangeRowsPerPage}
+                  ActionsComponent={TablePaginationActions}
+                />
+              </TableRow>
+            </TableFooter>
+          </Table>
+        )}
+      </TableContainer>
+      </Container>
+      <CustomDialog isOpen={isOpen} handleClose={handleDialogClose} title='افزودن/ویرایش کالا'>
+        <h1>hi </h1>
+      </CustomDialog>
+    </main>
   );
 };
 

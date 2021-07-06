@@ -5,7 +5,7 @@ export const useStyles=makeStyles((theme)=>({
         // minHeight:"40px",
         // display:"block",
         justifyContent:"space-between",
-        padding:"0 10px"
+        padding:"0 5px"
     },
     box:{
         display:"flex",
@@ -35,8 +35,11 @@ export const useStyles=makeStyles((theme)=>({
     link:{
         textDecoration:"none",
         color:"black",
-        fontSize:"12px",
-        margin:"10px"
+        fontSize:"10px",
+        margin:"10px",
+        '&:hover':{
+            textDecoration:"none"
+        }
         // border:"1px solid beige",
         // padding:"10px 15px",
         // background:"beige"
@@ -49,7 +52,7 @@ export const useStyles=makeStyles((theme)=>({
         // width:"30vw",
         // width:"60vw",
         minHeight:"10px",
-        background:"beige",
+        background:"rgba(245, 245, 220 , 0.85)",
     //   direction:"ltr"
         
 
@@ -70,6 +73,11 @@ export const useStyles=makeStyles((theme)=>({
         // background:"blue",
         // textDecoration:"none",
         minHeight:"10px",
+        color:"black",
+        textDecoration:"none",
+        '&:hover':{
+            textDecoration:"none"
+        }
         // width:"10vw"
         // color: COLORS.textColor,
     }

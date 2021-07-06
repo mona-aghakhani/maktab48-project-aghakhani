@@ -6,10 +6,10 @@ import {
   Box,
   Tab,
   Tabs,
-  Paper,
+  Paper,Link
 } from "@material-ui/core";
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+// import { NavLink, Link } from "react-router-dom";
 
 import { useStyles } from "./styles";
 
@@ -93,8 +93,8 @@ const PublicHeader = () => {
                           <NavLink to="/admin/orders" className={link} activeClassName={active}>سفارش ها</NavLink> */}
         </Grid>
         <Grid item md={2} sm={2} xs={12} className={item3}>
-          <Link to="/" className={link}>
-            بازگشت به سایت
+          <Link href="/" className={link}>
+            <Typography className={link} variant="body1" >بازگشت به سایت</Typography> 
           </Link>
         </Grid>
       </Grid>

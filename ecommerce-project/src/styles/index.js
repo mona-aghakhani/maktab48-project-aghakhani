@@ -5,24 +5,34 @@ import { createMuiTheme} from "@material-ui/core";
 // const success = "#3CD4A0";
 // const info = "#9013FE";
 export const theme = createMuiTheme({
-    typography: {
-      fontFamily: [
-        'shabnam',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-      ].join(','),
-    },
+  direction: "rtl",
+    // typography: {
+    //   fontFamily: [
+    //     'shabnam',
+    //     'BlinkMacSystemFont',
+    //     '"Segoe UI"',
+    //     'Roboto',
+    //     '"Helvetica Neue"',
+    //     'Arial',
+    //     'sans-serif',
+    //     '"Apple Color Emoji"',
+    //     '"Segoe UI Emoji"',
+    //     '"Segoe UI Symbol"',
+    //   ].join(','),
+    // },
     palette: {
+      // background: {
+      //   default: "#ededdc"
+      //   // default: "rgb(243,239,248)"
+      // },
+      text: {
+        primary: "#4A4A4A",
+        secondary: "rgb(214,230,215)",
+        hint: "#B9B9B9",
+      },
       background: {
-        default: "#ededdc"
-        // default: "rgb(243,239,248)"
+        default: "#ededdc",
+        light: "#F3F5FF",
       },
         primary: {
           // light: will be calculated from palette.primary.main,
@@ -36,10 +46,10 @@ export const theme = createMuiTheme({
           // dark: will be calculated from palette.secondary.main,
           contrastText: '#ffcc00',
         },
-        text:{
-          // secondary:"rgb(205,242,208)"
-          secondary:"rgb(214,230,215)"
-        },
+        // text:{
+        //   // secondary:"rgb(205,242,208)"
+        //   secondary:"rgb(214,230,215)"
+        // },
         // Used by `getContrastText()` to maximize the contrast between
         // the background and the text.
         contrastThreshold: 3,
@@ -48,6 +58,120 @@ export const theme = createMuiTheme({
         // E.g., shift from Red 500 to Red 300 or Red 700.
         tonalOffset: 0.2,
       },
+      customShadows: {
+        widget:
+          "0px 3px 11px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A",
+        widgetDark:
+          "0px 3px 18px 0px #4558A3B3, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A",
+        widgetWide:
+          "0px 12px 33px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A",
+      },
+      overrides: {
+        MuiBackdrop: {
+          root: {
+            backgroundColor: "rgba(74,74,74,0.4)",
+          },
+        },
+        MuiMenu: {
+          paper: {
+            boxShadow:
+              "0px 3px 11px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A",
+          },
+        },
+        MuiPaper: {
+          root: {
+            background:"#ededdc",
+            boxShadow:
+              "0px 3px 11px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A",
+          },
+        },
+        MuiDialog: {
+          paper: {
+            background:"#ededdc",
+            // boxShadow:
+            //   "0px 3px 11px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A",
+          },
+        },
+        MuiSelect: {
+          icon: {
+            color: "#B9B9B9",
+          },
+        },
+        MuiListItem: {
+          root: {
+            "&$selected": {
+              backgroundColor: "#F3F5FF !important",
+              "&:focus": {
+                backgroundColor: "#F3F5FF",
+              },
+            },
+          },
+          // button: {
+          //   "&:hover, &:focus": {
+          //     backgroundColor: "blue",
+          //   },
+          // },
+        },
+        MuiTouchRipple: {
+          child: {
+            backgroundColor: "white",
+            fontFamily: "Shabnam !important",
+
+          },
+        },
+        MuiTableRow: {
+          root: {
+            height: 56,
+          },
+        },
+        MuiTableCell: {
+          root: {
+            borderBottom: "1px solid rgba(224, 224, 224, .5)",
+          },
+          head: {
+            textAlign: "right",
+            fontSize: "0.75rem",
+            fontFamily: "Shabnam",
+          },
+          body: {
+            textAlign: "right",
+            fontSize: "0.75rem",
+            fontFamily: "Shabnam",
+          },
+        },
+        MuiButton:{
+          root:{
+            minWidth:"15px",
+          "&:hover": {
+            backgroundColor: "rgb(233,170,106,0.95)",
+          },
+        }
+        },
+        MuiTypography: {
+          root: {
+            fontFamily: "Shabnam !important",
+          },
+        },
+        MuiListItemText: {
+          root: {
+            textAlign: "right",
+          },
+        },
+        MUIDataTable: {
+          responsiveStacked: {
+            overFlowX: "hidden !important",
+          },
+          caption: {
+            display: "none",
+          },
+        },
+        MuiButtonBase:{
+          root:{
+            fontFamily: "Shabnam !important",
+          }
+        }
+
+      }
     // overrides: {
     //   MuiOutlinedInput: {
     //     root: {
@@ -62,5 +186,5 @@ export const theme = createMuiTheme({
     //     }
     //   }
     // },
-    direction: "rtl",
+   
   });
