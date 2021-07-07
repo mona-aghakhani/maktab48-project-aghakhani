@@ -67,6 +67,30 @@ export const deleteApiProduct = async (id) => {
 //     });
 // };
 
+/*
+*  PUT api for update product
+*/
+
+export const putUpdatedProduct = async (updateProduct,id) => {
+  let res = await axios({
+    method: "put",
+    url: `http://localhost:5000/products/${id}`,
+    headers: { "content-type": "application/json" },
+    data: JSON.stringify(updateProduct),
+  });
+  return res;
+};
+
+
+
+
+
+
+
+/*
+ * GET api for get a product
+ */
+
 export const getAProductById = async (id) => {
   let res = await axios({
     method: "get",

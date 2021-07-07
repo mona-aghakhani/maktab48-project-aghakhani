@@ -18,18 +18,19 @@ import {
 } from "@material-ui/core";
 import { useStyles } from "./styles";
 import { addNewProduct } from "../../store/actions/productActions";
+import { updatedProduct } from "../../store/actions/productActions";
 // import { isLoggedIn } from "../../../utils/auth";
 // import { setToken, getProducts } from "../../../store/actions/productActions";
 
-export default function AddProduct({handleClose}) {
+export default function AddProduct({handleClose,editedObj}) {
   const classes = useStyles();
   /*
    * set states for input values
    */
-  const [image, setImage] = useState("");
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [description, setDescription] = useState("");
+  const [image, setImage] = useState(editedObj.image);
+  const [title, setTitle] = useState(editedObj.title);
+  const [category, setCategory] = useState(editedObj.category);
+  const [description, setDescription] = useState(editedObj.description);
   //   const history = useHistory();
     const dispatch = useDispatch();
 
@@ -64,33 +65,17 @@ export default function AddProduct({handleClose}) {
   // }
   const handleLogin = (e) => {
     e.preventDefault();
-    // console.log("ok");
-    // setImage(filesContent[0]?.content);
-    // console.log(title,image,category,description);
-    // addAproduct();
-    let newProduct={ id:Math.floor(Math.random() * 1000000),title,image:filesContent[0]?.content,category,description};
-dispatch(addNewProduct(newProduct))
+    console.log(editedObj);
+    // if (editedObj) {
+    //   console.log(editedObj);
+    //   let updatedProductObj={ title,image:filesContent[0]?.content,category,description};
+    //   // let updatedProductObj={ title,image:filesContent[0]?.content,category,description};
+    // // dispatch(updatedProduct(updatedProductObj,editedObj.id))
+    // }else{
+    // let newProduct={ id:Math.floor(Math.random() * 1000000),title,image:filesContent[0]?.content,category,description};
+    // dispatch(addNewProduct(newProduct))
+    // }
     handleClose();
-    // setImage(filesContent[0]?.content);
-    // console.log(image,"img");
-    //   if ((email, password)) {
-    //     login(email, password)
-    //       .then((res) => {
-    //         // console.log(res.data,"data");
-    //         // dispatch(setToken(res.data.token));
-    //         localStorage.setItem("token", res.data.token);
-    //         // window.location.reload();
-    //         if (isLoggedIn()) {
-    //           history.push("/admin/products");
-    //         }
-
-    //       })
-    //       .catch((err) => console.error(err));
-    //   }
-    //    else {
-    //     // toast.error("email and password fields could not be empty! ");
-    //     console.error("err")
-    //   }
   };
   const handleChange = (e) => {
     setImage(filesContent[0]?.content);
@@ -105,7 +90,7 @@ dispatch(addNewProduct(newProduct))
     // }
     // console.log(image,"img");
   };
-  console.log(image,"img");
+  // console.log(image,"img");
   
 //   console.log(filesContent[0]?.content);
   return (
@@ -140,7 +125,8 @@ onChange={handleChange}
             <Grid item xs={2}>
               <button
                 type="button"
-                onClick={() =>openFileSelector()}
+                onClick={() =>{openFileSelector();
+                }}
                 className={classes.btnFile}
               >
                 Browse

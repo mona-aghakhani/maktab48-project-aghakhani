@@ -178,6 +178,17 @@ const handleDialogOpen=()=>{
 const handleDialogClose=()=>{
   setIsOpen(false)
 }
+/*
+* handle edit product & and setState for get edited product
+*/
+const [editedObj, setEditedObj] = useState(null)
+
+const handleDialogOpenEdit=(product)=>{
+  setIsOpen(true)
+  setEditedObj(product)
+  // console.log(editedObj);
+
+}
   return (
     <main>
       <Container maxWidth="md">
@@ -191,19 +202,19 @@ const handleDialogClose=()=>{
       </Grid>
       <TableContainer className={classes.paper} component={Paper}>
         {products !== "Not found" && (
-          <Table className={classes.table} size="small">
+          <Table className={classes.table} >
             <TableHead>
               <TableRow>
                 {/* <TableCell>#</TableCell> */}
                 {/* <TableCell>code</TableCell> */}
-                <TableCell align="left">تصویر</TableCell>
-                <TableCell align="left">نام کالا</TableCell>
+                <TableCell >تصویر</TableCell>
+                <TableCell >نام کالا</TableCell>
 
-                <TableCell align="left">دسته بندی</TableCell>
-                <TableCell align="left">#</TableCell>
+                <TableCell >دسته بندی</TableCell>
+                <TableCell ></TableCell>
               </TableRow>
             </TableHead>
-            <TableBody stripedRows>
+            <TableBody >
               {products !== "Not found" &&
                 (rowsPerPage > 0
                   ? products.slice(
@@ -211,11 +222,14 @@ const handleDialogClose=()=>{
                       page * rowsPerPage + rowsPerPage
                     )
                   : products
-                ).map((row) => <ProductRow key={row.id} product={row} />)}
+                ).map((row) =>
+                 <ProductRow handleOpen={handleDialogOpenEdit} key={row.id} product={row} />)}
 
               {emptyRows > 0 && (
                 <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={6} />
+                  <TableCell 
+                  // colSpan={6}
+                   />
                 </TableRow>
               )}
             </TableBody>
@@ -228,7 +242,7 @@ const handleDialogClose=()=>{
                   rowsPerPage={rowsPerPage}
                   page={page}
                   SelectProps={{
-                    inputProps: { "aria-label": " rows per page " },
+                    inputProps: { "aria-label": "تعداد ردیف در هر صفحه " },
                     native: true,
                   }}
                   onChangePage={handleChangePage}
@@ -243,7 +257,7 @@ const handleDialogClose=()=>{
       </Container>
       <CustomDialog isOpen={isOpen} handleClose={handleDialogClose} className={classes.dialogTitle} title='افزودن/ویرایش کالا'>
         {/* <h1>hi </h1> */}
-        <AddProduct handleClose={handleDialogClose}/>
+        <AddProduct handleClose={handleDialogClose} editedObj={editedObj} />
       </CustomDialog>
     </main>
   );

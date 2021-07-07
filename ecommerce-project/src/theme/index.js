@@ -47,21 +47,9 @@ export const theme = createMuiTheme({
       // dark: will be calculated from palette.secondary.main,
       contrastText: "#ffcc00",
     },
-
-    // success: {
-    //   main: "rgb(103,182,108)",
-
-    // },
-    // text:{
-    //   // secondary:"rgb(205,242,208)"
-    //   secondary:"rgb(214,230,215)"
-    // },
-    // Used by `getContrastText()` to maximize the contrast between
-    // the background and the text.
+    
     contrastThreshold: 3,
-    // Used by the functions below to shift a color's luminance by approximately
-    // two indexes within its tonal palette.
-    // E.g., shift from Red 500 to Red 300 or Red 700.
+    
     tonalOffset: 0.2,
   },
   customShadows: {
@@ -100,7 +88,7 @@ export const theme = createMuiTheme({
     },
     MuiSelect: {
       root:{
-        fontFamily: "Shabnam !important",
+        // fontFamily: "Shabnam !important",
       },
       icon: {
         color: "#B9B9B9",
@@ -136,15 +124,19 @@ export const theme = createMuiTheme({
     MuiTableCell: {
       root: {
         borderBottom: "1px solid rgba(224, 224, 224, .5)",
+        textAlign:"center",
+        // padding:"5px"
       },
       head: {
-        textAlign: "right",
-        fontSize: "0.75rem",
+        // textAlign: "right",
+        textAlign:"center",
+        fontSize: "0.90rem",
         // fontFamily: "Shabnam",
       },
       body: {
-        textAlign: "right",
-        fontSize: "0.75rem",
+        // textAlign: "right",
+        textAlign:"center",
+        fontSize: "0.85rem",
         // fontFamily: "Shabnam",
       },
     },

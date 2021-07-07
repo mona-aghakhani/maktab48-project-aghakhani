@@ -26,7 +26,7 @@ borderBottom:"1px solid rgb(234,149,63,0.9)"
   },
  
 });
-function ProductRow({product}) {
+function ProductRow({product,handleOpen}) {
   let history=useHistory()
   const classes = useStyles();
   const dispatch = useDispatch()
@@ -42,15 +42,15 @@ function ProductRow({product}) {
           {product?.id}
         </TableCell> */}
         {/* <TableCell align="right">{user?.code}</TableCell> */}
-        <TableCell align="left"><img className={classes.img} src={product?.image}/></TableCell>
-        <TableCell align="left">
+        <TableCell ><img className={classes.img} src={product?.image}/></TableCell>
+        <TableCell >
             {product?.title}
             </TableCell>
-        <TableCell align="left">
+        <TableCell >
             {product?.category}
             </TableCell>
-            <TableCell align="left">
-           <Box className={classes.box}>ویرایش</Box>
+            <TableCell >
+           <Box onClick={()=>handleOpen(product)} className={classes.box}>ویرایش</Box>
            <Box onClick={()=>dispatch(deleteProductById(product.id))} className={classes.box}>حذف</Box>
             </TableCell>
         
