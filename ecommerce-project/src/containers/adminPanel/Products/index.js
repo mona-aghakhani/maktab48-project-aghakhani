@@ -243,7 +243,7 @@ const handleDialogClose=()=>{
       </Container>
       <CustomDialog isOpen={isOpen} handleClose={handleDialogClose} className={classes.dialogTitle} title='افزودن/ویرایش کالا'>
         {/* <h1>hi </h1> */}
-        <AddProduct/>
+        <AddProduct handleClose={handleDialogClose}/>
       </CustomDialog>
     </main>
   );

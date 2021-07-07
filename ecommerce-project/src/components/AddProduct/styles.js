@@ -26,7 +26,8 @@ btnFile:{
     cursor:"pointer"
 },
 label:{
-    color:"rgba(154,154,154,0.6)"
+    color:"rgba(154,154,154,0.6)",
+    fontSize:"11px"
 }
 
 

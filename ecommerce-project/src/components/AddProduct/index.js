@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useFilePicker } from "use-file-picker";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 // import { useHistory } from "react-router-dom";
 import {
   Button,
@@ -17,11 +17,11 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import { useStyles } from "./styles";
-// import { login } from "../../../api/login";
+import { addNewProduct } from "../../store/actions/productActions";
 // import { isLoggedIn } from "../../../utils/auth";
 // import { setToken, getProducts } from "../../../store/actions/productActions";
 
-export default function AddProduct({}) {
+export default function AddProduct({handleClose}) {
   const classes = useStyles();
   /*
    * set states for input values
@@ -31,7 +31,7 @@ export default function AddProduct({}) {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   //   const history = useHistory();
-  //   const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
   /*
    * 'use-file-picker' : Simple react hook to open browser file selector.
@@ -58,9 +58,21 @@ export default function AddProduct({}) {
   if (errors.length) {
     return <div>Error...</div>;
   }
-
+  // const addAproduct=()=>{
+  //   let newProduct={ id:Math.floor(Math.random() * 1000000),title,image:filesContent[0]?.content,category,description}
+  //   console.log(newProduct);
+  // }
   const handleLogin = (e) => {
     e.preventDefault();
+    // console.log("ok");
+    // setImage(filesContent[0]?.content);
+    // console.log(title,image,category,description);
+    // addAproduct();
+    let newProduct={ id:Math.floor(Math.random() * 1000000),title,image:filesContent[0]?.content,category,description};
+dispatch(addNewProduct(newProduct))
+    handleClose();
+    // setImage(filesContent[0]?.content);
+    // console.log(image,"img");
     //   if ((email, password)) {
     //     login(email, password)
     //       .then((res) => {
@@ -81,16 +93,21 @@ export default function AddProduct({}) {
     //   }
   };
   const handleChange = (e) => {
-    if (e.target.name === "dataImg") {
-      console.log("ok");
+    setImage(filesContent[0]?.content);
+    // if (e.target.name === "image") {
+    //   console.log("ok");
 
-      setImage(e.target.files);
-      console.log(image);
-    } else {
-      // setPassword(e.target.value);
-    }
+    // //   setImage(filesContent[0]?.content);
+    // //   setImage(e.target.files);
+    //   console.log(image,"img");
+    // } else {
+    //   // setPassword(e.target.value);
+    // }
+    // console.log(image,"img");
   };
-  console.log(filesContent[0]?.content);
+  console.log(image,"img");
+  
+//   console.log(filesContent[0]?.content);
   return (
     <Container component="main" maxWidth="sm">
       <form
@@ -113,15 +130,17 @@ export default function AddProduct({}) {
                 placeholder=" تصویر کالا"
                 name="image"
                 // margin="normal"
-                disabled
+                // disabled
                 className={classes.input}
                 fullWidth
+value={image}
+onChange={handleChange}
               />
             </Grid>
             <Grid item xs={2}>
               <button
                 type="button"
-                onClick={() => openFileSelector()}
+                onClick={() =>openFileSelector()}
                 className={classes.btnFile}
               >
                 Browse
@@ -134,6 +153,9 @@ export default function AddProduct({}) {
               placeholder=" نام کالا "
               required
               fullWidth
+              name="نام"
+              value={title}
+              onChange={(e)=>setTitle(e.target.value)}
             />
           </Grid>
           <Grid xs={12} item>
@@ -151,17 +173,18 @@ export default function AddProduct({}) {
               <Select
                 labelId="demo-simple-select-outlined-label"
                 id="demo-simple-select-outlined"
-                //   value={age}
-                onChange={handleChange}
-                label="Age"
+                  value={category}
+                
+                onChange={(e)=>setCategory(e.target.value)}
+                label="دسته بندی"
               >
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={10}>خواروبار</MenuItem>
-                <MenuItem value={20}>لبنیات</MenuItem>
-                <MenuItem value={30}>نوشیدنی</MenuItem>
-                <MenuItem value={30}>شوینده</MenuItem>
+                <MenuItem value={"خواروبار"}>خواروبار</MenuItem>
+                <MenuItem value={"لبنیات"}>لبنیات</MenuItem>
+                <MenuItem value={"نوشیدنی"}>نوشیدنی</MenuItem>
+                <MenuItem value={"شوینده"}>شوینده</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -173,6 +196,8 @@ export default function AddProduct({}) {
               required
               rows={2}
               rowsMax={4}
+              value={description}
+              onChange={(e)=>setDescription(e.target.value)}
             />
           </Grid>
           <Grid container xs={12} justify="center">

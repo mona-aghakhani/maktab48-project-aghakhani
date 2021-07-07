@@ -1,5 +1,9 @@
 import axios from "axios";
 
+/*
+* get api for 
+*/
+
 export const getAllProducts = async () => {
   let res = await axios({
     method: "get",
@@ -8,6 +12,21 @@ export const getAllProducts = async () => {
   }).catch((err) => console.log(err));
   return res;
 };
+
+/*
+* api post for add data
+*/
+export const postNewProduct = async (newProduct) => {
+  let res = await axios({
+    method: "post",
+    url: " http://localhost:5000/products",
+    headers: { "content-type": "application/json" },
+    data: JSON.stringify(newProduct),
+  });
+  return res;
+};
+
+
 
 export const getAProductById = async (id) => {
   let res = await axios({
@@ -18,26 +37,3 @@ export const getAProductById = async (id) => {
   return res;
 };
 
-// axios({
-//     method: 'get',
-//     url: 'http://bit.ly/2mTM3nY',
-//     responseType: 'stream'
-//   })
-//     .then(function (response) {
-//       response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
-//     });
-// export const 
-
-// export const getAllProduct = async (email, password) => {
-//   let res = await axios({
-//     method: "get",
-//     url: 'https://fakestoreapi.com/products',
-//     headers: { "content-type": "application/json" },
-//     data: JSON.stringify({
-//       email,
-//       password,
-//     }),
-//   });
-// //   return res;
-// const data=await res.json()
-// };

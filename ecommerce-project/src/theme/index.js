@@ -6,20 +6,21 @@ import { createMuiTheme } from "@material-ui/core";
 // const info = "#9013FE";
 export const theme = createMuiTheme({
   direction: "rtl",
-  // typography: {
-  //   fontFamily: [
-  //     'shabnam',
-  //     'BlinkMacSystemFont',
-  //     '"Segoe UI"',
-  //     'Roboto',
-  //     '"Helvetica Neue"',
-  //     'Arial',
-  //     'sans-serif',
-  //     '"Apple Color Emoji"',
-  //     '"Segoe UI Emoji"',
-  //     '"Segoe UI Symbol"',
-  //   ].join(','),
-  // },
+  typography: {
+    fontFamily: [
+      'BRoya',
+      'shabnam',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+  },
   palette: {
     // background: {
     //   default: "#ededdc"
@@ -98,9 +99,13 @@ export const theme = createMuiTheme({
       },
     },
     MuiSelect: {
+      root:{
+        fontFamily: "Shabnam !important",
+      },
       icon: {
         color: "#B9B9B9",
       },
+
     },
     MuiListItem: {
       root: {
@@ -120,7 +125,7 @@ export const theme = createMuiTheme({
     MuiTouchRipple: {
       child: {
         backgroundColor: "white",
-        fontFamily: "Shabnam !important",
+        // fontFamily: "Shabnam !important",
       },
     },
     MuiTableRow: {
@@ -135,12 +140,12 @@ export const theme = createMuiTheme({
       head: {
         textAlign: "right",
         fontSize: "0.75rem",
-        fontFamily: "Shabnam",
+        // fontFamily: "Shabnam",
       },
       body: {
         textAlign: "right",
         fontSize: "0.75rem",
-        fontFamily: "Shabnam",
+        // fontFamily: "Shabnam",
       },
     },
     MuiButton: {
@@ -159,7 +164,7 @@ export const theme = createMuiTheme({
     MuiOutlinedInput: {
       root: {
         margin:"5px 0",
-        fontFamily: "Shabnam !important",
+        // fontFamily: "Shabnam !important",
       },
       input: {
         padding: "5px",
@@ -174,18 +179,14 @@ width:"100%"
     },
     MuiInputbase:{
       root:{
-        fontFamily: "Shabnam !important",
+        // fontFamily: "Shabnam !important",
       }
     },
-    MuiSelect:{
-      root:{
-        fontFamily: "Shabnam !important",
-      }
-    },
+    
     MuiTypography: {
-      root: {
-        fontFamily: "Shabnam !important",
-      },
+      // root: {
+      //   fontFamily: "Shabnam !important",
+      // },
       variantMapping: {
         h1: "h2",
         h2: "h2",
@@ -214,12 +215,12 @@ width:"100%"
     },
     MuiButtonBase: {
       root: {
-        fontFamily: "Shabnam !important",
+        // fontFamily: "Shabnam !important",
       },
     },
     MuiDialogTitle: {
       root: {
-        fontFamily: "Shabnam !important",
+        // fontFamily: "Shabnam !important",
         fontSize: "20px",
       },
     },

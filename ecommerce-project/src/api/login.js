@@ -1,6 +1,6 @@
 import axios from "axios";
 /*
-*use api succeslogin reqres
+*use api successlogin reqres
 */
 export const login = async (email, password) => {
   let res = await axios({

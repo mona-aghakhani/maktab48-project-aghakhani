@@ -1,4 +1,4 @@
-import { getAProductById, getAllProducts } from "../../api/products";
+import { getAProductById, getAllProducts,postNewProduct } from "../../api/products";
 import { ActionTypes } from "../constants/action-type.js";
 
 export const setToken = (token) => {
@@ -13,6 +13,12 @@ export const setProducts=(products)=>{
       type:ActionTypes.SET_PRODUCTS,
       payload:products,
   }
+}
+export function addProduct(newProduct){
+    return{
+        type:ActionTypes.ADD_PRODUCT,
+        payload:newProduct
+    }
 }
 
 export const selectedProduct = (product) => {
@@ -32,15 +38,13 @@ export const getProducts = () => async (dispatch, getState) => {
 };
 
 /*
-* use .then .catch
+* async action for add new product
 */
 
-// export const getProducts = () => (dispatch, getState) => {
-//   getAllProducts().then((res) => {
-//     console.log(res.data);
-//     dispatch(setProducts(res.data));
-//   });
-// };
+export const addNewProduct = (newProduct) => async (dispatch, getState) => {
+  let res = await postNewProduct();
+  dispatch(addProduct(newProduct));
+};
 
 /*
 * async action for get a product
