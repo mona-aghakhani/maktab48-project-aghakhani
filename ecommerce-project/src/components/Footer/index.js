@@ -18,6 +18,9 @@ const Footer = () => {
             <Typography>با ما همراه باشید</Typography>
           </Box>
           <Box textAlign="center">
+            <Typography>mona.aqakhani@</Typography>
+          </Box>
+          <Box textAlign="center">
           <FacebookIcon />
           <LinkedInIcon />
           <InstagramIcon />

@@ -1,4 +1,4 @@
-import { getAProductById, getAllProducts,postNewProduct } from "../../api/products";
+import { getAProductById, getAllProducts,postNewProduct,deleteApiProduct } from "../../api/products";
 import { ActionTypes } from "../constants/action-type.js";
 
 export const setToken = (token) => {
@@ -18,6 +18,12 @@ export function addProduct(newProduct){
     return{
         type:ActionTypes.ADD_PRODUCT,
         payload:newProduct
+    }
+}
+export function deleteProduct(id){
+    return{
+        type:ActionTypes.DELETE_PRODUCT,
+        payload:id
     }
 }
 
@@ -45,6 +51,17 @@ export const addNewProduct = (newProduct) => async (dispatch, getState) => {
   let res = await postNewProduct();
   dispatch(addProduct(newProduct));
 };
+
+
+/*
+* async action for delete product
+*/
+export const deleteProductById = (id) => async (dispatch, getState) => {
+  let res = await deleteApiProduct(id);
+  dispatch(deleteProduct(id));
+};
+
+
 
 /*
 * async action for get a product

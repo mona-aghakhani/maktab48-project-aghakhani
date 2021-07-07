@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Box from '@material-ui/core/Box';
+import { useDispatch } from 'react-redux';
+import {deleteProductById} from '../../store/actions/productActions'
 const useStyles = makeStyles({
   box:{
     textAlign:"center",
@@ -27,6 +29,7 @@ borderBottom:"1px solid rgb(234,149,63,0.9)"
 function ProductRow({product}) {
   let history=useHistory()
   const classes = useStyles();
+  const dispatch = useDispatch()
 //   const handleGoToUserPage=()=>{
 //     console.log(1);
 //     history.push(`/user/${user.id}`)
@@ -48,7 +51,7 @@ function ProductRow({product}) {
             </TableCell>
             <TableCell align="left">
            <Box className={classes.box}>ویرایش</Box>
-           <Box className={classes.box}>حذف</Box>
+           <Box onClick={()=>dispatch(deleteProductById(product.id))} className={classes.box}>حذف</Box>
             </TableCell>
         
         
