@@ -119,26 +119,6 @@ handleAdd(newProduct)
 // });
 // console.log(response, loading, error);
     handleClose();
-    // setImage(filesContent[0]?.content);
-    // console.log(image,"img");
-    //   if ((email, password)) {
-    //     login(email, password)
-    //       .then((res) => {
-    //         // console.log(res.data,"data");
-    //         // dispatch(setToken(res.data.token));
-    //         localStorage.setItem("token", res.data.token);
-    //         // window.location.reload();
-    //         if (isLoggedIn()) {
-    //           history.push("/admin/products");
-    //         }
-
-    //       })
-    //       .catch((err) => console.error(err));
-    //   }
-    //    else {
-    //     // toast.error("email and password fields could not be empty! ");
-    //     console.error("err")
-    //   }
   };
   const handleChange = (e) => {
 
@@ -191,7 +171,8 @@ onChange={(e)=>setImage(e.target.value)}
             <Grid item xs={2}>
               <button
                 type="button"
-                onClick={() =>openFileSelector()}
+                onClick={() =>{openFileSelector();
+                }}
                 className={classes.btnFile}
               >
                 Browse

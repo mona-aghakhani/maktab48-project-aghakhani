@@ -26,6 +26,14 @@ export function deleteProduct(id) {
     payload: id,
   };
 }
+export function updateProductAct(updatedProduct){
+    return{
+        type:ActionTypes.UPDATE_PRODUCT,
+        payload:updatedProduct
+    }
+}
+
+
 
 export const selectedProduct = (product) => {
   return {

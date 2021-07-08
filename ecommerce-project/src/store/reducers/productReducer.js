@@ -16,6 +16,10 @@ export const productReducer = (state = initialState, { type, payload }) => {
       const newdata=state.products.filter((product,index)=>index !==payload)
       return { ...state, products:newdata };
     }
+    case ActionTypes.UPDATE_PRODUCT:{
+      const updatedData=state.products.splice((payload.id)-1,1,payload)
+      return { ...state, products:updatedData };
+    }
     case ActionTypes.SELECTED_PRODUCT:
       return { ...state, selectedProduct: payload };
 
