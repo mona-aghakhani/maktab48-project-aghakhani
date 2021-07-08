@@ -1,4 +1,4 @@
-import { getAProductById, getAllProducts,postNewProduct,deleteApiProduct } from "../../api/products";
+import { getAProductById, getAllProducts,postNewProduct,deleteApiProduct } from "../../api/products/products";
 import { ActionTypes } from "../constants/action-type.js";
 
 export const setToken = (token) => {
@@ -8,23 +8,23 @@ export const setToken = (token) => {
   };
 };
 
-export const setProducts=(products)=>{
-  return{
-      type:ActionTypes.SET_PRODUCTS,
-      payload:products,
-  }
+export const setProducts = (products) => {
+  return {
+    type: ActionTypes.SET_PRODUCTS,
+    payload: products,
+  };
+};
+export function addProduct(newProduct) {
+  return {
+    type: ActionTypes.ADD_PRODUCT,
+    payload: newProduct,
+  };
 }
-export function addProduct(newProduct){
-    return{
-        type:ActionTypes.ADD_PRODUCT,
-        payload:newProduct
-    }
-}
-export function deleteProduct(id){
-    return{
-        type:ActionTypes.DELETE_PRODUCT,
-        payload:id
-    }
+export function deleteProduct(id) {
+  return {
+    type: ActionTypes.DELETE_PRODUCT,
+    payload: id,
+  };
 }
 
 export const selectedProduct = (product) => {
@@ -35,41 +35,39 @@ export const selectedProduct = (product) => {
 };
 
 /*
-* async action for get all products
-*/
+ * async action for get all products
+ */
 
-export const getProducts = () => async (dispatch, getState) => {
-  let res = await getAllProducts();
+export const getProducts = () => async(dispatch, getState) => {
+  const res = await getAllProducts();
+  console.log(res.data);
   dispatch(setProducts(res.data));
 };
 
 /*
-* async action for add new product
-*/
+ * async action for add new product
+ */
 
 export const addNewProduct = (newProduct) => async (dispatch, getState) => {
   let res = await postNewProduct();
-  dispatch(addProduct(newProduct));
+  console.log(res);
+  // dispatch(addProduct(newProduct));
 };
 
-
 /*
-* async action for delete product
-*/
+ * async action for delete product
+ */
 export const deleteProductById = (id) => async (dispatch, getState) => {
-  let res = await deleteApiProduct(id);
-  dispatch(deleteProduct(id));
+  // let res = await deleteApiProduct(id);
+  // dispatch(deleteProduct(id));
 };
 
-
-
 /*
-* async action for get a product
-*/
-
+ * async action for get a product
+ */
 
 export const getAProduct = (id) => async (dispatch) => {
-  let res = await getAProductById(id);
-  console.log(res.data);
-  dispatch(selectedProduct(res.data));
+  // let res = await getAProductById(id);
+  // console.log(res.data);
+  // dispatch(selectedProduct(res.data));
 };

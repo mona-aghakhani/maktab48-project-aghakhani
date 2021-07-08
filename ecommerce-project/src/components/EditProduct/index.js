@@ -23,7 +23,7 @@ import {postNewProduct} from "../../api/products/products"
 // import { isLoggedIn } from "../../../utils/auth";
 // import { setToken, getProducts } from "../../../store/actions/productActions";
 
-export default function AddProduct({handleClose,handleAdd,handleEdit,editedObj,tasks}) {
+export default function EditProduct({handleClose,handleAdd,handleEdit,editedObj}) {
   const classes = useStyles();
 
 /*
@@ -40,10 +40,10 @@ export default function AddProduct({handleClose,handleAdd,handleEdit,editedObj,t
    * set states for input values
    */
   // console.log(editedObj);
-  const [image, setImage] = useState("");
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [description, setDescription] = useState("");
+  const [image, setImage] = useState(editedObj?.image);
+  const [title, setTitle] = useState(editedObj?.title);
+  const [category, setCategory] = useState(editedObj?.category);
+  const [description, setDescription] = useState(editedObj?.description);
   // const [newitem, setNew] = useState(null)
 //   const { response, loading, error } = useAxios({
 //   method: "post",
@@ -86,23 +86,20 @@ export default function AddProduct({handleClose,handleAdd,handleEdit,editedObj,t
   //   console.log(newProduct);
   // }
   const handleLogin = (e) => {
-    console.log("ok");
     // e.preventDefault();
     // if (editedObj) {
     //   console.log("edit");
-    //   let updatedProductObj={...editedObj, title,image:filesContent[0]?.content || image ,category,description};
-    //  console.log(updatedProductObj);
-    //   handleEdit(updatedProductObj)
+      let updatedProductObj={...editedObj, title,image:filesContent[0]?.content || image ,category,description};
+     console.log(updatedProductObj);
+      handleEdit(updatedProductObj)
     // }
     // console.log("ok");
     // setImage(filesContent[0]?.content);
     // console.log(title,image,category,description);
     // addAproduct();
-    
-  let newProduct={ id:tasks.length+1,title,image:filesContent[0]?.content,category,description,price:"",amount:""};
+    // let newProduct={ id:Math.floor(Math.random() * 1000000),title,image:filesContent[0]?.content,category,description,price:"",amount:""};
 // dispatch(addNewProduct(newProduct))
-console.log(newProduct);
-handleAdd(newProduct)
+// handleAdd(newProduct)
 // dispatch(addProduct(postNewProduct(newProduct)))
 // let res=postNewProduct(newProduct)
 // console.log(res);

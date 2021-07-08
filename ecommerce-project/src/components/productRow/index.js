@@ -7,7 +7,8 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Box from '@material-ui/core/Box';
 import { useDispatch } from 'react-redux';
-import {deleteProductById} from '../../store/actions/productActions'
+import {deleteApiProduct} from "../../api/products/products"
+// import {deleteProductById} from '../../store/actions/productActions'
 const useStyles = makeStyles({
   box:{
     textAlign:"center",
@@ -26,32 +27,36 @@ borderBottom:"1px solid rgb(234,149,63,0.9)"
   },
  
 });
-function ProductRow({product}) {
+function ProductRow({row,handleOpen,handleDel,handleEdit}) {
   let history=useHistory()
   const classes = useStyles();
   const dispatch = useDispatch()
+  // console.log(product,"inja");
 //   const handleGoToUserPage=()=>{
 //     console.log(1);
 //     history.push(`/user/${user.id}`)
 //   }
 
     return(
-        <TableRow key={product?.id} >
+        <TableRow key={row?.id} >
             
         {/* <TableCell component="th" scope="row">
           {product?.id}
         </TableCell> */}
         {/* <TableCell align="right">{user?.code}</TableCell> */}
-        <TableCell align="left"><img className={classes.img} src={product?.image}/></TableCell>
-        <TableCell align="left">
-            {product?.title}
+        <TableCell ><img className={classes.img} src={row?.image}/></TableCell>
+        <TableCell >
+            {row?.title}
             </TableCell>
-        <TableCell align="left">
-            {product?.category}
+        <TableCell >
+            {row?.category}
             </TableCell>
-            <TableCell align="left">
-           <Box className={classes.box}>ویرایش</Box>
-           <Box onClick={()=>dispatch(deleteProductById(product.id))} className={classes.box}>حذف</Box>
+            <TableCell >
+           <Box onClick={()=>handleOpen(row)} className={classes.box}>ویرایش</Box>
+           <Box 
+           onClick={()=>handleDel(row.id)}
+          //  onClick={()=>dispatch(deleteProductById(product.id))}
+            className={classes.box}>حذف</Box>
             </TableCell>
         
         
