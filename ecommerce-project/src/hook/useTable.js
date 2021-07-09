@@ -3,7 +3,7 @@ import { Table, TableHead, TableRow, TableCell, makeStyles, TablePagination, Tab
 
 const useStyles = makeStyles(theme => ({
     table: {
-        // minWidth: 250,
+        minWidth: 650,
         // direction:'rtl',
         marginTop: 50,
         // borderTop: "1px solid gray",

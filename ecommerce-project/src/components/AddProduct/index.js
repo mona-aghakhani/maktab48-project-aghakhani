@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useFilePicker } from "use-file-picker";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 // import { useHistory } from "react-router-dom";
 import {
   Button,
@@ -20,11 +20,22 @@ import { useStyles } from "./styles";
 import { addNewProduct,addProduct } from "../../store/actions/productActions";
 import {useAxios} from "../../api/products/useAxios"
 import {postNewProduct} from "../../api/products/products"
+import axios from 'axios';
 // import { isLoggedIn } from "../../../utils/auth";
 // import { setToken, getProducts } from "../../../store/actions/productActions";
 
-export default function AddProduct({handleClose,handleAdd,handleEdit,editedObj,tasks}) {
+export default function AddProduct({
+  handleClose,
+  // handleAdd,handleEdit,editedObj,tasks
+}) {
   const classes = useStyles();
+ /*
+   * useselector & get products
+   */
+ const products = useSelector((state) => state.allProducts.products);
+ const dispatch = useDispatch();
+
+
 
 /*
 * custom hook for api
@@ -54,7 +65,7 @@ export default function AddProduct({handleClose,handleAdd,handleEdit,editedObj,t
 // console.log(response, loading, error);
 
   //   const history = useHistory();
-    const dispatch = useDispatch();
+  
 
   /*
    * 'use-file-picker' : Simple react hook to open browser file selector.
@@ -86,8 +97,12 @@ export default function AddProduct({handleClose,handleAdd,handleEdit,editedObj,t
   //   console.log(newProduct);
   // }
   const handleLogin = (e) => {
-    console.log("ok");
-    // e.preventDefault();
+    // console.log("ok");
+    e.preventDefault();
+
+    // if (image && title) {
+      
+    // }
     // if (editedObj) {
     //   console.log("edit");
     //   let updatedProductObj={...editedObj, title,image:filesContent[0]?.content || image ,category,description};
@@ -98,26 +113,33 @@ export default function AddProduct({handleClose,handleAdd,handleEdit,editedObj,t
     // setImage(filesContent[0]?.content);
     // console.log(title,image,category,description);
     // addAproduct();
+    console.log("add comp");
     
-  let newProduct={ id:tasks.length+1,title,image:filesContent[0]?.content,category,description,price:"",amount:""};
-// dispatch(addNewProduct(newProduct))
-console.log(newProduct);
-handleAdd(newProduct)
-// dispatch(addProduct(postNewProduct(newProduct)))
-// let res=postNewProduct(newProduct)
-// console.log(res);
-// console.log(res.data);
-// .then((res)=>{
-//   console.log(res.data);
-// })
-// setNew(newProduct)
-// const { response, loading, error } = useAxios({
-//   method: "post",
-//   url: "http://localhost:5000/products",
-//   headers: { "content-type": "application/json" },
-// data:newProduct
-// });
-// console.log(response, loading, error);
+  let newProduct={ title:title,image:filesContent[0]?.content,category:category,description:description,price:"",amount:""};
+  console.log(newProduct);
+  // postNewProduct(newProduct).then(function(res){
+  //   dispatch(addProduct(res.data))
+  // })
+dispatch(addNewProduct(newProduct))
+  // axios.post('http://localhost:5000/products',newProduct)
+  // .then(function (res){
+  //   console.log(res);
+  //   dispatch(addProduct(res.data))
+  // })
+  // dispatch(addNewProduct(newProduct))
+  //   getAllProducts().then((res) => {
+  //     console.log("res data for products", res.data);
+  //     dispatch(setProducts(res.data));
+  //   });
+//   postNewProduct(newProduct).then((res) => {
+//     // if (res.status === 404) {
+//     //   console.log("error");
+//     //   console.log(res);
+//     //   // toast.error("Not defined");
+//     // }
+// dispatch(addProduct(newProduct))
+//   })
+ 
     handleClose();
   };
   const handleChange = (e) => {
@@ -234,7 +256,7 @@ onChange={(e)=>setImage(e.target.value)}
           </Grid>
           <Grid container xs={12} justify="center">
             <Button
-              // onClick={handleLogin}
+              onClick={handleLogin}
               type="submit"
               // fullWidth
               variant="contained"
@@ -250,3 +272,28 @@ onChange={(e)=>setImage(e.target.value)}
     </Container>
   );
 }
+
+
+
+   // setproducts([...products, newProduct]);
+    // setproducts(products.filter((task) => task.id !== id));
+
+
+
+// console.log(newProduct);
+// handleAdd(newProduct)
+// dispatch(addProduct(postNewProduct(newProduct)))
+// let res=postNewProduct(newProduct)
+// console.log(res);
+// console.log(res.data);
+// .then((res)=>{
+//   console.log(res.data);
+// })
+// setNew(newProduct)
+// const { response, loading, error } = useAxios({
+//   method: "post",
+//   url: "http://localhost:5000/products",
+//   headers: { "content-type": "application/json" },
+// data:newProduct
+// });
+// console.log(response, loading, error);

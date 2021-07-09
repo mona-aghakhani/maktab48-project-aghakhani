@@ -20,6 +20,7 @@ export const getAllProducts = async () => {
     url: "http://localhost:5000/products",
     headers: { "content-type": "application/json" },
   }).catch((err) => console.log(err));
+  // console.log(res);
   return res;
 };
 
@@ -35,7 +36,7 @@ export const postNewProduct =async (newProduct) => {
     headers: { "content-type": "application/json" },
     data: newProduct
   }).catch((err) => console.log(err));
-  console.log(res);
+  console.log("post api",res);
   return res;
 
 // axios.post("http://localhost:5000/products",newProduct)

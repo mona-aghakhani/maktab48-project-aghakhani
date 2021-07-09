@@ -48,7 +48,7 @@ export const selectedProduct = (product) => {
 
 export const getProducts = () => async(dispatch, getState) => {
   const res = await getAllProducts();
-  console.log(res.data);
+  // console.log("res data from async action",res.data);
   dispatch(setProducts(res.data));
 };
 
@@ -57,9 +57,9 @@ export const getProducts = () => async(dispatch, getState) => {
  */
 
 export const addNewProduct = (newProduct) => async (dispatch, getState) => {
-  let res = await postNewProduct();
-  console.log(res);
-  // dispatch(addProduct(newProduct));
+  let res = await postNewProduct(newProduct);
+  console.log("res from post api",res);
+  dispatch(addProduct(newProduct));
 };
 
 /*

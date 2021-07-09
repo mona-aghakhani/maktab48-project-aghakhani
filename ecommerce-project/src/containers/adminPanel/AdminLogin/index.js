@@ -5,6 +5,7 @@ import {Button,TextField,FormControlLabel,Checkbox,Grid,Card,Container,Typograph
 import { useStyles } from "./styles";
 import { login } from "../../../api/login";
 import {isLoggedIn} from "../../../utils/auth"
+import { ToastContainer, toast } from "react-toastify";
 // import { setToken, getProducts } from "../../../store/actions/productActions";
 
 
@@ -36,7 +37,7 @@ export default function AdminLogin({}) {
         .catch((err) => console.error(err));
     }
      else {
-      // toast.error("email and password fields could not be empty! ");
+      toast.error("email and password fields could not be empty! ");
       console.error("err")
     }
   };
