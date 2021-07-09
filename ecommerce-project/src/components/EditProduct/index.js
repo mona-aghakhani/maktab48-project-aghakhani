@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useFilePicker } from "use-file-picker";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 // import { useHistory } from "react-router-dom";
 import {
   Button,
@@ -17,15 +17,18 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import { useStyles } from "./styles";
-import { addNewProduct,addProduct } from "../../store/actions/productActions";
-import {useAxios} from "../../api/products/useAxios"
-import {postNewProduct} from "../../api/products/products"
+import { updateProductById } from "../../store/actions/productActions";
+// import {useAxios} from "../../api/products/useAxios"
+// import {postNewProduct} from "../../api/products/products"
 // import { isLoggedIn } from "../../../utils/auth";
 // import { setToken, getProducts } from "../../../store/actions/productActions";
 
-export default function EditProduct({handleClose,handleAdd,handleEdit,editedObj}) {
+export default function EditProduct({handleClose,editedObj
+  // ,handleAdd,handleEdit
+}) {
   const classes = useStyles();
 
+  console.log(editedObj);
 /*
 * custom hook for api
 */
@@ -40,10 +43,10 @@ export default function EditProduct({handleClose,handleAdd,handleEdit,editedObj}
    * set states for input values
    */
   // console.log(editedObj);
-  const [image, setImage] = useState(editedObj?.image);
-  const [title, setTitle] = useState(editedObj?.title);
-  const [category, setCategory] = useState(editedObj?.category);
-  const [description, setDescription] = useState(editedObj?.description);
+  const [image, setImage] = useState(editedObj.image);
+  const [title, setTitle] = useState(editedObj.title);
+  const [category, setCategory] = useState(editedObj.category);
+  const [description, setDescription] = useState(editedObj.description);
   // const [newitem, setNew] = useState(null)
 //   const { response, loading, error } = useAxios({
 //   method: "post",
@@ -54,6 +57,8 @@ export default function EditProduct({handleClose,handleAdd,handleEdit,editedObj}
 // console.log(response, loading, error);
 
   //   const history = useHistory();
+  // const products = useSelector((state) => state.allProducts.products);
+  // console.log(products);
     const dispatch = useDispatch();
 
   /*
@@ -86,12 +91,15 @@ export default function EditProduct({handleClose,handleAdd,handleEdit,editedObj}
   //   console.log(newProduct);
   // }
   const handleLogin = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
+    console.log("edit comp");
     // if (editedObj) {
     //   console.log("edit");
       let updatedProductObj={...editedObj, title,image:filesContent[0]?.content || image ,category,description};
      console.log(updatedProductObj);
-      handleEdit(updatedProductObj)
+     dispatch(updateProductById(editedObj.id,updatedProductObj))
+
+      // handleEdit(updatedProductObj)
     // }
     // console.log("ok");
     // setImage(filesContent[0]?.content);
@@ -116,6 +124,7 @@ export default function EditProduct({handleClose,handleAdd,handleEdit,editedObj}
 // });
 // console.log(response, loading, error);
     handleClose();
+    window.location.reload()
     // setImage(filesContent[0]?.content);
     // console.log(image,"img");
     //   if ((email, password)) {
@@ -176,11 +185,12 @@ export default function EditProduct({handleClose,handleAdd,handleEdit,editedObj}
                 variant="outlined"
                 placeholder=" تصویر کالا"
                 name="image"
+                defaultValue={image}
                 // margin="normal"
                 // disabled
                 className={classes.input}
                 fullWidth
-value={image}
+// value={image}
 onChange={(e)=>setImage(e.target.value)}
 // onChange={handleChange}
               />

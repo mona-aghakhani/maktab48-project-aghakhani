@@ -1,6 +1,9 @@
-import { getAProductById, getAllProducts,postNewProduct,deleteApiProduct } from "../../api/products/products";
+import { getAProductById, getAllProducts,postNewProduct,deleteApiProduct,putApiProduct } from "../../api/products/products";
 import { ActionTypes } from "../constants/action-type.js";
 
+/*
+* declare sync actions
+*/
 export const setToken = (token) => {
   return {
     type: ActionTypes.SET_TOKEN,
@@ -33,8 +36,6 @@ export function updateProductAct(updatedProduct){
     }
 }
 
-
-
 export const selectedProduct = (product) => {
   return {
     type: ActionTypes.SELECTED_PRODUCT,
@@ -48,7 +49,7 @@ export const selectedProduct = (product) => {
 
 export const getProducts = () => async(dispatch, getState) => {
   const res = await getAllProducts();
-  // console.log("res data from async action",res.data);
+  console.log("res data products from async action",res.data);
   dispatch(setProducts(res.data));
 };
 
@@ -70,13 +71,21 @@ export const deleteProductById = (id) => async (dispatch, getState) => {
   console.log("res from delete api",res);
   dispatch(deleteProduct(id));
 };
+/*
+ * async action for update product
+ */
+export const updateProductById = (id,updateProduct) => async (dispatch, getState) => {
+  let res = await putApiProduct(id,updateProduct);
+  console.log("res from put api",res);
+  dispatch(updateProductAct(updateProduct));
+};
 
 /*
  * async action for get a product
  */
 
 export const getAProduct = (id) => async (dispatch) => {
-  // let res = await getAProductById(id);
-  // console.log(res.data);
-  // dispatch(selectedProduct(res.data));
+  let res = await getAProductById(id);
+  console.log(res.data);
+  dispatch(selectedProduct(res.data));
 };

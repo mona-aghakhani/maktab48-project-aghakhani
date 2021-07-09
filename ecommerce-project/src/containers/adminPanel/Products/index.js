@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
-import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
-  Table,
-  TableBody,
+  Table, TableBody,
   TableHead,
   TableCell,
   TableContainer,
@@ -18,54 +15,26 @@ import {
   Container,
   Box,
 } from "@material-ui/core";
-// import IconButton from "@material-ui/core/IconButton";
-// import FirstPageIcon from "@material-ui/icons/FirstPage";
-// import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
-// import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
-// import LastPageIcon from "@material-ui/icons/LastPage";
 import { useStyles2 } from "./styles";
 import { TablePaginationActions } from "./TablePaginationActions";
-import ProductRow from "../../../components/productRow";
+
 import { CustomDialog } from "../../../components/CustomDialog";
 import AddProduct from "../../../components/AddProduct";
 import EditProduct from "../../../components/EditProduct";
-import { useAxios } from "../../../api/products/useAxios";
-import {
-  setProducts,
-  getProducts,
-  addNewProduct,
-  deleteProduct,
-  deleteProductById,
-} from "../../../store/actions/productActions";
-import {
-  getAllProducts,
-  deleteApiProduct,
-  postNewProduct,
-  putUpdatedProduct,
-} from "../../../api/products/products";
+// import { useAxios } from "../../../api/products/useAxios";
+import { setProducts, getProducts, addNewProduct, deleteProduct, deleteProductById } from "../../../store/actions/productActions";
+import { getAllProducts, deleteApiProduct, postNewProduct, putApiProduct } from "../../../api/products/products";
 // import {deleteApiProduct} from "../../api/products/products"
-import axios from "axios";
+// import axios from "axios";
 
 const Products = () => {
-  // const [data, setData] = useState([]);
-
-  // const [products, setProducts] = useState([]);
-  // const { response, loading, error } = useAxios({
-  //   method: "get",
-  //   url: "http://localhost:5000/products",
-  //   headers: { "content-type": "application/json" }
-  // });
-  // console.log(response, loading, error);
-  // fetchData()
-  // console.log(notifToast, fetchData, response, loading, error);
-
   /*
-   * useselector & get products
+   * use useselector & dispatch for get products and handle api calls
    */
   const products = useSelector((state) => state.allProducts.products);
   const dispatch = useDispatch();
   /*
-   * dispatch setProducts action and get data
+   * dispatch sync action(setProducts) and get data
    */
   // useEffect(() => {
   //   getAllProducts().then((res) => {
@@ -80,13 +49,16 @@ const Products = () => {
   useEffect(() => {
     dispatch(getProducts());
   }, []);
-  // console.log("products", products);
+
   /*
    * setState for handle CustomDialog
    */
   const [isOpenAdd, setIsOpenAdd] = useState(false);
-  const [showAddComp, setShowAddComp] = useState(false);
-  const [edit, setEdit] = useState(false);
+  const [isOpenUpdate, setIsOpenUpdate] = useState(false);
+
+  // const [showAddComp, setShowAddComp] = useState(false);
+  // const [edit, setEdit] = useState(false);
+  const [editedObj, setEditedObj] = useState(null);
 
   const handleOpenAddDialog = () => {
     // setShowAddComp(!showAddComp)
@@ -96,6 +68,21 @@ const Products = () => {
   };
   const handleDialogAddClose = () => {
     setIsOpenAdd(false);
+  };
+  const handleOpenUpdateDialog = (obj) => {
+    // setShowAddComp(!showAddComp)
+console.log("edit");
+setEditedObj(obj)
+console.log(editedObj);
+    setIsOpenUpdate(true);
+    console.log(isOpenUpdate);
+  };
+  console.log(editedObj);
+  // useEffect(() => {
+  //   setEditedObj(obj)
+  // }, [editedObj])
+  const handleDialogUpdateClose = () => {
+    setIsOpenUpdate(false);
   };
 
   /*
@@ -127,65 +114,9 @@ const Products = () => {
   //     console.log(productsFromServer);
   //     // setproducts(productsFromServer.data);
   //   };
-
   //   getproducts();
   // }, []);
 
-  const handleDel = (id) => {
-    deleteApiProduct(id).then((res) => {
-      console.log("res data for delete products", res.data);
-      dispatch(deleteProduct(id));
-    });
-    // dispatch(deleteProductById(id))
-    //     const getTasks = async () => {
-    //       const tasksFromServer = await deleteApiProduct();
-    // console.log(tasksFromServer);
-    // console.log(tasksFromServer.data);
-    //       setTasks(tasksFromServer.data);
-    //     };
-
-    //     getTasks();
-    // deleteApiProduct(id).then((res) => {
-    //   if (res.status === 404) {
-    //     console.log("error");
-    //     console.log(res);
-    //     // toast.error("Not defined");
-    //   }
-    //   // setproducts(products.filter((task) => task.id !== id));
-    // });
-    //     const getproducts = async () => {
-    //       const productsFromServer = await deleteApiProduct();
-    // console.log(productsFromServer);
-    //       setproducts(productsFromServer.data);
-    //     };
-
-    //     getproducts();
-  };
-  // const handleDel = (id) => {
-  //   //     const getTasks = async () => {
-  //   //       const tasksFromServer = await deleteApiProduct();
-  //   // console.log(tasksFromServer);
-  //   // console.log(tasksFromServer.data);
-  //   //       setTasks(tasksFromServer.data);
-  //   //     };
-
-  //   //     getTasks();
-  //   deleteApiProduct(id).then((res) => {
-  //     if (res.status === 404) {
-  //       console.log("error");
-  //       console.log(res);
-  //       // toast.error("Not defined");
-  //     }
-  //     // setproducts(products.filter((task) => task.id !== id));
-  //   });
-  //   //     const getproducts = async () => {
-  //   //       const productsFromServer = await deleteApiProduct();
-  //   // console.log(productsFromServer);
-  //   //       setproducts(productsFromServer.data);
-  //   //     };
-
-  //   //     getproducts();
-  // };
 
   const handleEdit = (updatedProduct) => {
     //     const getTasks = async () => {
@@ -196,7 +127,7 @@ const Products = () => {
     //     };
 
     //     getTasks();
-    putUpdatedProduct(updatedProduct).then((res) => {
+    putApiProduct(updatedProduct).then((res) => {
       if (res.status === 404) {
         console.log("error");
         console.log(res);
@@ -222,7 +153,7 @@ const Products = () => {
   /*
    * handle edit product & and setState for get edited product
    */
-  const [editedObj, setEditedObj] = useState(null);
+ 
 
   // const handleDialogOpenEdit = (productObj) => {
   //   setEdit(true)
@@ -262,9 +193,9 @@ const Products = () => {
                 {products !== "Not found" &&
                   (rowsPerPage > 0
                     ? products?.slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
                     : products
                   )?.map((row, index) => (
                     <TableRow key={row?.index}>
@@ -279,6 +210,9 @@ const Products = () => {
                       <TableCell>{row?.category}</TableCell>
                       <TableCell>
                         <Box
+                        // onClick={handleOpenUpdateDialog}
+                        onClick={()=>handleOpenUpdateDialog(row)}
+                       
                           // onClick={()=>handleOpen(row)}
                           className={classes.box}
                         >
@@ -287,7 +221,9 @@ const Products = () => {
                         <Box
                           // onClick={() => handleDel(row.id)}
                           //  onClick={()=>{dispatch(deleteProductById(index))}}
-                           onClick={()=>{dispatch(deleteProductById(row.id))}}
+                          onClick={() => {
+                            dispatch(deleteProductById(row.id));
+                          }}
                           className={classes.box}
                         >
                           حذف
@@ -331,7 +267,7 @@ const Products = () => {
           )}
         </TableContainer>
       </Container>
-      <CustomDialog
+     {isOpenAdd && <CustomDialog
         isOpen={isOpenAdd}
         handleClose={handleDialogAddClose}
         className={classes.dialogTitle}
@@ -340,20 +276,25 @@ const Products = () => {
         <AddProduct
           // products={products}
           handleClose={handleDialogAddClose}
-          // editedObj={editedObj}
-          // handleAdd={handleAdd}
-          // handleEdit={handleEdit}
+        // editedObj={editedObj}
+        // handleAdd={handleAdd}
+        // handleEdit={handleEdit}
         />
-      </CustomDialog>
-      {/* <CustomDialog
-        isOpen={isOpenAdd}
-        handleClose={handleDialogAddClose}
+      </CustomDialog>}
+      {isOpenUpdate && <CustomDialog
+        isOpen={isOpenUpdate}
+        handleClose={handleDialogUpdateClose}
         className={classes.dialogTitle}
         title="افزودن/ویرایش کالا"
       >
-
+    <EditProduct
+     handleClose={handleDialogUpdateClose}
+     editedObj={editedObj}
+    //  handleAdd={handleAdd}
+    // handleEdit={handleEdit}
+     />
        
-      </CustomDialog> */}
+      </CustomDialog> }
     </main>
   );
 };

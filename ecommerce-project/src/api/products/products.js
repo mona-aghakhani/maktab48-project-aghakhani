@@ -1,26 +1,17 @@
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
 
 /*
  * GET api for get all products
  */
 
-// export const getAllProducts = async () => {
-//   let res = await axios({
-//     method: "get",
-//     url: "http://localhost:5000/products",
-//     headers: { "content-type": "application/json" },
-//   }).catch((err) => console.log(err));
-//   console.log(res.data);
-//   return res.data;
-// };
+
 export const getAllProducts = async () => {
   let res = await axios({
     method: "get",
     url: "http://localhost:5000/products",
     headers: { "content-type": "application/json" },
   }).catch((err) => console.log(err));
-  // console.log(res);
+  console.log(res);
   return res;
 };
 
@@ -29,6 +20,16 @@ export const getAllProducts = async () => {
  */
 
 
+// export const postNewProduct =async (newProduct) => {
+//   let res = await axios({
+//     method: "post",
+//     url: "http://localhost:5000/products",
+//     headers: { "content-type": "application/json" },
+//     data: newProduct
+//   }).catch((err) => console.log(err));
+//   console.log("post api",res);
+//   return res;
+// }
 export const postNewProduct =async (newProduct) => {
   let res = await axios({
     method: "post",
@@ -38,7 +39,7 @@ export const postNewProduct =async (newProduct) => {
   }).catch((err) => console.log(err));
   console.log("post api",res);
   return res;
-
+}
 // axios.post("http://localhost:5000/products",newProduct)
 // .then(function (response) {
 //   if (response.status === 404) {
@@ -66,7 +67,7 @@ export const postNewProduct =async (newProduct) => {
   // } catch (e) {
   //   // toast.error(`${task.text} didn't add becuase of an unkown error:(`);
   // }
-};
+
 /*
  *  DELETE api for delete selected product
  */
@@ -79,7 +80,21 @@ export const deleteApiProduct = async (id) => {
   console.log(res);
   return res;
 };
+/*
+*  PUT api for update product
+*/
 
+
+export const putApiProduct = async (id,updateProduct) => {
+  let res = await axios({
+    method: "put",
+    url: `http://localhost:5000/products/${id}`,
+    headers: { "content-type": "application/json" },
+    data: updateProduct,
+  });
+  console.log("res put api",res);
+  return res;
+};
 
 // export const postNewProduct = async (newProduct) => {
 //   let res = await axios({
@@ -115,17 +130,6 @@ export const deleteApiProduct = async (id) => {
 //   return res;
 // };
 
-
-
-export const putUpdatedProduct = async (updateProduct) => {
-  let res = await axios({
-    method: "put",
-    url: `http://localhost:5000/products/${updateProduct.id}`,
-    headers: { "content-type": "application/json" },
-    data: updateProduct,
-  });
-  return res;
-};
 // const deleteProduct = (id) => {
 //   fetch(`http://localhost:5000/products${id}`, {
 //     method: "DELETE",

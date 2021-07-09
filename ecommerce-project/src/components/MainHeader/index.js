@@ -13,7 +13,7 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import { useStyles, useOutlinedInputStyles } from "./styles";
-import logome from "../../images/logome.png"
+import logome from "../../assets/images/logome.png"
 // const useStyles = makeStyles((theme) => ({
 //   root: {
 //     flexGrow: 1,
