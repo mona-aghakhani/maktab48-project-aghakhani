@@ -1,36 +1,53 @@
 import React from 'react';
-import {useHistory} from "react-router-dom"
+
 // import React,{useState,useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+
 // import Table from '@material-ui/core/Table';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Box from '@material-ui/core/Box';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from "react-redux";
 import {deleteApiProduct} from "../../api/products/products"
-// import {deleteProductById} from '../../store/actions/productActions'
-const useStyles = makeStyles({
-  box:{
-    textAlign:"center",
-    cursor:"pointer",
-// margin:"5px",
-'&:hover':{
-borderBottom:"1px solid rgb(234,149,63,0.9)"
-}
-  },
-  img:{
-    objectFit:'cover',
-    objectPosition:'center',
-    width:"60px",
-    height:"60px",
-    borderRadius:"50%",
-  },
- 
-});
-function ProductRow({row,handleOpen,handleDel,handleEdit}) {
-  let history=useHistory()
+import {deleteProductById} from '../../store/actions/productActions'
+import {useStyles} from "./styles"
+
+
+function ProductRow({row,handleOpen,
+  // handleDel,
+ handleEdit}) {
+
+  
   const classes = useStyles();
+
+
   const dispatch = useDispatch()
+
+  const handleDel = (id) => {
+    dispatch(deleteProductById(id))
+    //     const getTasks = async () => {
+    //       const tasksFromServer = await deleteApiProduct();
+    // console.log(tasksFromServer);
+    // console.log(tasksFromServer.data);
+    //       setTasks(tasksFromServer.data);
+    //     };
+
+    //     getTasks();
+    // deleteApiProduct(id).then((res) => {
+    //   if (res.status === 404) {
+    //     console.log("error");
+    //     console.log(res);
+    //     // toast.error("Not defined");
+    //   }
+    //   // setproducts(products.filter((task) => task.id !== id));
+    // });
+    //     const getproducts = async () => {
+    //       const productsFromServer = await deleteApiProduct();
+    // console.log(productsFromServer);
+    //       setproducts(productsFromServer.data);
+    //     };
+
+    //     getproducts();
+  };
   // console.log(product,"inja");
 //   const handleGoToUserPage=()=>{
 //     console.log(1);
@@ -54,7 +71,9 @@ function ProductRow({row,handleOpen,handleDel,handleEdit}) {
             <TableCell >
            <Box onClick={()=>handleOpen(row)} className={classes.box}>ویرایش</Box>
            <Box 
-           onClick={()=>handleDel(row.id)}
+           onClick={
+             ()=>handleDel(row.id)
+            }
           //  onClick={()=>dispatch(deleteProductById(product.id))}
             className={classes.box}>حذف</Box>
             </TableCell>

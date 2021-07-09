@@ -66,8 +66,9 @@ export const addNewProduct = (newProduct) => async (dispatch, getState) => {
  * async action for delete product
  */
 export const deleteProductById = (id) => async (dispatch, getState) => {
-  // let res = await deleteApiProduct(id);
-  // dispatch(deleteProduct(id));
+  let res = await deleteApiProduct(id);
+  console.log("res from delete api",res);
+  dispatch(deleteProduct(id));
 };
 
 /*

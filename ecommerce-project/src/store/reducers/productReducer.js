@@ -12,9 +12,10 @@ export const productReducer = (state = initialState, { type, payload }) => {
       return { ...state, products: payload };
     case ActionTypes.ADD_PRODUCT:
       return { ...state, products:[...state.products,payload] };
-    case ActionTypes.DELETE_PRODUCT:{
-      const newdata=state.products.filter((product,index)=>index !==payload)
-      return { ...state, products:newdata };
+    case ActionTypes.DELETE_PRODUCT:
+      return {
+        ...state,
+        products:state.products.filter((item,index)=>item.id !==payload) 
     }
     case ActionTypes.UPDATE_PRODUCT:{
       const updatedData=state.products.splice((payload.id)-1,1,payload)

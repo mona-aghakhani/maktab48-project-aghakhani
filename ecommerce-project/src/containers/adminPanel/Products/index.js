@@ -16,6 +16,7 @@ import {
   Grid,
   Button,
   Container,
+  Box,
 } from "@material-ui/core";
 // import IconButton from "@material-ui/core/IconButton";
 // import FirstPageIcon from "@material-ui/icons/FirstPage";
@@ -33,6 +34,8 @@ import {
   setProducts,
   getProducts,
   addNewProduct,
+  deleteProduct,
+  deleteProductById,
 } from "../../../store/actions/productActions";
 import {
   getAllProducts,
@@ -127,7 +130,13 @@ const Products = () => {
 
   //   getproducts();
   // }, []);
+
   const handleDel = (id) => {
+    deleteApiProduct(id).then((res) => {
+      console.log("res data for delete products", res.data);
+      dispatch(deleteProduct(id));
+    });
+    // dispatch(deleteProductById(id))
     //     const getTasks = async () => {
     //       const tasksFromServer = await deleteApiProduct();
     // console.log(tasksFromServer);
@@ -136,14 +145,14 @@ const Products = () => {
     //     };
 
     //     getTasks();
-    deleteApiProduct(id).then((res) => {
-      if (res.status === 404) {
-        console.log("error");
-        console.log(res);
-        // toast.error("Not defined");
-      }
-      // setproducts(products.filter((task) => task.id !== id));
-    });
+    // deleteApiProduct(id).then((res) => {
+    //   if (res.status === 404) {
+    //     console.log("error");
+    //     console.log(res);
+    //     // toast.error("Not defined");
+    //   }
+    //   // setproducts(products.filter((task) => task.id !== id));
+    // });
     //     const getproducts = async () => {
     //       const productsFromServer = await deleteApiProduct();
     // console.log(productsFromServer);
@@ -152,6 +161,31 @@ const Products = () => {
 
     //     getproducts();
   };
+  // const handleDel = (id) => {
+  //   //     const getTasks = async () => {
+  //   //       const tasksFromServer = await deleteApiProduct();
+  //   // console.log(tasksFromServer);
+  //   // console.log(tasksFromServer.data);
+  //   //       setTasks(tasksFromServer.data);
+  //   //     };
+
+  //   //     getTasks();
+  //   deleteApiProduct(id).then((res) => {
+  //     if (res.status === 404) {
+  //       console.log("error");
+  //       console.log(res);
+  //       // toast.error("Not defined");
+  //     }
+  //     // setproducts(products.filter((task) => task.id !== id));
+  //   });
+  //   //     const getproducts = async () => {
+  //   //       const productsFromServer = await deleteApiProduct();
+  //   // console.log(productsFromServer);
+  //   //       setproducts(productsFromServer.data);
+  //   //     };
+
+  //   //     getproducts();
+  // };
 
   const handleEdit = (updatedProduct) => {
     //     const getTasks = async () => {
@@ -232,14 +266,41 @@ const Products = () => {
                         page * rowsPerPage + rowsPerPage
                       )
                     : products
-                  )?.map((row) => (
-                    <ProductRow
-                      // handleOpen={handleDialogOpenEdit}
-                      handleDel={handleDel}
-                      //  handleEdit={handleEdit}
-                      key={row.id}
-                      row={row}
-                    />
+                  )?.map((row, index) => (
+                    <TableRow key={row?.index}>
+                      {/* <TableCell component="th" scope="row">
+                      {product?.id}
+                    </TableCell> */}
+                      {/* <TableCell align="right">{user?.code}</TableCell> */}
+                      <TableCell>
+                        <img className={classes.img} src={row?.image} />
+                      </TableCell>
+                      <TableCell>{row?.title}</TableCell>
+                      <TableCell>{row?.category}</TableCell>
+                      <TableCell>
+                        <Box
+                          // onClick={()=>handleOpen(row)}
+                          className={classes.box}
+                        >
+                          ویرایش
+                        </Box>
+                        <Box
+                          // onClick={() => handleDel(row.id)}
+                          //  onClick={()=>{dispatch(deleteProductById(index))}}
+                           onClick={()=>{dispatch(deleteProductById(row.id))}}
+                          className={classes.box}
+                        >
+                          حذف
+                        </Box>
+                      </TableCell>
+                    </TableRow>
+                    // <ProductRow
+                    //   // handleOpen={handleDialogOpenEdit}
+                    //   // handleDel={handleDel}
+                    //   //  handleEdit={handleEdit}
+                    //   key={row.id}
+                    //   row={row}
+                    // />
                   ))}
 
                 {emptyRows > 0 && (

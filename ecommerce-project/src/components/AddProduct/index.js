@@ -32,7 +32,7 @@ export default function AddProduct({
  /*
    * useselector & get products
    */
- const products = useSelector((state) => state.allProducts.products);
+//  const products = useSelector((state) => state.allProducts.products);
  const dispatch = useDispatch();
 
 

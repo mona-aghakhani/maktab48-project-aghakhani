@@ -29,6 +29,21 @@ export const useStyles2 = makeStyles({
     dialogTitle: {
       fontSize: "17px",
     },
+    box:{
+      textAlign:"center",
+      cursor:"pointer",
+  // margin:"5px",
+  '&:hover':{
+  borderBottom:"1px solid rgb(234,149,63,0.9)"
+  }
+    },
+    img:{
+      objectFit:'cover',
+      objectPosition:'center',
+      width:"60px",
+      height:"60px",
+      borderRadius:"50%",
+    },
   });
   // const useStyles2 = makeStyles({
 //   table: {

@@ -67,6 +67,18 @@ export const postNewProduct =async (newProduct) => {
   //   // toast.error(`${task.text} didn't add becuase of an unkown error:(`);
   // }
 };
+/*
+ *  DELETE api for delete selected product
+ */
+export const deleteApiProduct = async (id) => {
+  let res = await axios({
+    method: "delete",
+    url: `http://localhost:5000/products/${id}`,
+    headers: { "content-type": "application/json" },
+  });
+  console.log(res);
+  return res;
+};
 
 
 // export const postNewProduct = async (newProduct) => {
@@ -78,9 +90,7 @@ export const postNewProduct =async (newProduct) => {
 //   });
 //   return res;
 // };
-/*
- *  DELETE api for delete selected product
- */
+
 
 // const deleteProduct = (id) => {
 //   axios.delete(`http://localhost:5000/products${id}`)
@@ -95,15 +105,15 @@ export const postNewProduct =async (newProduct) => {
 //       toast.error("request failed!");
 //     });
 // };
-export const deleteApiProduct = async (id) => {
-  let res = await axios({
-    method: "delete",
-    url: `http://localhost:5000/products/${id}`,
-    headers: { "content-type": "application/json" },
-  });
-  console.log(res);
-  return res;
-};
+// export const deleteApiProduct = async (id) => {
+//   let res = await axios({
+//     method: "delete",
+//     url: `http://localhost:5000/products/${id}`,
+//     headers: { "content-type": "application/json" },
+//   });
+//   console.log(res);
+//   return res;
+// };
 
 
 
