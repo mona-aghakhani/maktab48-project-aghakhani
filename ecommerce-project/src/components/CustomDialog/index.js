@@ -6,9 +6,7 @@ export const CustomDialog= ({isOpen,handleClose,title,subtitle,children}) =>{
     const {btn,dialogTitle} = useStyles();
     return(
         <>
-        <Dialog fullWidth maxWidth='xs' open={isOpen} onClose={handleClose}
-        //  aria-labelledby='max-width-dialog-title'
-         >
+        <Dialog fullWidth maxWidth='xs' open={isOpen} onClose={handleClose}  >
              <Grid container justify="space-between" alignItems="center">
                  <Grid item >
              <DialogTitle variant="h6" className={dialogTitle} >

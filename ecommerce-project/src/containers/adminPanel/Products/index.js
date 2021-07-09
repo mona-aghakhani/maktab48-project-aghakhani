@@ -14,6 +14,7 @@ import {
   Button,
   Container,
   Box,
+  TableSortLabel
 } from "@material-ui/core";
 import { useStyles2 } from "./styles";
 import { TablePaginationActions } from "./TablePaginationActions";
@@ -21,12 +22,11 @@ import { TablePaginationActions } from "./TablePaginationActions";
 import { CustomDialog } from "../../../components/CustomDialog";
 import AddProduct from "../../../components/AddProduct";
 import EditProduct from "../../../components/EditProduct";
-// import { useAxios } from "../../../api/products/useAxios";
+
 import { setProducts, getProducts, addNewProduct, deleteProduct, deleteProductById } from "../../../store/actions/productActions";
 import { getAllProducts, deleteApiProduct, postNewProduct, putApiProduct } from "../../../api/products/products";
 import CircularProgress from '@material-ui/core/CircularProgress';
-// import {deleteApiProduct} from "../../api/products/products"
-// import axios from "axios";
+
 
 const Products = () => {
   /*
@@ -59,13 +59,10 @@ const Products = () => {
   const [isOpenAdd, setIsOpenAdd] = useState(false);
   const [isOpenUpdate, setIsOpenUpdate] = useState(false);
 
-  // const [showAddComp, setShowAddComp] = useState(false);
-  // const [edit, setEdit] = useState(false);
+  
   const [editedObj, setEditedObj] = useState(null);
 
   const handleOpenAddDialog = () => {
-    // setShowAddComp(!showAddComp)
-
     setIsOpenAdd(true);
     console.log(isOpenAdd);
   };
@@ -73,17 +70,13 @@ const Products = () => {
     setIsOpenAdd(false);
   };
   const handleOpenUpdateDialog = (obj) => {
-    // setShowAddComp(!showAddComp)
-console.log("edit");
+// console.log("edit");
 setEditedObj(obj)
-console.log(editedObj);
+// console.log(editedObj);
     setIsOpenUpdate(true);
-    console.log(isOpenUpdate);
   };
-  console.log(editedObj);
-  // useEffect(() => {
-  //   setEditedObj(obj)
-  // }, [editedObj])
+  // console.log(editedObj);
+  
   const handleDialogUpdateClose = () => {
     setIsOpenUpdate(false);
   };
@@ -107,6 +100,50 @@ console.log(editedObj);
     setPage(0);
   };
 
+
+  const headCells = [
+    { id: 'image', label: 'تصویر',disableSorting: true },
+    { id: 'titleProduct', label: 'نام کالا' },
+    { id: 'category', label: 'دسته بندی' },
+    { id: 'edit', label: '', disableSorting: true },
+]
+  const [order, setOrder] = useState()
+    const [orderBy, setOrderBy] = useState()
+  const handleSortRequest = cellId => {
+    const isAsc = orderBy === cellId && order === "asc";
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(cellId)
+}
+function stableSort(array, comparator) {
+  const stabilizedThis = array.map((el, index) => [el, index]);
+  stabilizedThis.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) return order;
+      return a[1] - b[1];
+  });
+  return stabilizedThis.map((el) => el[0]);
+}
+
+function getComparator(order, orderBy) {
+  return order === 'desc'
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
+}
+
+function descendingComparator(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+      return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+      return 1;
+  }
+  return 0;
+}
+const recordsAfterPagingAndSorting = (products) => {
+  return stableSort(products,getComparator(order, orderBy))
+  .slice(page*rowsPerPage,(page+1)*rowsPerPage)
+}
+
   /*
    *  initial states & functions without redux
    */
@@ -121,50 +158,7 @@ console.log(editedObj);
   // }, []);
 
 
-  const handleEdit = (updatedProduct) => {
-    //     const getTasks = async () => {
-    //       const tasksFromServer = await deleteApiProduct();
-    // console.log(tasksFromServer);
-    // console.log(tasksFromServer.data);
-    //       setTasks(tasksFromServer.data);
-    //     };
-
-    //     getTasks();
-    putApiProduct(updatedProduct).then((res) => {
-      if (res.status === 404) {
-        console.log("error");
-        console.log(res);
-        // toast.error("Not defined");
-      }
-      console.log(res);
-      console.log(updatedProduct);
-      // setproducts(products.splice(updatedProduct.id-1,1,updatedProduct));
-      // setproducts([...products,newProduct])
-      // setproducts(products.filter((task) => task.id !== id));
-    });
-    console.log("edit put");
-
-    //     const getproducts = async () => {
-    //       const productsFromServer = await deleteApiProduct();
-    // console.log(productsFromServer);
-    //       setproducts(productsFromServer.data);
-    //     };
-
-    //     getproducts();
-  };
-
-  /*
-   * handle edit product & and setState for get edited product
-   */
- 
-
-  // const handleDialogOpenEdit = (productObj) => {
-  //   setEdit(true)
-  //   setIsOpen(true);
-  //   console.log("edit");
-  //   setEditedObj(productObj);
-  //   console.log(editedObj);
-  // };
+  
   return (
     <main style={{height:"80vh"}}>
       {loading && <CircularProgress className={classes.progress} size={100} thickness={4} disableShrink /> }
@@ -183,16 +177,57 @@ console.log(editedObj);
           {products !== "Not found" && (
             <Table className={classes.table}>
               <TableHead>
-                <TableRow>
-                  {/* <TableCell>#</TableCell> */}
-                  {/* <TableCell>code</TableCell> */}
-                  <TableCell>تصویر</TableCell>
+            
+            <TableRow
+             colSpan={1}
+            //  style={{ height: 53 * emptyRows }}
+            >
+                {
+                    headCells.map(headCell => (
+                        <TableCell  colSpan={1} key={headCell.id}
+                            sortDirection={orderBy === headCell.id ? order : false}
+                            >
+                            {headCell.disableSorting ? headCell.label :
+                                <TableSortLabel
+                                    active={orderBy === headCell.id}
+                                    direction={orderBy === headCell.id ? order : 'asc'}
+                                    onClick={() => { handleSortRequest(headCell.id) }}>
+                                    {headCell.label}
+                                </TableSortLabel>
+                            }
+                        </TableCell>))
+                }
+            </TableRow >
+        </TableHead>
+              {/* <TableHead>
+                <TableRow 
+                // colSpan={4}
+                >
+                 
+                  <TableCell 
+                  //  colSpan={1}
+                   >
+                     تصویر
+                     </TableCell>
                   <TableCell>نام کالا</TableCell>
-
+               
                   <TableCell>دسته بندی</TableCell>
                   <TableCell></TableCell>
                 </TableRow>
-              </TableHead>
+              </TableHead> */}
+{/* <TableBody>
+                        {
+                             recordsAfterPagingAndSorting().map(product =>
+                                (<TableRow key={product.id}>
+                                    <TableCell className={classes.cell} colSpan={1}><img className={classes.img} src={product?.image}/></TableCell>
+                                    <TableCell className={classes.cell} colSpan={1}>{product.title}</TableCell>
+                                    <TableCell className={classes.cell} colSpan={1}>{product.category}</TableCell>
+                                    <TableCell className={classes.cell} colSpan={1}></TableCell>
+                                </TableRow>)
+                            )
+                        }
+                    </TableBody> */}
+
               <TableBody>
                 {products !== "Not found" &&
                   (rowsPerPage > 0
@@ -203,10 +238,7 @@ console.log(editedObj);
                     : products
                   )?.map((row, index) => (
                     <TableRow key={row?.index}>
-                      {/* <TableCell component="th" scope="row">
-                      {product?.id}
-                    </TableCell> */}
-                      {/* <TableCell align="right">{user?.code}</TableCell> */}
+                     
                       <TableCell>
                         <img className={classes.img} src={row?.image} />
                       </TableCell>
@@ -214,17 +246,16 @@ console.log(editedObj);
                       <TableCell>{row?.category}</TableCell>
                       <TableCell>
                         <Box
-                        // onClick={handleOpenUpdateDialog}
+                        
                         onClick={()=>handleOpenUpdateDialog(row)}
                        
-                          // onClick={()=>handleOpen(row)}
+                          
                           className={classes.box}
                         >
                           ویرایش
                         </Box>
                         <Box
-                          // onClick={() => handleDel(row.id)}
-                          //  onClick={()=>{dispatch(deleteProductById(index))}}
+                         
                           onClick={() => {
                             dispatch(deleteProductById(row.id));
                           }}
@@ -234,13 +265,7 @@ console.log(editedObj);
                         </Box>
                       </TableCell>
                     </TableRow>
-                    // <ProductRow
-                    //   // handleOpen={handleDialogOpenEdit}
-                    //   // handleDel={handleDel}
-                    //   //  handleEdit={handleEdit}
-                    //   key={row.id}
-                    //   row={row}
-                    // />
+                  
                   ))}
 
                 {emptyRows > 0 && (
@@ -277,13 +302,7 @@ console.log(editedObj);
         className={classes.dialogTitle}
         title="افزودن/ویرایش کالا"
       >
-        <AddProduct
-          // products={products}
-          handleClose={handleDialogAddClose}
-        // editedObj={editedObj}
-        // handleAdd={handleAdd}
-        // handleEdit={handleEdit}
-        />
+        <AddProduct handleClose={handleDialogAddClose} />
       </CustomDialog>}
       {isOpenUpdate && <CustomDialog
         isOpen={isOpenUpdate}
@@ -293,10 +312,7 @@ console.log(editedObj);
       >
     <EditProduct
      handleClose={handleDialogUpdateClose}
-     editedObj={editedObj}
-    //  handleAdd={handleAdd}
-    // handleEdit={handleEdit}
-     />
+     editedObj={editedObj} />
        
       </CustomDialog> }
     </main>
@@ -305,118 +321,3 @@ console.log(editedObj);
 
 export default Products;
 
-// {showAddComp &&  <AddProduct
-//   products={products}
-//   handleClose={handleDialogClose}
-//   editedObj={editedObj}
-//   // handleAdd={handleAdd}
-//   // handleEdit={handleEdit}
-// />}
-// {/* {edit &&  <EditProduct
-//   handleClose={handleDialogClose}
-//   editedObj={editedObj}
-//   // handleAdd={handleAdd}
-//   handleEdit={handleEdit}
-// /> } */}
-// {/* {!editedObj ? (
-// <AddProduct
-//   tasks={tasks}
-//   handleClose={handleDialogClose}
-//   editedObj={editedObj}
-//   handleAdd={handleAdd}
-//   handleEdit={handleEdit}
-// />
-// ) : (
-// <EditProduct
-//   handleClose={handleDialogClose}
-//   editedObj={editedObj}
-//   handleAdd={handleAdd}
-//   handleEdit={handleEdit}
-// />
-// )} */}
-// {/* // <AddProduct handleClose={handleDialogClose} editedObj={editedObj} handleAdd={handleAdd} handleEdit={handleEdit} /> */}
-
-// const handleAdd = (newProduct) => {
-//   //     const getproducts = async () => {
-//   //       const productsFromServer = await deleteApiProduct();
-//   // console.log(productsFromServer);
-//   // console.log(productsFromServer.data);
-//   //       setproducts(productsFromServer.data);
-//   //     };
-
-//   //     getproducts();
-//   postNewProduct(newProduct).then((res) => {
-//     if (res.status === 404) {
-//       console.log("error");
-//       console.log(res);
-//       // toast.error("Not defined");
-//     }
-//     // setproducts([...products, newProduct]);
-//     // setproducts(products.filter((task) => task.id !== id));
-//   });
-//   console.log("add");
-
-//   //     const getproducts = async () => {
-//   //       const productsFromServer = await deleteApiProduct();
-//   // console.log(productsFromServer);
-//   //       setproducts(productsFromServer.data);
-//   //     };
-
-//   //     getproducts();
-// };
-
-/*
- * Fetch products
- */
-// const fetchproducts = async () => {
-//   let res = await axios({
-//     method: "get",
-//     url: "http://localhost:5000/products",
-//     headers: { "content-type": "application/json" },
-//   }).catch((err) => console.log(err));
-//   return res;
-// };
-// const fetchproducts = async () => {
-//   try {
-//     const response = await fetch(`http://localhost:5000/products`);
-//     const data = await response.json();
-//     return data;
-//   } catch (err) {
-//     console.log(err);
-//     // toast.error("request failed!");
-//   } finally {
-//     console.log("it is done!!");
-//   }
-// };
-
-// console.log(products);
-
-// const handleAdd = (newProduct) => {
-//   console.log("add");
-//   dispatch(addNewProduct(newProduct))
-//   //     const getproducts = async () => {
-//   //       const productsFromServer = await deleteApiProduct();
-//   // console.log(productsFromServer);
-//   // console.log(productsFromServer.data);
-//   //       setproducts(productsFromServer.data);
-//   //     };
-
-//   //     getproducts();
-//   // postNewProduct(newProduct).then((res) => {
-//   //   if (res.status === 404) {
-//   //     console.log("error");
-//   //     console.log(res);
-//   //     // toast.error("Not defined");
-//   //   }
-//     // setproducts([...products, newProduct]);
-//     // setproducts(products.filter((task) => task.id !== id));
-//   }
-
-//     const getproducts = async () => {
-//       const productsFromServer = await deleteApiProduct();
-// console.log(productsFromServer);
-//       setproducts(productsFromServer.data);
-//     };
-
-//     getproducts();
-// };

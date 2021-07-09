@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import { useFilePicker } from "use-file-picker";
-import { useDispatch,useSelector } from "react-redux";
-// import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import {
   Button,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Grid,
-  Card,
   Container,
-  Typography,
   FormControl,
   InputLabel,
   Select,
@@ -18,47 +13,25 @@ import {
 } from "@material-ui/core";
 import { useStyles } from "./styles";
 import { updateProductById } from "../../store/actions/productActions";
-// import {useAxios} from "../../api/products/useAxios"
-// import {postNewProduct} from "../../api/products/products"
-// import { isLoggedIn } from "../../../utils/auth";
-// import { setToken, getProducts } from "../../../store/actions/productActions";
 
-export default function EditProduct({handleClose,editedObj
-  // ,handleAdd,handleEdit
-}) {
+
+export default function EditProduct({handleClose,editedObj}) {
   const classes = useStyles();
 
-  console.log(editedObj);
-/*
-* custom hook for api
-*/
-// const { response, loading, error } = useAxios({
-//   method: "get",
-//   url: "http://localhost:5000/products",
-//   headers: { "content-type": "application/json" }
-// });
-// console.log(response, loading, error);
+  // console.log(editedObj);
+
 
   /*
    * set states for input values
    */
-  // console.log(editedObj);
+
   const [image, setImage] = useState(editedObj.image);
   const [title, setTitle] = useState(editedObj.title);
   const [category, setCategory] = useState(editedObj.category);
   const [description, setDescription] = useState(editedObj.description);
-  // const [newitem, setNew] = useState(null)
-//   const { response, loading, error } = useAxios({
-//   method: "post",
-//   url: "http://localhost:5000/products",
-//   headers: { "content-type": "application/json" },
-// data:JSON.stringify(newitem)
-// });
-// console.log(response, loading, error);
-
-  //   const history = useHistory();
-  // const products = useSelector((state) => state.allProducts.products);
-  // console.log(products);
+  /*
+   * usedispatch action for edit product
+   */
     const dispatch = useDispatch();
 
   /*
@@ -79,91 +52,19 @@ export default function EditProduct({handleClose,editedObj
     // },
   });
 
-  // if (loadingImg) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // if (errorsImg.length) {
-  //   return <div>Error...</div>;
-  // }
-  // const addAproduct=()=>{
-  //   let newProduct={ id:Math.floor(Math.random() * 1000000),title,image:filesContent[0]?.content,category,description}
-  //   console.log(newProduct);
-  // }
+ 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log("edit comp");
-    // if (editedObj) {
-    //   console.log("edit");
+    // console.log("edit comp");
+   
       let updatedProductObj={...editedObj, title,image:filesContent[0]?.content || image ,category,description};
      console.log(updatedProductObj);
      dispatch(updateProductById(editedObj.id,updatedProductObj))
 
-      // handleEdit(updatedProductObj)
-    // }
-    // console.log("ok");
-    // setImage(filesContent[0]?.content);
-    // console.log(title,image,category,description);
-    // addAproduct();
-    // let newProduct={ id:Math.floor(Math.random() * 1000000),title,image:filesContent[0]?.content,category,description,price:"",amount:""};
-// dispatch(addNewProduct(newProduct))
-// handleAdd(newProduct)
-// dispatch(addProduct(postNewProduct(newProduct)))
-// let res=postNewProduct(newProduct)
-// console.log(res);
-// console.log(res.data);
-// .then((res)=>{
-//   console.log(res.data);
-// })
-// setNew(newProduct)
-// const { response, loading, error } = useAxios({
-//   method: "post",
-//   url: "http://localhost:5000/products",
-//   headers: { "content-type": "application/json" },
-// data:newProduct
-// });
-// console.log(response, loading, error);
     handleClose();
     window.location.reload()
-    // setImage(filesContent[0]?.content);
-    // console.log(image,"img");
-    //   if ((email, password)) {
-    //     login(email, password)
-    //       .then((res) => {
-    //         // console.log(res.data,"data");
-    //         // dispatch(setToken(res.data.token));
-    //         localStorage.setItem("token", res.data.token);
-    //         // window.location.reload();
-    //         if (isLoggedIn()) {
-    //           history.push("/admin/products");
-    //         }
-
-    //       })
-    //       .catch((err) => console.error(err));
-    //   }
-    //    else {
-    //     // toast.error("email and password fields could not be empty! ");
-    //     console.error("err")
-    //   }
   };
-  const handleChange = (e) => {
-
-    setImage(e.target.value);
-    // setImage(filesContent[0]?.content);
-    // if (e.target.name === "image") {
-    //   console.log("ok");
-
-    // //   setImage(filesContent[0]?.content);
-    // //   setImage(e.target.files);
-    //   console.log(image,"img");
-    // } else {
-    //   // setPassword(e.target.value);
-    // }
-    // console.log(image,"img");
-  };
-  // console.log(image,"img");
   
-//   console.log(filesContent[0]?.content);
   return (
     <Container component="main" maxWidth="sm">
       <form
@@ -192,7 +93,7 @@ export default function EditProduct({handleClose,editedObj
                 fullWidth
 // value={image}
 onChange={(e)=>setImage(e.target.value)}
-// onChange={handleChange}
+
               />
             </Grid>
             <Grid item xs={2}>
@@ -260,11 +161,11 @@ onChange={(e)=>setImage(e.target.value)}
           </Grid>
           <Grid container xs={12} justify="center">
             <Button
-              // onClick={handleLogin}
+             
               type="submit"
-              // fullWidth
+            
               variant="contained"
-              // disabled={!email && !password}
+             
 
               className={classes.btn}
             >

@@ -6,7 +6,7 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 
 
 const Footer = () => {
-  // let theme=useContext(ThemeContext)
+
 
   return (
     <footer
@@ -27,16 +27,7 @@ const Footer = () => {
           </Box>
         </Container>
       </Box>
-      {/* <AppBar className={appbar} color="secondary" position="relative">
-        <Toolbar className={header}>
-          <Typography variant="h6" noWrap>
-            با ما همراه باشید
-          </Typography>
-
-          <HomeIcon className={icon} />
-         
-        </Toolbar>
-      </AppBar> */}
+     
     </footer>
   );
 };

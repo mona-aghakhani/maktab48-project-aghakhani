@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useFilePicker } from "use-file-picker";
-import { useDispatch,useSelector } from "react-redux";
-// import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import {
   Button,
   TextField,
@@ -17,60 +17,32 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import { useStyles } from "./styles";
-import { addNewProduct,addProduct } from "../../store/actions/productActions";
-import {useAxios} from "../../api/products/useAxios"
-import {postNewProduct} from "../../api/products/products"
-import axios from 'axios';
-// import { isLoggedIn } from "../../../utils/auth";
-// import { setToken, getProducts } from "../../../store/actions/productActions";
+import { addNewProduct } from "../../store/actions/productActions";
 
-export default function AddProduct({
-  handleClose,
-  // handleAdd,handleEdit,editedObj,tasks
-}) {
+
+
+export default function AddProduct({ handleClose}) {
   const classes = useStyles();
  /*
-   * useselector & get products
+   * usedispatch action for add product
    */
-//  const products = useSelector((state) => state.allProducts.products);
+
  const dispatch = useDispatch();
-
-
-
-/*
-* custom hook for api
-*/
-// const { response, loading, error } = useAxios({
-//   method: "get",
-//   url: "http://localhost:5000/products",
-//   headers: { "content-type": "application/json" }
-// });
-// console.log(response, loading, error);
 
   /*
    * set states for input values
    */
-  // console.log(editedObj);
+  
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
-  // const [newitem, setNew] = useState(null)
-//   const { response, loading, error } = useAxios({
-//   method: "post",
-//   url: "http://localhost:5000/products",
-//   headers: { "content-type": "application/json" },
-// data:JSON.stringify(newitem)
-// });
-// console.log(response, loading, error);
-
-  //   const history = useHistory();
-  
+ 
 
   /*
    * 'use-file-picker' : Simple react hook to open browser file selector.
    */
-  const [openFileSelector, { filesContent, loadingImg, errorsImg }] = useFilePicker({
+  const [openFileSelector, { filesContent }] = useFilePicker({
     readAs: "DataURL",
     accept: "image/*",
     multiple: true,
@@ -84,86 +56,30 @@ export default function AddProduct({
     //   minWidth: 768,
     // },
   });
-
-  // if (loadingImg) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // if (errorsImg.length) {
-  //   return <div>Error...</div>;
-  // }
-  // const addAproduct=()=>{
-  //   let newProduct={ id:Math.floor(Math.random() * 1000000),title,image:filesContent[0]?.content,category,description}
-  //   console.log(newProduct);
-  // }
-  const handleLogin = (e) => {
-    // console.log("ok");
+  /*
+  * use output 'use-file-picker'
+  */
+//   console.log(filesContent[0]?.content);
+  
+  const handleSubmit = (e) => {
+    
     e.preventDefault();
-
-    // if (image && title) {
-      
-    // }
-    // if (editedObj) {
-    //   console.log("edit");
-    //   let updatedProductObj={...editedObj, title,image:filesContent[0]?.content || image ,category,description};
-    //  console.log(updatedProductObj);
-    //   handleEdit(updatedProductObj)
-    // }
-    // console.log("ok");
-    // setImage(filesContent[0]?.content);
-    // console.log(title,image,category,description);
-    // addAproduct();
-    console.log("add comp");
+    // console.log("add comp");
     
   let newProduct={ title:title,image:filesContent[0]?.content,category:category,description:description,price:"",amount:""};
-  console.log(newProduct);
-  // postNewProduct(newProduct).then(function(res){
-  //   dispatch(addProduct(res.data))
-  // })
+  // console.log(newProduct);
+  
 dispatch(addNewProduct(newProduct))
-  // axios.post('http://localhost:5000/products',newProduct)
-  // .then(function (res){
-  //   console.log(res);
-  //   dispatch(addProduct(res.data))
-  // })
-  // dispatch(addNewProduct(newProduct))
-  //   getAllProducts().then((res) => {
-  //     console.log("res data for products", res.data);
-  //     dispatch(setProducts(res.data));
-  //   });
-//   postNewProduct(newProduct).then((res) => {
-//     // if (res.status === 404) {
-//     //   console.log("error");
-//     //   console.log(res);
-//     //   // toast.error("Not defined");
-//     // }
-// dispatch(addProduct(newProduct))
-//   })
  
     handleClose();
   };
-  const handleChange = (e) => {
-
-    setImage(e.target.value);
-    // setImage(filesContent[0]?.content);
-    // if (e.target.name === "image") {
-    //   console.log("ok");
-
-    // //   setImage(filesContent[0]?.content);
-    // //   setImage(e.target.files);
-    //   console.log(image,"img");
-    // } else {
-    //   // setPassword(e.target.value);
-    // }
-    // console.log(image,"img");
-  };
-  // console.log(image,"img");
+ 
   
-//   console.log(filesContent[0]?.content);
+
   return (
     <Container component="main" maxWidth="sm">
       <form
-        onSubmit={handleLogin}
+        onSubmit={handleSubmit}
         className={classes.form}
         noValidate
         autoComplete="off"
@@ -187,7 +103,7 @@ dispatch(addNewProduct(newProduct))
                 fullWidth
 value={image}
 onChange={(e)=>setImage(e.target.value)}
-// onChange={handleChange}
+
               />
             </Grid>
             <Grid item xs={2}>
@@ -256,11 +172,11 @@ onChange={(e)=>setImage(e.target.value)}
           </Grid>
           <Grid container xs={12} justify="center">
             <Button
-              onClick={handleLogin}
+              onClick={handleSubmit}
               type="submit"
               // fullWidth
               variant="contained"
-              // disabled={!email && !password}
+              disabled={!title && !category}
 
               className={classes.btn}
             >
@@ -274,26 +190,3 @@ onChange={(e)=>setImage(e.target.value)}
 }
 
 
-
-   // setproducts([...products, newProduct]);
-    // setproducts(products.filter((task) => task.id !== id));
-
-
-
-// console.log(newProduct);
-// handleAdd(newProduct)
-// dispatch(addProduct(postNewProduct(newProduct)))
-// let res=postNewProduct(newProduct)
-// console.log(res);
-// console.log(res.data);
-// .then((res)=>{
-//   console.log(res.data);
-// })
-// setNew(newProduct)
-// const { response, loading, error } = useAxios({
-//   method: "post",
-//   url: "http://localhost:5000/products",
-//   headers: { "content-type": "application/json" },
-// data:newProduct
-// });
-// console.log(response, loading, error);

@@ -15,19 +15,7 @@ import { useStyles } from "./styles";
 
 const PublicHeader = () => {
   const {
-    appbar,
-    box,
-    link,
-    tab,
-    tabs,
-    paper,
-    indicator,
-    active,
-    grid,
-    item1,
-    item2,
-    item3,
-  } = useStyles();
+    appbar,link, tab, tabs,indicator, grid, item1, item2, item3,} = useStyles();
   const [value, setValue] = React.useState(2);
 
   const handleChange = (event, newValue) => {
@@ -35,9 +23,9 @@ const PublicHeader = () => {
   };
 
   return (
-    // <header>
+    
     <AppBar className={appbar} position="relative">
-      {/* <Box> */}
+    
       <Grid container className={grid}>
         <Grid item md={3} sm={2} xs={12} className={item1}>
           <Typography>پنل مدیریت فروشگاه</Typography>
@@ -88,9 +76,7 @@ const PublicHeader = () => {
               className={tab}
             />
           </Tabs>
-          {/* <NavLink to="/admin/products" className={link} activeClassName={active} >کالاها</NavLink>
-                          <NavLink to="/admin/prices " className={link} activeClassName={active}> قیمت و موجودی </NavLink>
-                          <NavLink to="/admin/orders" className={link} activeClassName={active}>سفارش ها</NavLink> */}
+          
         </Grid>
         <Grid item md={2} sm={2} xs={12} className={item3}>
           <Link href="/" className={link}>
@@ -99,88 +85,12 @@ const PublicHeader = () => {
         </Grid>
       </Grid>
 
-      {/* </Box> */}
+    
     </AppBar>
-    // </header>
+   
   );
 };
 
 export default PublicHeader;
 
-// const PublicHeader = () => {
-//     const {  appbar,box,link,tab,tabs,paper,indicator,active} =useStyles();
-//     const [value, setValue] = React.useState(2);
 
-//   const handleChange = (event, newValue) => {
-//     setValue(newValue);
-//   };
-//     return (
-//         <div>
-//             <AppBar  position="relative">
-//                 <Toolbar   className={appbar}>
-
-//                     {/* <Grid container direction="row">
-//                     <Grid item> */}
-//                     {/* <div> */}
-//                     <Typography xs={12}>
-//                         پنل مدیریت فروشگاه
-//                     </Typography>
-//                     {/* </div> */}
-
-//                         <Box xs={12} className={box}>
-//                         {/* <Paper className={paper} square> */}
-//                           <NavLink to="/admin/products" className={link} activeClassName={active} >کالاها</NavLink>
-//                           <NavLink to="/admin/prices " className={link} activeClassName={active}> قیمت و موجودی </NavLink>
-//                           <NavLink to="/admin/orders" className={link} activeClassName={active}>سفارش ها</NavLink>
-//       {/* <Tabs
-//       // position="relative"
-//     //   classes={{ indicator:indicator }}
-//     // TabIndicatorProps={{ style: { background: "red",width:"50px" } }}
-//         value={value}
-//         indicatorColor="primary"
-//         textColor="black"
-//         onChange={handleChange}
-//         className={tabs}
-//         // aria-label="disabled tabs example"
-//       >
-//         <Tab label="کالاها" className={tab} component={Link}
-//             to="/admin/products" />
-//         <Tab label="قیمت و موجودی" className={tab} component={Link}  to="/admin/prices" />
-
-//         <Tab label="سفارش ها" component={Link}  to="/admin/orders" className={tab} />
-//       </Tabs> */}
-//     {/* </Paper> */}
-
-//                     </Box>
-
-//                 </Toolbar>
-//             </AppBar>
-
-//         </div>
-//     )
-// }
-
-// export default PublicHeader
-
-// {/* <Tabs className={tab} >
-//           <Tab className={tab} exact label='کالاها'
-//   component={Link}
-//   to="/"
-//    />
-//           <Tab bgcolor="secondary" exact label='کالاها'
-//   component={Link}
-//   to="/"
-//    />
-//           <Tab bgcolor="secondary" exact label='کالاها'
-//   component={Link}
-//   to="/"
-//    />
-
-//           </Tabs> */}
-
-// {/* <Tab label={
-//     <React.Fragment>
-//       قیمت<br />
-//       <span style={{ fontSize: "smaller",width:"10px" }}>قیمت</span>
-//     </React.Fragment>
-//   } className={tab} component={Link}  to="/admin/prices" /> */}
