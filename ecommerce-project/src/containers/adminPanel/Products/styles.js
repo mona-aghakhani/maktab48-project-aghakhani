@@ -44,4 +44,8 @@ export const useStyles2 = makeStyles({
       height:"60px",
       borderRadius:"50%",
     },
+    progress: {
+      marginLeft: '45%',
+      marginTop:"15%"
+    },
   });

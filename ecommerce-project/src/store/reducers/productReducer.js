@@ -3,6 +3,7 @@ import { ActionTypes } from "../constants/action-type";
 
 const initialState = {
   products: [],
+  loading:true,
   selectedProduct: {},
 };
 
@@ -23,6 +24,8 @@ export const productReducer = (state = initialState, { type, payload }) => {
       products:state.products.splice(state.products.findIndex(item=>item.id === payload.id),1,payload)
       // { ...state, products:updatedData };
     }
+    case ActionTypes.SET_LOADING:
+      return { ...state, loading: false };
     case ActionTypes.SELECTED_PRODUCT:
       return { ...state, selectedProduct: payload };
 

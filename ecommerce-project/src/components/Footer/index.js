@@ -10,7 +10,7 @@ const Footer = () => {
 
   return (
     <footer
-    //  style={{margin:"90vh 0"}}
+     style={{margin:"80vh 0 0 0"}}
      >
       <Box bgcolor="text.secondary">
         <Container maxWidth="lg">

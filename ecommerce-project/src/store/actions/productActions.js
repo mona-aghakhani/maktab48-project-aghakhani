@@ -35,6 +35,15 @@ export function updateProductAct(updatedProduct){
         payload:updatedProduct
     }
 }
+export function setLoading(){
+    return{
+        type:ActionTypes.SET_LOADING,
+        // payload:
+    }
+}
+
+
+
 
 export const selectedProduct = (product) => {
   return {
@@ -51,6 +60,7 @@ export const getProducts = () => async(dispatch, getState) => {
   const res = await getAllProducts();
   console.log("res data products from async action",res.data);
   dispatch(setProducts(res.data));
+  dispatch(setLoading())
 };
 
 /*

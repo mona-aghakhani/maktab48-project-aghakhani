@@ -24,6 +24,7 @@ import EditProduct from "../../../components/EditProduct";
 // import { useAxios } from "../../../api/products/useAxios";
 import { setProducts, getProducts, addNewProduct, deleteProduct, deleteProductById } from "../../../store/actions/productActions";
 import { getAllProducts, deleteApiProduct, postNewProduct, putApiProduct } from "../../../api/products/products";
+import CircularProgress from '@material-ui/core/CircularProgress';
 // import {deleteApiProduct} from "../../api/products/products"
 // import axios from "axios";
 
@@ -32,6 +33,8 @@ const Products = () => {
    * use useselector & dispatch for get products and handle api calls
    */
   const products = useSelector((state) => state.allProducts.products);
+  const loading = useSelector((state) => state.allProducts.loading);
+  console.log(loading);
   const dispatch = useDispatch();
   /*
    * dispatch sync action(setProducts) and get data
@@ -163,8 +166,9 @@ console.log(editedObj);
   //   console.log(editedObj);
   // };
   return (
-    <main>
-      <Container maxWidth="md">
+    <main style={{height:"80vh"}}>
+      {loading && <CircularProgress className={classes.progress} size={100} thickness={4} disableShrink /> }
+      {!loading && <Container maxWidth="md">
         <Grid container justify="space-between" className={classes.grid}>
           <Grid item>
             <Typography>مدیریت کالاها</Typography>
@@ -266,7 +270,7 @@ console.log(editedObj);
             </Table>
           )}
         </TableContainer>
-      </Container>
+      </Container>}
      {isOpenAdd && <CustomDialog
         isOpen={isOpenAdd}
         handleClose={handleDialogAddClose}
