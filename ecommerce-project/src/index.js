@@ -13,6 +13,7 @@ import { create } from "jss";
 import {CssBaseline } from "@material-ui/core";
 import rtl from "jss-rtl";
 import {theme} from "./theme/index"
+import { ToastContainer, toast } from "react-toastify";
 
 
 // Configure JSS
@@ -20,6 +21,7 @@ const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 ReactDOM.render(
   <React.StrictMode>
+    <ToastContainer/>
     <Provider store={store}>
       <StylesProvider jss={jss}>
         <ThemeProvider theme={theme}>

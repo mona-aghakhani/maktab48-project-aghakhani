@@ -13,7 +13,7 @@ export const useStyles2 = makeStyles({
       // padding: theme.spacing(3)
       margin: "20px auto",
       // background:"lightgray"
-      background: "rgb(214,230,215,0.6)",
+      background: "rgba(231, 231 ,231,0.3)",
     },
     grid: {
       width: "90%",
@@ -48,4 +48,55 @@ export const useStyles2 = makeStyles({
       marginLeft: '45%',
       marginTop:"15%"
     },
+    tableSortLabel: props => ({
+      // backgroundColor: "gray",
+      color:"gray",
+      fill: "gray",
+      "&:hover": {
+        // backgroundColor: "gray",
+        color:"gray"
+      }
+    }),
+    icon:{
+      color:"red"
+    },
+    caption: {
+      color: "none",
+      // padding: 8,
+      // border: "1px dashed grey",
+      // fontSize: "0.875rem"
+    },
+    toolbar: {
+      "& > p:nth-of-type(2)": {
+        // fontSize: "1.25rem",
+        // opacity:0,
+        direction:"ltr"
+        // fontWeight: 600
+      }
+
+    },
+  //   icon: {
+  //     display: 'none',
+  // },
+  // active: {
+  //     '& $icon': {
+  //         display: 'inline',
+  //     },
+  // },
+
+    activeSortIcon: {
+      // "& > :not(nth-of-child(2))": {
+        // fontSize: "1.25rem",
+        opacity:1,
+        color:"red"
+        // fontWeight: 600
+      // }
+      // opacity: 1,
+      // color:"black"
+    },
+    // Half visible for inactive icons
+    inactiveSortIcon: {
+      opacity: 0,
+    },
+
   });

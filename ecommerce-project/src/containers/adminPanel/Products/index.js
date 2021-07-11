@@ -28,6 +28,120 @@ import { getAllProducts, deleteApiProduct, postNewProduct, putApiProduct } from 
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
+
+function descendingComparator(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
+
+function getComparator(order, orderBy) {
+  return order === "desc"
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+}
+
+function stableSort(array, comparator) {
+  const stabilizedThis = array.map((el, index) => [el, index]);
+  stabilizedThis.sort((a, b) => {
+    const order = comparator(a[0], b[0]);
+    if (order !== 0) return order;
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map(el => el[0]);
+}
+const headCells = [
+  { id: 'image', label: 'تصویر', disableSorting: true },
+  { id: 'titleProduct', label: 'نام کالا', disableSorting: true },
+  { id: 'category', label: 'دسته بندی',
+   disableSorting: true
+   },
+  { id: 'edit', label: '', disableSorting: true },
+]
+const styles = {
+  activeSortIcon: {
+    // "& > :not(nth-of-child(2))": {
+      // fontSize: "1.25rem",
+      opacity:1,
+      color:"red"
+      // fontWeight: 600
+    // }
+    // opacity: 1,
+    // color:"black"
+  },
+  // Half visible for inactive icons
+  inactiveSortIcon: {
+    opacity: 0,
+  },
+  icon: {
+      display: 'none',
+      color:"red"
+  },
+  active: {
+      '& $icon': {
+          display: 'inline',
+      },
+  },
+};
+// const styles = theme => ({
+//   // Fully visible for active icons
+//   activeSortIcon: {
+//     opacity: 1,
+//   },
+//   // Half visible for inactive icons
+//   inactiveSortIcon: {
+//     opacity: 0.4,
+//   },
+// });
+function EnhancedTableHead(props) {
+  const {
+    classes,
+    order,
+    orderBy,
+    onRequestSort
+  } = props;
+  const createSortHandler = property => event => {
+    onRequestSort(event, property);
+  };
+
+  return (
+    <TableHead>
+      <TableRow>
+        {headCells.map(headCell => (
+          <TableCell
+          olSpan={1}
+            key={headCell.id}
+            sortDirection={orderBy === headCell.id ? order : false}
+          >
+             {headCell.disableSorting ? headCell.label :
+            <TableSortLabel
+              active={orderBy === headCell.id }
+              direction={orderBy === headCell.id ? order : "asc"}
+              onClick={createSortHandler(headCell.id)}
+              // style={styles}
+              // style={{ opacity: (true === headCell.disableSorting ) ? 0 :1 }}
+              classes={{
+                // Override with the active class if this is the selected column or inactive otherwise
+                icon: ((true === headCell.disableSorting) ? styles.activeSortIcon : styles.inactiveSortIcon ) 
+                // icon: ((orderBy === 'category') ? styles.activeSortIcon : styles.inactiveSortIcon ) 
+                // icon:  classes.activeSortIcon 
+                }}
+            >
+              {headCell.label}
+            </TableSortLabel>
+             }
+          </TableCell>
+        ))}
+      </TableRow>
+    </TableHead>
+  );
+}
+
+
 const Products = () => {
   /*
    * use useselector & dispatch for get products and handle api calls
@@ -59,7 +173,7 @@ const Products = () => {
   const [isOpenAdd, setIsOpenAdd] = useState(false);
   const [isOpenUpdate, setIsOpenUpdate] = useState(false);
 
-  
+
   const [editedObj, setEditedObj] = useState(null);
 
   const handleOpenAddDialog = () => {
@@ -70,13 +184,13 @@ const Products = () => {
     setIsOpenAdd(false);
   };
   const handleOpenUpdateDialog = (obj) => {
-// console.log("edit");
-setEditedObj(obj)
-// console.log(editedObj);
+    // console.log("edit");
+    setEditedObj(obj)
+    // console.log(editedObj);
     setIsOpenUpdate(true);
   };
   // console.log(editedObj);
-  
+
   const handleDialogUpdateClose = () => {
     setIsOpenUpdate(false);
   };
@@ -101,48 +215,17 @@ setEditedObj(obj)
   };
 
 
-  const headCells = [
-    { id: 'image', label: 'تصویر',disableSorting: true },
-    { id: 'titleProduct', label: 'نام کالا' },
-    { id: 'category', label: 'دسته بندی' },
-    { id: 'edit', label: '', disableSorting: true },
-]
+
   const [order, setOrder] = useState()
-    const [orderBy, setOrderBy] = useState()
-  const handleSortRequest = cellId => {
-    const isAsc = orderBy === cellId && order === "asc";
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(cellId)
-}
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-      const order = comparator(a[0], b[0]);
-      if (order !== 0) return order;
-      return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
-}
+  const [orderBy, setOrderBy] = useState()
 
-function getComparator(order, orderBy) {
-  return order === 'desc'
-      ? (a, b) => descendingComparator(a, b, orderBy)
-      : (a, b) => -descendingComparator(a, b, orderBy);
-}
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+  };
 
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-      return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-      return 1;
-  }
-  return 0;
-}
-const recordsAfterPagingAndSorting = (products) => {
-  return stableSort(products,getComparator(order, orderBy))
-  .slice(page*rowsPerPage,(page+1)*rowsPerPage)
-}
+
 
   /*
    *  initial states & functions without redux
@@ -158,10 +241,11 @@ const recordsAfterPagingAndSorting = (products) => {
   // }, []);
 
 
-  
   return (
-    <main style={{height:"80vh"}}>
-      {loading && <CircularProgress className={classes.progress} size={100} thickness={4} disableShrink /> }
+    <main
+    //  style={{height:"80vh"}}
+    >
+      {loading && <CircularProgress className={classes.progress} size={100} thickness={4} disableShrink />}
       {!loading && <Container maxWidth="md">
         <Grid container justify="space-between" className={classes.grid}>
           <Grid item>
@@ -176,96 +260,40 @@ const recordsAfterPagingAndSorting = (products) => {
         <TableContainer className={classes.paper} component={Paper}>
           {products !== "Not found" && (
             <Table className={classes.table}>
-              <TableHead>
-            
-            <TableRow
-             colSpan={1}
-            //  style={{ height: 53 * emptyRows }}
-            >
-                {
-                    headCells.map(headCell => (
-                        <TableCell  colSpan={1} key={headCell.id}
-                            sortDirection={orderBy === headCell.id ? order : false}
-                            >
-                            {headCell.disableSorting ? headCell.label :
-                                <TableSortLabel
-                                    active={orderBy === headCell.id}
-                                    direction={orderBy === headCell.id ? order : 'asc'}
-                                    onClick={() => { handleSortRequest(headCell.id) }}>
-                                    {headCell.label}
-                                </TableSortLabel>
-                            }
-                        </TableCell>))
-                }
-            </TableRow >
-        </TableHead>
-              {/* <TableHead>
-                <TableRow 
-                // colSpan={4}
-                >
-                 
-                  <TableCell 
-                  //  colSpan={1}
-                   >
-                     تصویر
-                     </TableCell>
-                  <TableCell>نام کالا</TableCell>
-               
-                  <TableCell>دسته بندی</TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
-              </TableHead> */}
-{/* <TableBody>
-                        {
-                             recordsAfterPagingAndSorting().map(product =>
-                                (<TableRow key={product.id}>
-                                    <TableCell className={classes.cell} colSpan={1}><img className={classes.img} src={product?.image}/></TableCell>
-                                    <TableCell className={classes.cell} colSpan={1}>{product.title}</TableCell>
-                                    <TableCell className={classes.cell} colSpan={1}>{product.category}</TableCell>
-                                    <TableCell className={classes.cell} colSpan={1}></TableCell>
-                                </TableRow>)
-                            )
-                        }
-                    </TableBody> */}
+              <EnhancedTableHead
+                classes={{
+                  icon: classes.icon,
+                  active: classes.active
+                }}
+                // classes={classes}
+                order={order}
+                orderBy={orderBy}
+                onRequestSort={handleRequestSort}
+                rowCount={products.length}
+              />
+
 
               <TableBody>
-                {products !== "Not found" &&
-                  (rowsPerPage > 0
-                    ? products?.slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
-                    )
-                    : products
-                  )?.map((row, index) => (
+                {stableSort(products, getComparator(order, orderBy))?.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+                  // : products
+                  // )?
+                  .map((row, index) => (
                     <TableRow key={row?.index}>
-                     
+
                       <TableCell>
                         <img className={classes.img} src={row?.image} />
                       </TableCell>
                       <TableCell>{row?.title}</TableCell>
                       <TableCell>{row?.category}</TableCell>
                       <TableCell>
-                        <Box
-                        
-                        onClick={()=>handleOpenUpdateDialog(row)}
-                       
-                          
-                          className={classes.box}
-                        >
-                          ویرایش
-                        </Box>
-                        <Box
-                         
-                          onClick={() => {
-                            dispatch(deleteProductById(row.id));
-                          }}
-                          className={classes.box}
-                        >
-                          حذف
-                        </Box>
+                        <Box onClick={() => handleOpenUpdateDialog(row)}   className={classes.box}> ویرایش </Box>
+                        <Box onClick={() => { dispatch(deleteProductById(row.id)); }} className={classes.box} > حذف</Box>
                       </TableCell>
                     </TableRow>
-                  
+
                   ))}
 
                 {emptyRows > 0 && (
@@ -282,9 +310,16 @@ const recordsAfterPagingAndSorting = (products) => {
                     count={products?.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
+                    labelRowsPerPage=''
+                    classes={{
+                      toolbar: classes.toolbar,
+                      caption: classes.caption
+                    }}
                     SelectProps={{
-                      inputProps: { "aria-label": "تعداد ردیف در هر صفحه " },
+                      inputProps: { "aria-label": "none " },
+                      // variant="",
                       native: true,
+
                     }}
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
@@ -296,7 +331,7 @@ const recordsAfterPagingAndSorting = (products) => {
           )}
         </TableContainer>
       </Container>}
-     {isOpenAdd && <CustomDialog
+      {isOpenAdd && <CustomDialog
         isOpen={isOpenAdd}
         handleClose={handleDialogAddClose}
         className={classes.dialogTitle}
@@ -310,11 +345,11 @@ const recordsAfterPagingAndSorting = (products) => {
         className={classes.dialogTitle}
         title="افزودن/ویرایش کالا"
       >
-    <EditProduct
-     handleClose={handleDialogUpdateClose}
-     editedObj={editedObj} />
-       
-      </CustomDialog> }
+        <EditProduct
+          handleClose={handleDialogUpdateClose}
+          editedObj={editedObj} />
+
+      </CustomDialog>}
     </main>
   );
 };

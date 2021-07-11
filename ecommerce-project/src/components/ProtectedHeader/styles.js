@@ -21,12 +21,25 @@ export const useStyles=makeStyles((theme)=>({
     
     item3:{
         textAlign:"center",
-        textDecoration:"none"
+        textDecoration:"none",
+        alignItems:"center",
+        justifyContent:"center",
     },
     item2:{
         justifyContent:"center",
         margin:"20px 0"
         
+    },
+    boxLogout:{
+        color:"red",
+        fontSize: "10px",
+        width:"10px",
+        height:"10px",
+        borderRadius:"50%",
+        cursor:"pointer",
+        margin:"0 5px",
+     
+
     },
     // paper:{
     //     borderRadius:"5px",
@@ -36,9 +49,11 @@ export const useStyles=makeStyles((theme)=>({
         textDecoration:"none",
         color:"black",
         fontSize:"10px",
-        margin:"10px",
+        margin:"10px 0 0 0",
+        width:"60px",
         '&:hover':{
-            textDecoration:"none"
+            textDecoration:"none",
+            borderBottom:"1px solid rgb(214,230,215)",
         }
         // border:"1px solid beige",
         // padding:"10px 15px",

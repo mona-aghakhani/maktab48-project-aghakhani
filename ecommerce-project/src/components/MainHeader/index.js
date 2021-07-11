@@ -10,7 +10,7 @@ import {
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import { useStyles, useOutlinedInputStyles } from "./styles";
-import logome from "../../assets/images/logome.png"
+import logoNew from "../../assets/images/logoNew.png"
 
 
 function MainHeader() {
@@ -23,14 +23,14 @@ function MainHeader() {
           <Grid container  alignItems="center"> 
             <Grid item>
           {/* <Box > */}
-            <img src={logome} style={{width:"100px",height:"50px"}}  />
+            <img src={logoNew} style={{width:"100px",height:"50px"}}  />
             </Grid>
             {/* </Box> */}
-            <Grid item>
+            {/* <Grid item>
           <Typography variant="h6" noWrap>
             فروشگاه من
           </Typography>
-          </Grid>
+          </Grid> */}
           </Grid>
           {/* <div
           //    className={classes.search}

@@ -12,7 +12,7 @@ export default function AdminLogin({}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const classes = useStyles();
   /*
   * check  admin-token 
@@ -22,21 +22,29 @@ export default function AdminLogin({}) {
     if ((email, password)) {
       login(email, password)
         .then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            localStorage.setItem("token", res.data.token);
+          }
+          if (res.status === 400) {
+            toast.error("ایمیل و پسورد را به درستی وارد کنید ");
+          }
+          // if(res.status !== 200){
+          //   console.log("error");
+          //   toast.error("لطفا ایمیل و پسورد را به درستی وارد کنید ");
+          // }
           // console.log(res.data,"data");
           // dispatch(setToken(res.data.token));
-          localStorage.setItem("token", res.data.token);
           // window.location.reload();
           if (isLoggedIn()) {
             history.push("/admin/products");
-          }else{
-            toast.error("لطفا ایمیل و پسورد را به درستی وارد کنید ");
           }
           
         })
         .catch((err) => console.error(err));
     }
      else {
-      // toast.error("email and password fields could not be empty! ");
+      toast.error("ایمیل و پسورد را لطفاوارد کنید ");
       console.error("err")
     }
   };
@@ -101,7 +109,7 @@ export default function AdminLogin({}) {
               type="submit"
               fullWidth
               variant="contained"
-              disabled={!email && !password}
+              // disabled={!password && !email}
               color="primary"
               className={classes.submit}
             >

@@ -28,22 +28,22 @@ export const theme = createMuiTheme({
     // },
     text: {
       primary: "#4A4A4A",
-      secondary: "rgb(214,230,215)",
+      secondary: "rgba(231, 231 ,231,0.65)",
       hint: "#B9B9B9",
     },
     background: {
-      default: "#ededdc",
+      default: "rgba(239,239,239,0.1)",
       light: "#F3F5FF",
     },
     primary: {
       // light: will be calculated from palette.primary.main,
-      main: "rgb(234,149,63,0.9)",
+      main: "rgba(234,149,63,0.9)",
       // dark: will be calculated from palette.primary.main,
       // contrastText: will be calculated to contrast with palette.primary.main
     },
     secondary: {
       // light: '#0066ff',
-      main: "rgb(214,230,215)",
+      main: "rgba(231, 231 ,231,0.65)",
       // dark: will be calculated from palette.secondary.main,
       contrastText: "#ffcc00",
     },
@@ -216,6 +216,28 @@ width:"100%"
         fontSize: "20px",
       },
     },
+    MuiSvgIcon: {
+      root: {
+        // fontFamily: "Shabnam !important",
+        fontSize: "20px",
+        color: "gray",
+      },
+    },
+    MuiTableSortLabel:{
+      root: {
+        // fontFamily: "Shabnam !important",
+        // color: "gray",
+      },
+      icon: {
+        opacity:"0",
+        // fontFamily: "Shabnam !important",
+        color: "gray",
+      },
+      active:{
+        color: "black",
+        opacity:"1",
+      }
+    }
   },
   // overrides: {
   //   MuiOutlinedInput: {

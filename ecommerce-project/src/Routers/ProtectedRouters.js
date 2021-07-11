@@ -16,6 +16,7 @@ export const ProtectedRouters=(props)=>{
         <Switch>
         {/* <Route path="/admin/login" exact component={AdminLogin} /> */}
             <ProtectedRoute path="/admin/products" exact component={Products} />
+            {/* <ProtectedRoute path="/admin/products" exact component={Products} /> */}
             <ProtectedRoute path="/admin/prices" exact component={Prices} />
             <ProtectedRoute path="/admin/orders" exact component={Orders} />
             {/* <Route path="/admin/dashboard" exact component={Dashboard} /> */}

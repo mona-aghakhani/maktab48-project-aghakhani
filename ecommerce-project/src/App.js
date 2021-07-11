@@ -6,6 +6,7 @@ import { ProtectedRouters } from "./Routers/ProtectedRouters";
 import { PublicRouters } from "./Routers/PublicRouters";
 import AdminLogin from "./containers/adminPanel/AdminLogin";
 import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 /*
  * define high level routes
  */
@@ -14,9 +15,10 @@ function App() {
   return (
     // <div className="App">
     <React.Fragment>
-       <ToastContainer />
+       
       <Router>
         <PageLayout>
+        <ToastContainer />
           <Switch>
          
            
