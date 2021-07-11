@@ -28,11 +28,11 @@ export const theme = createMuiTheme({
     // },
     text: {
       primary: "#4A4A4A",
-      secondary: "rgba(231, 231 ,231,0.65)",
+      secondary: "rgba(111, 101 ,101,0.4)",
       hint: "#B9B9B9",
     },
     background: {
-      default: "rgba(239,239,239,0.1)",
+      default: "rgba(248,248,238,0.5)",
       light: "#F3F5FF",
     },
     primary: {
@@ -43,7 +43,7 @@ export const theme = createMuiTheme({
     },
     secondary: {
       // light: '#0066ff',
-      main: "rgba(231, 231 ,231,0.65)",
+      main: "rgba(111, 101 ,101,0.4)",
       // dark: will be calculated from palette.secondary.main,
       contrastText: "#ffcc00",
     },

@@ -13,7 +13,7 @@ export const useStyles2 = makeStyles({
       // padding: theme.spacing(3)
       margin: "20px auto",
       // background:"lightgray"
-      background: "rgba(231, 231 ,231,0.3)",
+      background: "rgba(231, 231 ,231,0.45)",
     },
     grid: {
       width: "90%",

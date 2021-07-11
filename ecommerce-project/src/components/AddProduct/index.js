@@ -18,7 +18,7 @@ import {
 } from "@material-ui/core";
 import { useStyles } from "./styles";
 import { addNewProduct } from "../../store/actions/productActions";
-
+import { ToastContainer, toast } from "react-toastify";
 
 
 export default function AddProduct({ handleClose}) {
@@ -61,25 +61,33 @@ export default function AddProduct({ handleClose}) {
   */
 //   console.log(filesContent[0]?.content);
   
-  const handleSubmit = (e) => {
+  const handleAdd = (e) => {
     
     e.preventDefault();
     // console.log("add comp");
-    
-  let newProduct={ title:title,image:filesContent[0]?.content,category:category,description:description,price:"",amount:""};
+    if (title && category) {
+      let newProduct={ title:title,image:filesContent[0]?.content,category:category,description:description,price:"",amount:""};
   // console.log(newProduct);
   
 dispatch(addNewProduct(newProduct))
+handleClose();
+    } else {
+      toast.error("نام کالا و دسته بندی را لطفا وارد کنید");
+      console.error("err")
+    }
+  
  
-    handleClose();
+   
   };
  
   
 
   return (
+    <>
+    <ToastContainer/>
     <Container component="main" maxWidth="sm">
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleAdd}
         className={classes.form}
         noValidate
         autoComplete="off"
@@ -172,11 +180,11 @@ onChange={(e)=>setImage(e.target.value)}
           </Grid>
           <Grid container xs={12} justify="center">
             <Button
-              onClick={handleSubmit}
+              onClick={handleAdd}
               type="submit"
               // fullWidth
               variant="contained"
-              disabled={!title && !category}
+              disabled={!title && !category && !image}
 
               className={classes.btn}
             >
@@ -186,6 +194,8 @@ onChange={(e)=>setImage(e.target.value)}
         </Grid>
       </form>
     </Container>
+
+    </>
   );
 }
 
