@@ -11,13 +11,13 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
-import {logout} from "../../utils/auth"
+import { logout } from "../../utils/auth"
 import { useStyles } from "./styles";
-import {useHistory} from "react-router-dom"
-import {useLocation} from "react-router-dom"
+import { useHistory } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 const PublicHeader = () => {
   const {
-    appbar,link, tab, tabs,indicator, grid, item1, item2, item3,boxLogout} = useStyles();
+    appbar, link, tab, tabs, indicator, grid, item1, item2, item3, boxLogout } = useStyles();
   const [value, setValue] = React.useState(2);
 
   const handleChange = (event, newValue) => {
@@ -25,11 +25,11 @@ const PublicHeader = () => {
   };
   const location = useLocation();
   const history = useHistory();
-console.log(history);
+  console.log(history);
   return (
-    
+
     <AppBar className={appbar} position="relative">
-    
+
       <Grid container className={grid}>
         <Grid item md={3} sm={2} xs={12} className={item1}>
           <Typography>پنل مدیریت فروشگاه</Typography>
@@ -90,9 +90,9 @@ console.log(history);
             onChange={handleChange}
             className={tabs}
             initialSelectedIndex={value}
-            // initialSelectedIndex={2}
-            // orientation={{xs:"vertical"}}
-            // aria-label="disabled tabs example"
+          // initialSelectedIndex={2}
+          // orientation={{xs:"vertical"}}
+          // aria-label="disabled tabs example"
           >
             <Tab
               value={"/admin/products"}
@@ -117,24 +117,24 @@ console.log(history);
               className={tab}
             />
           </Tabs>
-          
+
         </Grid>
         <Grid item md={2} sm={2} xs={12} className={item3} container>
           <Link href="/" className={link}>
             {/* <Typography className={link} variant="body1" >بازگشت به سایت</Typography>  */}
             بازگشت به سایت
             </Link>
-            <Box
-           className={boxLogout}
-          //  className={link} 
-           onClick={logout} variant="p" >خروج</Box>
-         
+          <Box
+            className={boxLogout}
+            //  className={link} 
+            onClick={logout} variant="p" >خروج</Box>
+
         </Grid>
       </Grid>
 
-    
+
     </AppBar>
-   
+
   );
 };
 

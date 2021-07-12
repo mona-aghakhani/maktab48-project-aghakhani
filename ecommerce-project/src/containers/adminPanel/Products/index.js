@@ -24,7 +24,7 @@ import AddProduct from "../../../components/AddProduct";
 import EditProduct from "../../../components/EditProduct";
 
 import { setProducts, getProducts, addNewProduct, deleteProduct, deleteProductById } from "../../../store/actions/productActions";
-import { getAllProducts, deleteApiProduct, postNewProduct, putApiProduct } from "../../../api/products/products";
+// import { getAllProducts, deleteApiProduct, postNewProduct, putApiProduct } from "../../../api/products/products";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
@@ -311,16 +311,16 @@ const Products = () => {
                     rowsPerPage={rowsPerPage}
                     page={page}
                     labelRowsPerPage=''
-                    classes={{
-                      toolbar: classes.toolbar,
-                      caption: classes.caption
-                    }}
-                    SelectProps={{
-                      inputProps: { "aria-label": "none " },
-                      // variant="",
-                      native: true,
+                    // classes={{
+                    //   toolbar: classes.toolbar,
+                    //   caption: classes.caption
+                    // }}
+                    // SelectProps={{
+                    //   inputProps: { "aria-label": "none " },
+                    //   // variant="",
+                    //   native: true,
 
-                    }}
+                    // }}
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                     ActionsComponent={TablePaginationActions}

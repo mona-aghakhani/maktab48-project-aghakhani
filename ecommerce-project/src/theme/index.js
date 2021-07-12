@@ -88,6 +88,7 @@ export const theme = createMuiTheme({
     },
     MuiSelect: {
       root:{
+        // display:"block"
         // fontFamily: "Shabnam !important",
       },
       icon: {
@@ -171,6 +172,7 @@ width:"100%"
     },
     MuiInputbase:{
       root:{
+        // display:"block"
         // fontFamily: "Shabnam !important",
       }
     },
@@ -239,6 +241,11 @@ width:"100%"
       }
     }
   },
+  MuiTablePagination:{
+    root:{
+      display:"block"
+    }
+  }
   // overrides: {
   //   MuiOutlinedInput: {
   //     root: {
