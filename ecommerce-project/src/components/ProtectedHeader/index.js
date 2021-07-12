@@ -6,13 +6,15 @@ import {
   Box,
   Tab,
   Tabs,
-  Paper,Link
+  Paper,
+  // Link
 } from "@material-ui/core";
 import React from "react";
-// import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import {logout} from "../../utils/auth"
 import { useStyles } from "./styles";
-
+import {useHistory} from "react-router-dom"
+import {useLocation} from "react-router-dom"
 const PublicHeader = () => {
   const {
     appbar,link, tab, tabs,indicator, grid, item1, item2, item3,boxLogout} = useStyles();
@@ -21,7 +23,9 @@ const PublicHeader = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  const location = useLocation();
+  const history = useHistory();
+console.log(history);
   return (
     
     <AppBar className={appbar} position="relative">
@@ -39,7 +43,7 @@ const PublicHeader = () => {
           spacing={1}
           className={item2}
         >
-          <Tabs
+          {/* <Tabs
             // position="relative"
             classes={{ indicator: indicator }}
             // TabIndicatorProps={{ style: { background: "red",width:"50px" } }}
@@ -73,6 +77,43 @@ const PublicHeader = () => {
               label="سفارش ها"
               component={Link}
               href="/admin/orders"
+              className={tab}
+            />
+          </Tabs> */}
+          <Tabs
+            // position="relative"
+            classes={{ indicator: indicator }}
+            // TabIndicatorProps={{ style: { background: "red",width:"50px" } }}
+            value={location.pathname}
+            // indicatorColor="secondary"
+            textColor="black"
+            onChange={handleChange}
+            className={tabs}
+            initialSelectedIndex={value}
+            // initialSelectedIndex={2}
+            // orientation={{xs:"vertical"}}
+            // aria-label="disabled tabs example"
+          >
+            <Tab
+              value={"/admin/products"}
+              label="کالاها"
+              className={tab}
+              component={Link}
+              to="/admin/products"
+            />
+            <Tab
+              value={"/admin/prices"}
+              label="قیمت و موجودی"
+              className={tab}
+              component={Link}
+              to="/admin/prices"
+            />
+
+            <Tab
+              value={"/admin/orders"}
+              label="سفارش ها"
+              component={Link}
+              to="/admin/orders"
               className={tab}
             />
           </Tabs>

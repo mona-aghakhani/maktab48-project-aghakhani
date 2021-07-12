@@ -18,12 +18,10 @@ function App() {
        
       <Router>
         <PageLayout>
-        <ToastContainer />
+        {/* <ToastContainer /> */}
           <Switch>
          
-           
           <Route path="/login" exact component={AdminLogin} />
-            
             <Route path="/admin"  component={ProtectedRouters} />
             <Route path="/"  component={PublicRouters} />
             
