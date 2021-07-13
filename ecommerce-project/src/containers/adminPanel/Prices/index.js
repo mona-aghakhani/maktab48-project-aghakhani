@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { TableContainer, Paper, Typography, Grid, Button,Container } from "@material-ui/core";
 import { useStyles2 } from "./styles";
@@ -68,11 +68,17 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 //   };
 const Prices = () => {
     const classes = useStyles2();
-
-    const products = useSelector((state) => state.allProducts.products);
+const [updatedata, setupdatedata] = useState([])
+    const rows = useSelector((state) => state.allProducts.products);
     const loading = useSelector((state) => state.allProducts.loading);
     console.log(loading);
     const dispatch = useDispatch();
+    // let defaultRows=[]
+    // defaultRows=[...products]
+    // console.log(defaultRows);
+    // const [rows, setRows] = React.useState(defaultRows);
+    // console.log(products);
+    console.log(rows);
     /*
    * dispatch sync action(setProducts) and get data
    */
@@ -131,22 +137,49 @@ const Prices = () => {
     // const handlePageSizeChange = (params) => {
     //     setPageSize(params.pageSize);
     //   };
-      const [editRowsModel, setEditRowsModel] = React.useState({});
+      // const [editRowsModel, setEditRowsModel] = React.useState({});
       // const [arrOfEdit, setArrOfEdit] = React.useState([]);
 
-      const handleEditRowModelChange = React.useCallback((params) => {
-        setEditRowsModel(params.model);
+      // const handleEditRowModelChange = React.useCallback((params) => {
+      //   setEditRowsModel(params.model);
+      //   // setArrOfEdit([...arrOfEdit,editRowsModel])
+      // }, [editRowsModel]);
+      const handleSelectionChange = React.useCallback((params) => {
+        // setEditRowsModel(params.model);
+        console.log(params);
         // setArrOfEdit([...arrOfEdit,editRowsModel])
-      }, []);
-      console.log("obj",editRowsModel);
+      }, [rows]);
+      // console.log("obj",editRowsModel);
       // console.log("arr",arrOfEdit);
 
     // const apiRef = useGridApiRef();
-    const [selectedCellParams, setSelectedCellParams] = React.useState(null);
+    // const [selectedCellParams, setSelectedCellParams] = React.useState(null);
 
+    
 
-
-
+    // const handleEditCellChangeCommitted = React.useCallback(
+    //   ({ id, field, props }) => {
+    //     if (field === 'price') {
+    //       const data = props; // Fix eslint value is missing in prop-types for JS files
+    //       console.log(data);
+    //       const [price, amount] = data.value.toString().split(' ');
+    //       const updatedRows = rows.map((row) => {
+    //         if (row.id === id) {
+    //           return { ...row, price, amount };
+    //         }
+    //         return row;
+    //       });
+    //       console.log(updatedRows);
+    //       // setRows(updatedRows);
+    //     }
+    //   },
+    //   [rows],
+    // );
+    // console.log(rows);
+    const [selectedRow, setSelectedRow] = useState({});
+    const [row, setRow] = useState({});
+    const [selectionModel, setSelectionModel] = React.useState([]);
+console.log(selectionModel);
     return (
         <main>
           {loading && <CircularProgress className={classes.progress} size={100} thickness={4} disableShrink />}
@@ -169,14 +202,22 @@ const Prices = () => {
                 <div style={{ flexGrow: 1 }}>
                 <div style={{ height: 400, width: '100%' }}>
                 <DataGrid
-        rows={products}
+        rows={rows}
         columns={columns}
         pageSize={5}
         // onPageSizeChange={handlePageSizeChange}
         rowsPerPageOptions={[5, 10, 20]}
         // pagination
-        editRowsModel={editRowsModel}
-        onEditRowModelChange={handleEditRowModelChange}
+        // editRowsModel={editRowsModel}
+        // onEditRowModelChange={handleEditRowModelChange}
+        onRowSelected={(e) => setRow(e.data)}
+        selectionModel={selectionModel}
+        onSelectionModelChange={(selection) => {
+          console.log(selection);
+          const newSelectionModel = selection.selectionModel;
+          console.log(newSelectionModel);
+        }}
+        // onEditCellChangeCommitted={handleEditCellChangeCommitted}
         // apiRef={apiRef}
         // onCellClick={handleCellClick}
         // onCellDoubleClick={handleDoubleCellClick}
@@ -185,13 +226,14 @@ const Prices = () => {
         // components={{
         //   Toolbar: EditToolbar,
         // }}
-        componentsProps={{
-          toolbar: {
-            selectedCellParams,
-            // apiRef,
-            setSelectedCellParams,
-          },
-        }}
+
+        // componentsProps={{
+        //   toolbar: {
+        //     selectedCellParams,
+        //     // apiRef,
+        //     setSelectedCellParams,
+        //   },
+        // }}
       />
                 </div>
                 </div>
