@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  Table, TableBody,
-  TableHead,
-  TableCell,
-  TableContainer,
-  TableFooter,
-  TableRow,
-  TablePagination,
+import {Table, TableBody,TableHead,TableCell,TableContainer,TableFooter,TableRow,TablePagination,
   Paper,
   Typography,
   Grid,
   Button,
   Container,
   Box,
-  TableSortLabel
+  TableSortLabel,Radio,RadioGroup,FormControlLabel,FormControl,FormLabel 
 } from "@material-ui/core";
 import { useStyles2 } from "./styles";
 import { TablePaginationActions } from "./TablePaginationActions";
@@ -27,7 +20,9 @@ import { setOrders, getOrders } from "../../../store/actions/ordersActions";
 // import { getAllProducts, deleteApiProduct, postNewProduct, putApiProduct } from "../../../api/products/products";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-
+/*
+* functions and states for handle sorting
+*/
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -171,7 +166,7 @@ const Products = () => {
   }, []);
 
   /*
-   * setState for handle CustomDialog
+   * setState and functions for handle CustomDialog
    */
   const [isOpenAdd, setIsOpenAdd] = useState(false);
   const [isOpenUpdate, setIsOpenUpdate] = useState(false);
@@ -227,9 +222,23 @@ const Products = () => {
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
+/*
+* initial states & functions for handle filtering with Radio
+*/
+// const [value, setValue] = React.useState('female');
 
-
-
+//   const handleChange = (event) => {
+//     setValue(event.target.value);
+//   };
+// <FormControl component="fieldset">
+//       <FormLabel component="legend">Gender</FormLabel>
+//       <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
+//         <FormControlLabel value="female" control={<Radio />} label="Female" />
+//         <FormControlLabel value="male" control={<Radio />} label="Male" />
+//         <FormControlLabel value="other" control={<Radio />} label="Other" />
+//         <FormControlLabel value="disabled" disabled control={<Radio />} label="(Disabled option)" />
+//       </RadioGroup>
+//     </FormControl>
   /*
    *  initial states & functions without redux
    */

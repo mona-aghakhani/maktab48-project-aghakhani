@@ -144,18 +144,54 @@ const [updatedata, setupdatedata] = useState([])
       //   setEditRowsModel(params.model);
       //   // setArrOfEdit([...arrOfEdit,editRowsModel])
       // }, [editRowsModel]);
-      const handleSelectionChange = React.useCallback((params) => {
-        // setEditRowsModel(params.model);
-        console.log(params);
-        // setArrOfEdit([...arrOfEdit,editRowsModel])
-      }, [rows]);
+      // const handleSelectionChange = React.useCallback((params) => {
+      //   // setEditRowsModel(params.model);
+      //   console.log(params);
+      //   // setArrOfEdit([...arrOfEdit,editRowsModel])
+      // }, [rows]);
       // console.log("obj",editRowsModel);
       // console.log("arr",arrOfEdit);
 
     // const apiRef = useGridApiRef();
     // const [selectedCellParams, setSelectedCellParams] = React.useState(null);
+// let newArr=[]
+//     const handleEditCellChange=({ id, field, props })=>{
+// console.log(id,field,props);
 
+// let updatedObj={id,field,value:props}
+// console.log(updatedObj);
+
+// newArr=[...newArr,updatedObj]
+// console.log(newArr);
+//     }
+
+//     console.log(newArr);
+// let newArr=[]
+    const handleEditCellChange=({ id, field, props })=>{
+// console.log(id,field,props);
+
+let updatedObj={id,field,value:props.value}
+// console.log(updatedObj);
+let obj=rows.filter((item)=>item.id === id)
+// console.log(obj);
+if (updatedObj.field === "amount") {
+  let newObj={...obj,amount:updatedObj.value}
+  // obj.amount=updatedObj.value;
+  console.log(newObj);
+  console.log(obj);
+}
+// console.log(obj);
+setupdatedata([...updatedata,updatedObj])
+// newArr=[...newArr,updatedObj]
+// console.log(updatedata);
+// let updatedObj={id,field,value:props.value}
+// console.log(updatedObj);
+// setupdatedata([...updatedata,updatedObj])
+// // newArr=[...newArr,updatedObj]
+// console.log(updatedata);
+    }
     
+    console.log(updatedata);
 
     // const handleEditCellChangeCommitted = React.useCallback(
     //   ({ id, field, props }) => {
@@ -176,10 +212,10 @@ const [updatedata, setupdatedata] = useState([])
     //   [rows],
     // );
     // console.log(rows);
-    const [selectedRow, setSelectedRow] = useState({});
-    const [row, setRow] = useState({});
-    const [selectionModel, setSelectionModel] = React.useState([]);
-console.log(selectionModel);
+    // const [selectedRow, setSelectedRow] = useState({});
+    // const [row, setRow] = useState({});
+    // const [selectionModel, setSelectionModel] = React.useState([]);
+// console.log(selectionModel);
     return (
         <main>
           {loading && <CircularProgress className={classes.progress} size={100} thickness={4} disableShrink />}
@@ -210,14 +246,14 @@ console.log(selectionModel);
         // pagination
         // editRowsModel={editRowsModel}
         // onEditRowModelChange={handleEditRowModelChange}
-        onRowSelected={(e) => setRow(e.data)}
-        selectionModel={selectionModel}
-        onSelectionModelChange={(selection) => {
-          console.log(selection);
-          const newSelectionModel = selection.selectionModel;
-          console.log(newSelectionModel);
-        }}
-        // onEditCellChangeCommitted={handleEditCellChangeCommitted}
+        // onRowSelected={(e) => setRow(e.data)}
+        // selectionModel={selectionModel}
+        // onSelectionModelChange={(selection) => {
+        //   console.log(selection);
+        //   const newSelectionModel = selection.selectionModel;
+        //   console.log(newSelectionModel);
+        // }}
+        onEditCellChangeCommitted={handleEditCellChange}
         // apiRef={apiRef}
         // onCellClick={handleCellClick}
         // onCellDoubleClick={handleDoubleCellClick}
