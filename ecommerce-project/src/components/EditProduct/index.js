@@ -12,7 +12,7 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import { useStyles } from "./styles";
-import { updateProductById } from "../../store/actions/productActions";
+import { updateProductById ,getProducts} from "../../store/actions/productActions";
 
 
 export default function EditProduct({handleClose,editedObj}) {
@@ -53,7 +53,7 @@ export default function EditProduct({handleClose,editedObj}) {
   });
 
  
-  const handleLogin = (e) => {
+  const handleEdit = (e) => {
     e.preventDefault();
     // console.log("edit comp");
    
@@ -62,13 +62,14 @@ export default function EditProduct({handleClose,editedObj}) {
      dispatch(updateProductById(editedObj.id,updatedProductObj))
 
     handleClose();
+    // dispatch(getProducts())
     window.location.reload()
   };
   
   return (
     <Container component="main" maxWidth="sm">
       <form
-        onSubmit={handleLogin}
+        onSubmit={handleEdit}
         className={classes.form}
         noValidate
         autoComplete="off"

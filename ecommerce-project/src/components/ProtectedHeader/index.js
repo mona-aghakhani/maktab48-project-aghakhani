@@ -25,7 +25,7 @@ const PublicHeader = () => {
   };
   const location = useLocation();
   const history = useHistory();
-  console.log(history);
+  // console.log(history);
   return (
 
     <AppBar className={appbar} position="relative">

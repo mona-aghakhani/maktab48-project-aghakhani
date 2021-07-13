@@ -58,7 +58,7 @@ export const selectedProduct = (product) => {
 
 export const getProducts = () => async(dispatch, getState) => {
   const res = await getAllProducts();
-  console.log("res data products from async action",res.data);
+  // console.log("res data products from async action",res.data);
   dispatch(setProducts(res.data));
   dispatch(setLoading())
 };
@@ -69,7 +69,7 @@ export const getProducts = () => async(dispatch, getState) => {
 
 export const addNewProduct = (newProduct) => async (dispatch, getState) => {
   let res = await postNewProduct(newProduct);
-  console.log("res from post api",res);
+  // console.log("res from post api",res);
   dispatch(addProduct(newProduct));
 };
 
@@ -78,7 +78,7 @@ export const addNewProduct = (newProduct) => async (dispatch, getState) => {
  */
 export const deleteProductById = (id) => async (dispatch, getState) => {
   let res = await deleteApiProduct(id);
-  console.log("res from delete api",res);
+  // console.log("res from delete api",res);
   dispatch(deleteProduct(id));
 };
 /*

@@ -148,7 +148,7 @@ const Products = () => {
    */
   const products = useSelector((state) => state.allProducts.products);
   const loading = useSelector((state) => state.allProducts.loading);
-  console.log(loading);
+  // console.log(loading);
   const dispatch = useDispatch();
   /*
    * dispatch sync action(setProducts) and get data

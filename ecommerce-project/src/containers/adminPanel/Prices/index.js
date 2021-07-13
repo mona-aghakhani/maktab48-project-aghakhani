@@ -5,7 +5,8 @@ import { useStyles2 } from "./styles";
 import { DataGrid } from '@material-ui/data-grid';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
-import {getProducts} from "../../../store/actions/productActions"
+import {getProducts,updateProductById,updateProductAct} from "../../../store/actions/productActions"
+import {putApiProduct} from "../../../api/products/products"
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
@@ -71,14 +72,14 @@ const Prices = () => {
 const [updatedata, setupdatedata] = useState([])
     const rows = useSelector((state) => state.allProducts.products);
     const loading = useSelector((state) => state.allProducts.loading);
-    console.log(loading);
+    // console.log(loading);
     const dispatch = useDispatch();
     // let defaultRows=[]
     // defaultRows=[...products]
     // console.log(defaultRows);
     // const [rows, setRows] = React.useState(defaultRows);
     // console.log(products);
-    console.log(rows);
+    // console.log(rows);
     /*
    * dispatch sync action(setProducts) and get data
    */
@@ -118,16 +119,17 @@ const [updatedata, setupdatedata] = useState([])
             headerName: 'قیمت(تومان)',
             // width: 250,
             flex:0.3,
-            // type: 'number',
+            type: 'number',
             // sortable: true,
             editable: true
         },
         {
             field: 'amount',
             headerName: 'موجودی',
-            // type: 'number',
+            type: 'number',
             // width: 250,
             flex:0.3,
+            // sortable: true,
             editable: true,
         }
     ];
@@ -169,19 +171,32 @@ const [updatedata, setupdatedata] = useState([])
 // let newArr=[]
     const handleEditCellChange=({ id, field, props })=>{
 // console.log(id,field,props);
+// let obj=rows.filter((item)=>item.id === id)
+// if (field === "amount") {
+//   var updatedObj={...obj,amount:props.value}
+//   console.log(updatedObj);
+// }else{
+//   var updatedObj={...obj,price:props.value}
+//   console.log(updatedObj);
+// }
+// setupdatedata([...updatedata,updatedObj])
 
 let updatedObj={id,field,value:props.value}
 // console.log(updatedObj);
 let obj=rows.filter((item)=>item.id === id)
+// let innerObj={...obj}
 // console.log(obj);
 if (updatedObj.field === "amount") {
-  let newObj={...obj,amount:updatedObj.value}
+  // let newObj={...innerObj,amount:updatedObj.value}
   // obj.amount=updatedObj.value;
-  console.log(newObj);
+  obj[0].amount=updatedObj.value
+  // console.log(newObj);
   console.log(obj);
+}else{
+  obj[0].price=updatedObj.value
 }
 // console.log(obj);
-setupdatedata([...updatedata,updatedObj])
+setupdatedata([...updatedata,...obj])
 // newArr=[...newArr,updatedObj]
 // console.log(updatedata);
 // let updatedObj={id,field,value:props.value}
@@ -191,7 +206,37 @@ setupdatedata([...updatedata,updatedObj])
 // console.log(updatedata);
     }
     
-    console.log(updatedata);
+    // console.log(updatedata);
+    const handleEdit=()=>{
+      // for (const index in updatedata) {
+      //   // console.log(item);
+      //   dispatch(updateProductById(item.id,item))
+      //   console.log(item.id);
+        
+      // }
+      for (let i = 0; i < updatedata.length; i++) {
+        console.log(updatedata[i].id,updatedata[i]);
+        // dispatch(updateProductById(updatedata[i].id,updatedata[i]))
+      // window.location.reload()
+      putApiProduct(updatedata[i].id,updatedata[i]).then((res)=>{
+        console.log("res data for editproducts", res.data);
+      
+      })
+        // array[i]
+        window.location.reload()
+      }
+      // window.location.reload()
+      // updatedata?.forEach(element=>{
+      //   putApiProduct(element.id,element).then((res)=>{
+      //     console.log("res foreach",res);
+      //     // if (res.status === 201) {
+            
+      //     // }
+      //   })
+      //   // dispatch(updateProductById(element.id,element))
+      // })
+      // window.location.reload()
+    }
 
     // const handleEditCellChangeCommitted = React.useCallback(
     //   ({ id, field, props }) => {
@@ -228,7 +273,7 @@ setupdatedata([...updatedata,updatedObj])
                 </Grid>
                 <Grid item>
                     <Button className={classes.btn} 
-                    // onClick={}
+                    onClick={handleEdit}
                     >
             ذخیره
             </Button>

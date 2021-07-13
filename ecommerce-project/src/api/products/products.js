@@ -11,7 +11,7 @@ export const getAllProducts = async () => {
     url: "http://localhost:5000/products",
     headers: { "content-type": "application/json" },
   }).catch((err) => console.log(err));
-  console.log(res);
+  // console.log(res);
   return res;
 };
 
@@ -63,7 +63,7 @@ export const deleteApiProduct = async (id) => {
     url: `http://localhost:5000/products/${id}`,
     headers: { "content-type": "application/json" },
   });
-  console.log(res);
+  // console.log(res);
   return res;
 };
 /*
@@ -72,14 +72,20 @@ export const deleteApiProduct = async (id) => {
 
 
 export const putApiProduct = async (id,updateProduct) => {
+  try {
   let res = await axios({
     method: "put",
     url: `http://localhost:5000/products/${id}`,
     headers: { "content-type": "application/json" },
     data: updateProduct,
-  });
-  console.log("res put api",res);
+  })
   return res;
+}
+catch (err) {
+  console.log(err) 
+};
+  // console.log("res put api",res);
+  
 };
 
 
