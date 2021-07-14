@@ -7,9 +7,9 @@ btn:{
     color:"white",
     margin:"10px",
     padding:"10px",
-    color:"white",
+  
     // borderRadius:"50%",
-    fontSize:"10px"
+    fontSize:"20px"
 },
 dialogTitle:{
     fontSize:"17px",

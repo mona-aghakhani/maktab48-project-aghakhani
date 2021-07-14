@@ -7,18 +7,18 @@ import {Table, TableBody,TableHead,TableCell,TableContainer,TableFooter,TableRow
  
   Container,
   Box,
-  TableSortLabel,Radio,RadioGroup,FormControlLabel,FormControl,FormLabel 
+  TableSortLabel,Radio,RadioGroup,FormControlLabel,FormControl
 } from "@material-ui/core";
 import { useStyles2 } from "./styles";
 import { TablePaginationActions } from "./TablePaginationActions";
 
 import { CustomDialog } from "../../../components/CustomDialog";
-import AddProduct from "../../../components/AddProduct";
-import EditProduct from "../../../components/EditProduct";
 
-import { setOrders, getOrders } from "../../../store/actions/ordersActions";
+
+import {  getOrders } from "../../../store/actions/ordersActions";
 // import { getAllProducts, deleteApiProduct, postNewProduct, putApiProduct } from "../../../api/products/products";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import OrderDetail from "../../../components/OrderDetail";
 
 /*
 * functions and states for handle sorting
@@ -94,7 +94,7 @@ const styles = {
 // });
 function EnhancedTableHead(props) {
   const {
-    classes,
+   
     order,
     orderBy,
     onRequestSort
@@ -144,7 +144,14 @@ const Orders = () => {
   const orders = useSelector((state) => state.allOrders.orders);
   const deliveredOrders=orders.filter((item)=>item.status === "تحویل شده")
   const waitingOrders=orders.filter((item)=>item.status === " در انتظار ارسال")
-
+  const [value, setValue] = useState("در انتظار ارسال");
+  
+  // const [data,setData]=useState(waitingOrders)
+    const handleChange = (event) => {
+      setValue(event.target.value);
+    };
+    let data=value === "در انتظار ارسال"  ? waitingOrders : deliveredOrders;
+// console.log(data);
 
   // const products=orders.map((order)=>order.products)
   // console.log(products);
@@ -171,30 +178,32 @@ const Orders = () => {
   /*
    * setState and functions for handle CustomDialog
    */
-  const [isOpenAdd, setIsOpenAdd] = useState(false);
-  const [isOpenUpdate, setIsOpenUpdate] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpenUpdate, setIsOpenUpdate] = useState(false);
 
 
-  const [editedObj, setEditedObj] = useState(null);
+  const [orderObj, setOrderObj] = useState(null);
 
-  const handleOpenAddDialog = () => {
-    setIsOpenAdd(true);
-    console.log(isOpenAdd);
-  };
-  const handleDialogAddClose = () => {
-    setIsOpenAdd(false);
-  };
-  const handleOpenUpdateDialog = (obj) => {
-    // console.log("edit");
-    setEditedObj(obj)
-    // console.log(editedObj);
-    setIsOpenUpdate(true);
-  };
-  // console.log(editedObj);
+  const handleOpen = (obj) => {
+    setOrderObj(obj)
+    setIsOpen(true);
 
-  const handleDialogUpdateClose = () => {
-    setIsOpenUpdate(false);
+    // console.log(isOpenAdd);
   };
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+  // const handleOpenUpdateDialog = (obj) => {
+  //   // console.log("edit");
+  //   setEditedObj(obj)
+  //   // console.log(editedObj);
+  //   setIsOpenUpdate(true);
+  // };
+  // // console.log(editedObj);
+
+  // const handleDialogUpdateClose = () => {
+  //   setIsOpenUpdate(false);
+  // };
 
   /*
    * const states and function for pagination table
@@ -228,13 +237,7 @@ const Orders = () => {
 /*
 * initial states & functions for handle filtering with Radio
 */
-const [value, setValue] = useState("در انتظار ارسال");
-  
-const [data,setData]=useState(waitingOrders)
-  const handleChange = (event) => {
-    setValue(event.target.value);
-    
-  };
+
 // <FormControl component="fieldset">
 //       <FormLabel component="legend">Gender</FormLabel>
 //       <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
@@ -280,7 +283,8 @@ const [data,setData]=useState(waitingOrders)
           </Grid>
         </Grid>
         <TableContainer className={classes.paper} component={Paper}>
-          {orders !== "Not found" && (
+          {orders !== "Not found" 
+          && (
             <Table className={classes.table}>
               <EnhancedTableHead
                 classes={{
@@ -291,12 +295,12 @@ const [data,setData]=useState(waitingOrders)
                 order={order}
                 orderBy={orderBy}
                 onRequestSort={handleRequestSort}
-                rowCount={orders.length}
+                rowCount={data.length}
               />
 
 
               <TableBody>
-                {stableSort(orders, getComparator(order, orderBy))?.slice(
+                {stableSort(data, getComparator(order, orderBy))?.slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 )
@@ -312,7 +316,7 @@ const [data,setData]=useState(waitingOrders)
                       <TableCell>{row?.total}</TableCell>
                       <TableCell>{row?.orderTime}</TableCell>
                       <TableCell>
-                        <Box onClick={() => handleOpenUpdateDialog(row)}   className={classes.box}> بررسی سفارش </Box>
+                        <Box onClick={() => handleOpen(row)}   className={classes.box}> بررسی سفارش </Box>
                         {/* <Box onClick={() => { dispatch(deleteProductById(row.id)); }} className={classes.box} > حذف</Box> */}
                       </TableCell>
                     </TableRow>
@@ -330,7 +334,7 @@ const [data,setData]=useState(waitingOrders)
                   <TablePagination
                     rowsPerPageOptions={[5, 10, 25, { label: "کل", value: -1 }]}
                     colSpan={3}
-                    count={orders?.length}
+                    count={data?.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     labelRowsPerPage='تعداد سطر های هر صفحه'
@@ -354,15 +358,15 @@ const [data,setData]=useState(waitingOrders)
           )}
         </TableContainer>
       </Container>}
-      {isOpenAdd && <CustomDialog
-        isOpen={isOpenAdd}
-        handleClose={handleDialogAddClose}
+      {isOpen && <CustomDialog
+        isOpen={isOpen}
+        handleClose={handleClose}
         className={classes.dialogTitle}
-        title="افزودن/ویرایش کالا"
+        title="نمایش سفارش"
       >
-        <AddProduct handleClose={handleDialogAddClose} />
+        <OrderDetail orderObj={orderObj} delivered={value} handleClose={handleClose} />
       </CustomDialog>}
-      {isOpenUpdate && <CustomDialog
+      {/* {isOpenUpdate && <CustomDialog
         isOpen={isOpenUpdate}
         handleClose={handleDialogUpdateClose}
         className={classes.dialogTitle}
@@ -372,7 +376,7 @@ const [data,setData]=useState(waitingOrders)
           handleClose={handleDialogUpdateClose}
           editedObj={editedObj} />
 
-      </CustomDialog>}
+      </CustomDialog>} */}
     </main>
   );
 };

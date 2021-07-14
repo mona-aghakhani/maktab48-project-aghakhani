@@ -27,11 +27,11 @@ export const postNewProduct =async (newProduct) => {
     data: newProduct
    })
 if (res.status === 201) {
-  console.log("post data is ok");
+  // console.log("post data is ok");
   // toast.success(` added successfully`)
 }
 if (res.status === 404) {
-  console.log("post data is ok");
+  // console.log("post data is ok");
   return toast.error("Not found")
  } 
 if (res.status === 500) {
@@ -40,7 +40,7 @@ if (res.status === 500) {
    console.log("post api",res);
   return res;
   }catch (err) {
-     console.log(err) 
+    //  console.log(err) 
   };
 }
 // export const postNewProduct =async (newProduct) => {

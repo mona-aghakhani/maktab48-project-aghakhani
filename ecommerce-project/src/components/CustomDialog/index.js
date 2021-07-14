@@ -15,7 +15,7 @@ export const CustomDialog= ({isOpen,handleClose,title,children}) =>{
              </Grid>
              <Grid item >
              <Button className={btn} onClick={handleClose} >
-                     x
+                    ×
                  </Button>
                  </Grid>
                  </Grid>

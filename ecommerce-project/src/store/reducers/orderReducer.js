@@ -11,6 +11,11 @@ export const orderReducer = (state = initialState, { type, payload }) => {
         return { ...state, orders: payload };
         case ActionTypes.SET_LOADING:
       return { ...state, loading: false };
+      case ActionTypes.PUT_STATUS:
+        return{
+          ...state,
+          orders:state.orders.splice(state.orders.findIndex(item=>item.id === payload.id),1,payload)
+        }
     //   case ActionTypes.ADD_PRODUCT:
     //     return { ...state, products:[payload,...state.products] };
     //   case ActionTypes.DELETE_PRODUCT:
