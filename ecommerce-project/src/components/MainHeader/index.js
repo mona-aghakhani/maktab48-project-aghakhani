@@ -3,13 +3,13 @@ import React from "react";
 import {
   AppBar,
   Toolbar,
-  Typography,
+
   InputBase,
    Grid
 } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
-import { useStyles, useOutlinedInputStyles } from "./styles";
+import { useStyles} from "./styles";
 import logoNew from "../../assets/images/logoNew.png"
 
 
@@ -23,7 +23,7 @@ function MainHeader() {
           <Grid container  alignItems="center"> 
             <Grid item>
           {/* <Box > */}
-            <img src={logoNew} style={{width:"100px",height:"50px"}}  />
+            <img src={logoNew} style={{width:"100px",height:"50px"}} alt="logo"  />
             </Grid>
             {/* </Box> */}
             {/* <Grid item>

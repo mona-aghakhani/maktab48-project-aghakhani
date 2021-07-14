@@ -5,12 +5,8 @@ import { useDispatch } from "react-redux";
 import {
   Button,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Grid,
-  Card,
   Container,
-  Typography,
   FormControl,
   InputLabel,
   Select,
@@ -115,14 +111,14 @@ onChange={(e)=>setImage(e.target.value)}
               />
             </Grid>
             <Grid item xs={2}>
-              <button
+              <Button
                 type="button"
                 onClick={() =>{openFileSelector();
                 }}
                 className={classes.btnFile}
               >
                 Browse
-              </button>
+              </Button>
             </Grid>
           </Grid>
           <Grid xs={12} item>

@@ -23,7 +23,7 @@ import { CustomDialog } from "../../../components/CustomDialog";
 import AddProduct from "../../../components/AddProduct";
 import EditProduct from "../../../components/EditProduct";
 
-import { setProducts, getProducts, addNewProduct, deleteProduct, deleteProductById } from "../../../store/actions/productActions";
+import {  getProducts, deleteProductById } from "../../../store/actions/productActions";
 // import { getAllProducts, deleteApiProduct, postNewProduct, putApiProduct } from "../../../api/products/products";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -87,19 +87,9 @@ const styles = {
       },
   },
 };
-// const styles = theme => ({
-//   // Fully visible for active icons
-//   activeSortIcon: {
-//     opacity: 1,
-//   },
-//   // Half visible for inactive icons
-//   inactiveSortIcon: {
-//     opacity: 0.4,
-//   },
-// });
+
 function EnhancedTableHead(props) {
   const {
-    classes,
     order,
     orderBy,
     onRequestSort
@@ -284,7 +274,7 @@ const Products = () => {
                     <TableRow key={row?.index}>
 
                       <TableCell>
-                        <img className={classes.img} src={row?.image} />
+                        <img className={classes.img} src={row?.image} alt="product" />
                       </TableCell>
                       <TableCell>{row?.title}</TableCell>
                       <TableCell>{row?.category}</TableCell>
@@ -310,7 +300,7 @@ const Products = () => {
                     count={products?.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
-                    labelRowsPerPage=''
+                    labelRowsPerPage='تعداد سطر های هر صفحه'
                     // classes={{
                     //   toolbar: classes.toolbar,
                     //   caption: classes.caption

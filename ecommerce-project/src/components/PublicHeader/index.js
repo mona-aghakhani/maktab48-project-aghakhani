@@ -1,9 +1,9 @@
-import { AppBar, Grid, Toolbar, Typography,Box } from '@material-ui/core'
+import { AppBar,  Toolbar, Typography,Box } from '@material-ui/core'
 import React from 'react';
 import { NavLink } from "react-router-dom";
-import Badge from '@material-ui/core/Badge';
-import IconButton from '@material-ui/core/IconButton';
-import MailIcon from '@material-ui/icons/Mail';
+// import Badge from '@material-ui/core/Badge';
+// import IconButton from '@material-ui/core/IconButton';
+// import MailIcon from '@material-ui/icons/Mail';
 import {useStyles} from "./styles"
 const PublicHeader = () => {
     const {  appbar,box,link} =useStyles();

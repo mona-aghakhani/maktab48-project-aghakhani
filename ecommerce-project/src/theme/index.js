@@ -1,4 +1,5 @@
 import { createMuiTheme } from "@material-ui/core";
+import { faIR } from "@material-ui/core/locale";
 // const primary = "#d204f2";
 // const secondary = "#FF5C93";
 // const warning = "#FFC260";
@@ -230,11 +231,11 @@ width:"100%"
         // fontFamily: "Shabnam !important",
         // color: "gray",
       },
-      icon: {
-        opacity:"0",
-        // fontFamily: "Shabnam !important",
-        color: "gray",
-      },
+      // icon: {
+      //   opacity:"0",
+      //   // fontFamily: "Shabnam !important",
+      //   color: "gray",
+      // },
       active:{
         color: "black",
         opacity:"1",
@@ -260,4 +261,4 @@ width:"100%"
   //     }
   //   }
   // },
-});
+},faIR);

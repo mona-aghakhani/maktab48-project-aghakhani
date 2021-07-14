@@ -1,8 +1,8 @@
 import React from 'react'
-import {Button,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle,Grid} from "@material-ui/core"
+import {Button,Dialog,DialogActions,DialogContent,DialogTitle,Grid} from "@material-ui/core"
 import {useStyles} from "./styles"
 // import PropTypes from 'prop-types'
-export const CustomDialog= ({isOpen,handleClose,title,subtitle,children}) =>{
+export const CustomDialog= ({isOpen,handleClose,title,children}) =>{
     const {btn,dialogTitle} = useStyles();
     return(
         <>

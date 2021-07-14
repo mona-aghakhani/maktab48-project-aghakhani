@@ -12,7 +12,7 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import { useStyles } from "./styles";
-import { updateProductById ,getProducts} from "../../store/actions/productActions";
+import { updateProductById } from "../../store/actions/productActions";
 
 
 export default function EditProduct({handleClose,editedObj}) {
@@ -37,19 +37,10 @@ export default function EditProduct({handleClose,editedObj}) {
   /*
    * 'use-file-picker' : Simple react hook to open browser file selector.
    */
-  const [openFileSelector, { filesContent, loadingImg, errorsImg }] = useFilePicker({
+  const [openFileSelector, { filesContent }] = useFilePicker({
     readAs: "DataURL",
     accept: "image/*",
     multiple: true,
-    // limitFilesConfig: { max: 1 },
-    // minFileSize: 0.1, // in megabytes
-    // maxFileSize: 50,
-    // imageSizeRestrictions: {
-    //   maxHeight: 900, // in pixels
-    //   maxWidth: 1600,
-    //   minHeight: 600,
-    //   minWidth: 768,
-    // },
   });
 
  

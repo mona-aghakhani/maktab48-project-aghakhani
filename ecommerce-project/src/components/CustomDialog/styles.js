@@ -6,6 +6,8 @@ btn:{
     height:"20px",
     color:"white",
     margin:"10px",
+    padding:"10px",
+    color:"white",
     // borderRadius:"50%",
     fontSize:"10px"
 },

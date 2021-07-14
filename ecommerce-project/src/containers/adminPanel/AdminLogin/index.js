@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+
 import { useHistory } from "react-router-dom";
-import {Button,TextField,Grid,Card,Container,Typography} from "@material-ui/core";
+import {Button,TextField,Card,Container,Typography} from "@material-ui/core";
 import { useStyles } from "./styles";
 import { login } from "../../../api/login";
 import {isLoggedIn} from "../../../utils/auth"
 import { ToastContainer, toast } from "react-toastify";
 // import { setToken, getProducts } from "../../../store/actions/productActions";
 
-export default function AdminLogin({}) {
+export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();

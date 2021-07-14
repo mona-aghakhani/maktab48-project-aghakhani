@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { AppBar } from "@material-ui/core";
+// import { AppBar } from "@material-ui/core";
 import ProductListing from "../containers/eCommerce/ProductListing";
 import ProductGroup from "../containers/eCommerce/ProductGroup";
 import ProductDetail from "../containers/eCommerce/ProductDetail";

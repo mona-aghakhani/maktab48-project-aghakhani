@@ -1,8 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { AppBar } from "@material-ui/core";
 import { ProtectedRoute } from "./ProtectedRoute";
-import AdminLogin from "../containers/adminPanel/AdminLogin"
 import Products from '../containers/adminPanel/Products';
 import Prices from '../containers/adminPanel/Prices';
 import Orders from '../containers/adminPanel/Orders';

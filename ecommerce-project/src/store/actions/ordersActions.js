@@ -25,4 +25,4 @@ export const getOrders = () => async(dispatch, getState) => {
     console.log("res data Orders from async action",res.data);
     dispatch(setOrders(res.data));
     dispatch(setLoading())
-  };
+  }

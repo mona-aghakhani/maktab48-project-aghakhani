@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { TableContainer, Paper, Typography, Grid, Button,Container } from "@material-ui/core";
 import { useStyles2 } from "./styles";
 import { DataGrid } from '@material-ui/data-grid';
-import {getProducts,updateProductById,updateProductAct} from "../../../store/actions/productActions"
-import {putApiProduct} from "../../../api/products/products"
+import {getProducts} from "../../../store/actions/productActions"
+// import {putApiProduct} from "../../../api/products/products"
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from "axios";
 
@@ -39,16 +39,16 @@ const [updatedata, setupdatedata] = useState([])
             headerName: 'نام کالا',
             // width: 350,
             // type: 'string',
-            // flex:1,
-            flex:0.4,
+            flex:1,
+            // flex:0.4,
             editable: false
         },
         {
             field: 'price',
             headerName: 'قیمت(تومان)',
             // width: 250,
-            // flex:0.5,
-            flex:0.3,
+            flex:0.5,
+            // flex:0.3,
             type: 'number',
             // sortable: true,
             editable: true
@@ -58,8 +58,8 @@ const [updatedata, setupdatedata] = useState([])
             headerName: 'موجودی',
             type: 'number',
             // width: 250,
-            // flex:0.5,
-            flex:0.3,
+            flex:0.5,
+            // flex:0.3,
             // sortable: true,
             editable: true,
         }
@@ -126,6 +126,7 @@ setupdatedata([...updatedata,...obj])
                 <Grid item>
                     <Button className={classes.btn} 
                     onClick={handleEdit}
+                    disabled={updatedata.length === 0}
                     >
             ذخیره
             </Button>

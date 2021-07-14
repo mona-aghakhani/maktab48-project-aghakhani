@@ -13,7 +13,7 @@ import { create } from "jss";
 import {CssBaseline } from "@material-ui/core";
 import rtl from "jss-rtl";
 import {theme} from "./theme/index"
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 
 // Configure JSS

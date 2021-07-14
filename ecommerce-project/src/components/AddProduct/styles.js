@@ -20,6 +20,7 @@ btnFile:{
     fontSize: "10px",
     padding: "5px 10px",
     marginLeft: "2px",
+    background: "rgb(103,182,108)",
     // borderRadius:"1px",
     // outline:"none",
     // border:"none",

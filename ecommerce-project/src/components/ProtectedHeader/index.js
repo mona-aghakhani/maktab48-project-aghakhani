@@ -1,19 +1,17 @@
 import {
   AppBar,
   Grid,
-  Toolbar,
   Typography,
   Box,
   Tab,
   Tabs,
-  Paper,
   // Link
 } from "@material-ui/core";
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import { logout } from "../../utils/auth"
 import { useStyles } from "./styles";
-import { useHistory } from "react-router-dom"
+// import { useHistory } from "react-router-dom"
 import { useLocation } from "react-router-dom"
 const PublicHeader = () => {
   const {
@@ -24,8 +22,8 @@ const PublicHeader = () => {
     setValue(newValue);
   };
   const location = useLocation();
-  const history = useHistory();
-  // console.log(history);
+  // const history = useHistory();
+  
   return (
 
     <AppBar className={appbar} position="relative">
@@ -43,43 +41,6 @@ const PublicHeader = () => {
           spacing={1}
           className={item2}
         >
-          {/* <Tabs
-            // position="relative"
-            classes={{ indicator: indicator }}
-            // TabIndicatorProps={{ style: { background: "red",width:"50px" } }}
-            value={value}
-            // indicatorColor="secondary"
-            textColor="black"
-            onChange={handleChange}
-            className={tabs}
-            initialSelectedIndex={value}
-            // initialSelectedIndex={2}
-            // orientation={{xs:"vertical"}}
-            // aria-label="disabled tabs example"
-          >
-            <Tab
-              value={2}
-              label="کالاها"
-              className={tab}
-              component={Link}
-              href="/admin/products"
-            />
-            <Tab
-              value={3}
-              label="قیمت و موجودی"
-              className={tab}
-              component={Link}
-              href="/admin/prices"
-            />
-
-            <Tab
-              value={1}
-              label="سفارش ها"
-              component={Link}
-              href="/admin/orders"
-              className={tab}
-            />
-          </Tabs> */}
           <Tabs
             // position="relative"
             classes={{ indicator: indicator }}

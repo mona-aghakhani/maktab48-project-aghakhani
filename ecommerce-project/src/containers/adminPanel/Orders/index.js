@@ -4,7 +4,7 @@ import {Table, TableBody,TableHead,TableCell,TableContainer,TableFooter,TableRow
   Paper,
   Typography,
   Grid,
-  Button,
+ 
   Container,
   Box,
   TableSortLabel,Radio,RadioGroup,FormControlLabel,FormControl,FormLabel 
@@ -142,11 +142,14 @@ const Orders = () => {
    * use useselector & dispatch for get products and handle api calls
    */
   const orders = useSelector((state) => state.allOrders.orders);
-  console.log(orders);
+  const deliveredOrders=orders.filter((item)=>item.status === "تحویل شده")
+  const waitingOrders=orders.filter((item)=>item.status === " در انتظار ارسال")
+
+
   // const products=orders.map((order)=>order.products)
   // console.log(products);
   const loading = useSelector((state) => state.allOrders.loading);
-  console.log(loading);
+ 
   const dispatch = useDispatch();
   /*
    * dispatch sync action(setProducts) and get data
@@ -225,11 +228,13 @@ const Orders = () => {
 /*
 * initial states & functions for handle filtering with Radio
 */
-// const [value, setValue] = React.useState('female');
-
-//   const handleChange = (event) => {
-//     setValue(event.target.value);
-//   };
+const [value, setValue] = useState("در انتظار ارسال");
+  
+const [data,setData]=useState(waitingOrders)
+  const handleChange = (event) => {
+    setValue(event.target.value);
+    
+  };
 // <FormControl component="fieldset">
 //       <FormLabel component="legend">Gender</FormLabel>
 //       <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
@@ -259,14 +264,19 @@ const Orders = () => {
     >
       {loading && <CircularProgress className={classes.progress} size={100} thickness={4} disableShrink />}
       {!loading && <Container maxWidth="md">
-        <Grid container justify="space-between" className={classes.grid}>
+        <Grid container justify="space-between" alignItems="center" className={classes.grid}>
           <Grid item>
-            <Typography>مدیریت کالاها</Typography>
+            <Typography>مدیریت سفارش ها</Typography>
           </Grid>
-          <Grid item>
-            <Button className={classes.btn} onClick={handleOpenAddDialog}>
-              افزودن کالا
-            </Button>
+          <Grid item >
+          <FormControl component="fieldset">
+      {/* <FormLabel component="legend">Gender</FormLabel> */}
+       <RadioGroup aria-label="فیلتر" name="gender1" value={value} onChange={handleChange}>
+         <FormControlLabel value="در انتظار ارسال" control={<Radio />} label="سفارش های در انتظار ارسال" />
+         <FormControlLabel value="تحویل شده" control={<Radio />} label="سفارش های تحویل شده" />
+         
+       </RadioGroup>
+     </FormControl>
           </Grid>
         </Grid>
         <TableContainer className={classes.paper} component={Paper}>
@@ -302,7 +312,7 @@ const Orders = () => {
                       <TableCell>{row?.total}</TableCell>
                       <TableCell>{row?.orderTime}</TableCell>
                       <TableCell>
-                        <Box onClick={() => handleOpenUpdateDialog(row)}   className={classes.box}> ویرایش </Box>
+                        <Box onClick={() => handleOpenUpdateDialog(row)}   className={classes.box}> بررسی سفارش </Box>
                         {/* <Box onClick={() => { dispatch(deleteProductById(row.id)); }} className={classes.box} > حذف</Box> */}
                       </TableCell>
                     </TableRow>
@@ -323,7 +333,7 @@ const Orders = () => {
                     count={orders?.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
-                    labelRowsPerPage=''
+                    labelRowsPerPage='تعداد سطر های هر صفحه'
                     // classes={{
                     //   toolbar: classes.toolbar,
                     //   caption: classes.caption
