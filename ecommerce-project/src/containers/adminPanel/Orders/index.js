@@ -137,7 +137,7 @@ function EnhancedTableHead(props) {
 }
 
 
-const Products = () => {
+const Orders = () => {
   /*
    * use useselector & dispatch for get products and handle api calls
    */
@@ -367,5 +367,5 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Orders;
 

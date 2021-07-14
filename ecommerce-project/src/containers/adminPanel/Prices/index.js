@@ -3,92 +3,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { TableContainer, Paper, Typography, Grid, Button,Container } from "@material-ui/core";
 import { useStyles2 } from "./styles";
 import { DataGrid } from '@material-ui/data-grid';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/styles';
 import {getProducts,updateProductById,updateProductAct} from "../../../store/actions/productActions"
 import {putApiProduct} from "../../../api/products/products"
 import CircularProgress from '@material-ui/core/CircularProgress';
+import axios from "axios";
 
 
-
-// const useStyles = makeStyles(
-//     (theme) => ({
-//       root: {
-//         justifyContent: 'center',
-//         display: 'flex',
-//         borderBottom: `1px solid ${theme.palette.divider}`,
-//       },
-//     }),
-//     // { defaultTheme },
-//   );
-  
-  function EditToolbar(props) {
-    const { selectedCellParams, apiRef, setSelectedCellParams } = props;
-    // const classes = useStyles();
-  
-    const handleClick = () => {
-      if (!selectedCellParams) {
-        return;
-      }
-      const { id, field, cellMode } = selectedCellParams;
-      if (cellMode === 'edit') {
-        apiRef.current.commitCellChange({ id, field });
-        apiRef.current.setCellMode(id, field, 'view');
-        setSelectedCellParams({ ...selectedCellParams, cellMode: 'view' });
-      } else {
-        apiRef.current.setCellMode(id, field, 'edit');
-        setSelectedCellParams({ ...selectedCellParams, cellMode: 'edit' });
-      }
-    };
-  
-    const handleMouseDown = (event) => {
-      // Keep the focus in the cell
-      event.preventDefault();
-    };
-  
-    return (
-      // <div className={classes.root}>
-        <Button
-          onClick={handleClick}
-          onMouseDown={handleMouseDown}
-          disabled={!selectedCellParams}
-          color="primary"
-        >
-          {selectedCellParams?.cellMode === 'edit' ? 'Save' : 'Edit'}
-        </Button>
-      // </div>
-    );
-  }
-  
-//   EditToolbar.propTypes = {
-//     apiRef: PropTypes.shape({
-//       current: PropTypes.object.isRequired,
-//     }).isRequired,
-//     selectedCellParams: PropTypes.any,
-//     setSelectedCellParams: PropTypes.func.isRequired,
-//   };
 const Prices = () => {
     const classes = useStyles2();
 const [updatedata, setupdatedata] = useState([])
     const rows = useSelector((state) => state.allProducts.products);
+    // console.log(rows);
     const loading = useSelector((state) => state.allProducts.loading);
     // console.log(loading);
     const dispatch = useDispatch();
-    // let defaultRows=[]
-    // defaultRows=[...products]
-    // console.log(defaultRows);
-    // const [rows, setRows] = React.useState(defaultRows);
-    // console.log(products);
-    // console.log(rows);
-    /*
-   * dispatch sync action(setProducts) and get data
-   */
-  // useEffect(() => {
-  //   getAllProducts().then((res) => {
-  //     console.log("res data for products", res.data);
-  //     dispatch(setProducts(res.data));
-  //   });
-  // }, []);
 
   /*
    * dispatch async action and get data
@@ -111,6 +39,7 @@ const [updatedata, setupdatedata] = useState([])
             headerName: 'نام کالا',
             // width: 350,
             // type: 'string',
+            // flex:1,
             flex:0.4,
             editable: false
         },
@@ -118,6 +47,7 @@ const [updatedata, setupdatedata] = useState([])
             field: 'price',
             headerName: 'قیمت(تومان)',
             // width: 250,
+            // flex:0.5,
             flex:0.3,
             type: 'number',
             // sortable: true,
@@ -128,139 +58,61 @@ const [updatedata, setupdatedata] = useState([])
             headerName: 'موجودی',
             type: 'number',
             // width: 250,
+            // flex:0.5,
             flex:0.3,
             // sortable: true,
             editable: true,
         }
     ];
 
-    // setState for handle pagnation
-    // const [pageSize, setPageSize] = React.useState(5);
-    // const handlePageSizeChange = (params) => {
-    //     setPageSize(params.pageSize);
-    //   };
-      // const [editRowsModel, setEditRowsModel] = React.useState({});
-      // const [arrOfEdit, setArrOfEdit] = React.useState([]);
-
-      // const handleEditRowModelChange = React.useCallback((params) => {
-      //   setEditRowsModel(params.model);
-      //   // setArrOfEdit([...arrOfEdit,editRowsModel])
-      // }, [editRowsModel]);
-      // const handleSelectionChange = React.useCallback((params) => {
-      //   // setEditRowsModel(params.model);
-      //   console.log(params);
-      //   // setArrOfEdit([...arrOfEdit,editRowsModel])
-      // }, [rows]);
-      // console.log("obj",editRowsModel);
-      // console.log("arr",arrOfEdit);
-
-    // const apiRef = useGridApiRef();
-    // const [selectedCellParams, setSelectedCellParams] = React.useState(null);
-// let newArr=[]
-//     const handleEditCellChange=({ id, field, props })=>{
-// console.log(id,field,props);
-
-// let updatedObj={id,field,value:props}
-// console.log(updatedObj);
-
-// newArr=[...newArr,updatedObj]
-// console.log(newArr);
-//     }
-
-//     console.log(newArr);
-// let newArr=[]
+ /*
+ * const function handleEditCellChange for setState updatedObj
+ */
     const handleEditCellChange=({ id, field, props })=>{
-// console.log(id,field,props);
-// let obj=rows.filter((item)=>item.id === id)
-// if (field === "amount") {
-//   var updatedObj={...obj,amount:props.value}
-//   console.log(updatedObj);
-// }else{
-//   var updatedObj={...obj,price:props.value}
-//   console.log(updatedObj);
-// }
-// setupdatedata([...updatedata,updatedObj])
 
-let updatedObj={id,field,value:props.value}
+let updatedObj={field,value:props.value}
 // console.log(updatedObj);
 let obj=rows.filter((item)=>item.id === id)
-// let innerObj={...obj}
-// console.log(obj);
+
 if (updatedObj.field === "amount") {
-  // let newObj={...innerObj,amount:updatedObj.value}
-  // obj.amount=updatedObj.value;
+  
   obj[0].amount=updatedObj.value
-  // console.log(newObj);
-  console.log(obj);
+ 
 }else{
   obj[0].price=updatedObj.value
 }
-// console.log(obj);
+
 setupdatedata([...updatedata,...obj])
-// newArr=[...newArr,updatedObj]
-// console.log(updatedata);
-// let updatedObj={id,field,value:props.value}
-// console.log(updatedObj);
-// setupdatedata([...updatedata,updatedObj])
-// // newArr=[...newArr,updatedObj]
-// console.log(updatedata);
+
     }
     
-    // console.log(updatedata);
+   /*
+ * const function handleEdit for save updatedData and multiple put api in for loop
+ */
     const handleEdit=()=>{
-      // for (const index in updatedata) {
-      //   // console.log(item);
-      //   dispatch(updateProductById(item.id,item))
-      //   console.log(item.id);
-        
-      // }
+     
       for (let i = 0; i < updatedata.length; i++) {
-        console.log(updatedata[i].id,updatedata[i]);
-        // dispatch(updateProductById(updatedata[i].id,updatedata[i]))
-      // window.location.reload()
-      putApiProduct(updatedata[i].id,updatedata[i]).then((res)=>{
-        console.log("res data for editproducts", res.data);
-      
-      })
-        // array[i]
-        window.location.reload()
+    
+        const getData = async () => {
+          try {
+              return await axios.put(`http://localhost:5000/products/${updatedata[i].id}`, updatedata[i])
+          } catch (error) {
+              console.error(error)
+          }
       }
-      // window.location.reload()
-      // updatedata?.forEach(element=>{
-      //   putApiProduct(element.id,element).then((res)=>{
-      //     console.log("res foreach",res);
-      //     // if (res.status === 201) {
-            
-      //     // }
-      //   })
-      //   // dispatch(updateProductById(element.id,element))
-      // })
-      // window.location.reload()
+      const callEndpoint = async () => {
+        const responseData = await getData()
+    
+        console.log(responseData)
+    }
+    
+    callEndpoint();
+        window.location.reload()
+      } 
+       dispatch(getProducts());
     }
 
-    // const handleEditCellChangeCommitted = React.useCallback(
-    //   ({ id, field, props }) => {
-    //     if (field === 'price') {
-    //       const data = props; // Fix eslint value is missing in prop-types for JS files
-    //       console.log(data);
-    //       const [price, amount] = data.value.toString().split(' ');
-    //       const updatedRows = rows.map((row) => {
-    //         if (row.id === id) {
-    //           return { ...row, price, amount };
-    //         }
-    //         return row;
-    //       });
-    //       console.log(updatedRows);
-    //       // setRows(updatedRows);
-    //     }
-    //   },
-    //   [rows],
-    // );
-    // console.log(rows);
-    // const [selectedRow, setSelectedRow] = useState({});
-    // const [row, setRow] = useState({});
-    // const [selectionModel, setSelectionModel] = React.useState([]);
-// console.log(selectionModel);
+   
     return (
         <main>
           {loading && <CircularProgress className={classes.progress} size={100} thickness={4} disableShrink />}
@@ -281,7 +133,7 @@ setupdatedata([...updatedata,...obj])
             </Grid>
             <TableContainer className={classes.paper} component={Paper}>
                 <div style={{ flexGrow: 1 }}>
-                <div style={{ height: 400, width: '100%' }}>
+                <div style={{ height: 400, width: '100%' ,textAlign:"center"}}>
                 <DataGrid
         rows={rows}
         columns={columns}
@@ -289,32 +141,13 @@ setupdatedata([...updatedata,...obj])
         // onPageSizeChange={handlePageSizeChange}
         rowsPerPageOptions={[5, 10, 20]}
         // pagination
-        // editRowsModel={editRowsModel}
-        // onEditRowModelChange={handleEditRowModelChange}
-        // onRowSelected={(e) => setRow(e.data)}
-        // selectionModel={selectionModel}
-        // onSelectionModelChange={(selection) => {
-        //   console.log(selection);
-        //   const newSelectionModel = selection.selectionModel;
-        //   console.log(newSelectionModel);
-        // }}
-        onEditCellChangeCommitted={handleEditCellChange}
-        // apiRef={apiRef}
-        // onCellClick={handleCellClick}
-        // onCellDoubleClick={handleDoubleCellClick}
-        // onCellFocusOut={handleCellFocusOut}
-        // onCellKeyDown={handleCellKeyDown}
-        // components={{
-        //   Toolbar: EditToolbar,
-        // }}
+        // className={classes.DataGrid}
 
-        // componentsProps={{
-        //   toolbar: {
-        //     selectedCellParams,
-        //     // apiRef,
-        //     setSelectedCellParams,
-        //   },
-        // }}
+
+
+
+        onEditCellChangeCommitted={handleEditCellChange}
+        
       />
                 </div>
                 </div>
