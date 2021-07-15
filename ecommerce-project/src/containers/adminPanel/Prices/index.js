@@ -4,7 +4,7 @@ import { TableContainer, Paper, Typography, Grid, Button,Container } from "@mate
 import { useStyles2 } from "./styles";
 import { DataGrid } from '@material-ui/data-grid';
 import {getProducts} from "../../../store/actions/productActions"
-// import {putApiProduct} from "../../../api/products/products"
+import {putApiProduct,getAllProducts} from "../../../api/products/products"
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from "axios";
 
@@ -132,6 +132,12 @@ setupdatedata([...updatedata,...obj])
     callEndpoint();
         window.location.reload()
       } 
+      // const getproducts = async () => {
+      //       const productsFromServer = await getAllProducts();
+      //       console.log(productsFromServer);
+      //       // setproducts(productsFromServer.data);
+      //     };
+      //     getproducts();
        dispatch(getProducts());
     }
 
@@ -165,6 +171,7 @@ setupdatedata([...updatedata,...obj])
         // onPageSizeChange={handlePageSizeChange}
         rowsPerPageOptions={[5, 10, 20]}
         // pagination
+        onCellModeChange={(e)=>console.log(e)}
         // className={classes.DataGrid}
         onEditCellChangeCommitted={handleEditCellChange}
         disableColumnMenu={true}
