@@ -32,36 +32,55 @@ const [updatedata, setupdatedata] = useState([])
     //   {
     //     field: 'id',
     //     headerName: 'ردیف',
-    //     width: 200 
+    //     flex:0.3,
+    //     // width: 200 
     // },
         {
             field: 'title',
             headerName: 'نام کالا',
+            headerClassName: 'super-app-theme--header',
             // width: 350,
             // type: 'string',
             flex:1,
             // flex:0.4,
+            // filterable:false,
             editable: false
         },
         {
             field: 'price',
             headerName: 'قیمت(تومان)',
+            headerAlign: 'left',
+            align:"left",
+            headerClassName: 'super-app-theme--header',
             // width: 250,
             flex:0.5,
             // flex:0.3,
             type: 'number',
             // sortable: true,
-            editable: true
+            editable: true,
+            valueFormatter: (params) => {
+              const valueFormatted = Number(params.value).toLocaleString();
+              return valueFormatted;
+            },
+            // filterable:false,
         },
         {
             field: 'amount',
             headerName: 'موجودی',
             type: 'number',
+            headerAlign: 'left',
+            align:"left",
+            headerClassName: 'super-app-theme--header',
             // width: 250,
             flex:0.5,
             // flex:0.3,
             // sortable: true,
             editable: true,
+            valueFormatter: (params) => {
+              const valueFormatted = Number(params.value).toLocaleString();
+              return valueFormatted;
+            },
+            // filterable:false,
         }
     ];
 
@@ -90,6 +109,10 @@ setupdatedata([...updatedata,...obj])
  * const function handleEdit for save updatedData and multiple put api in for loop
  */
     const handleEdit=()=>{
+      // Promise.all(updatedata.map(product=>axios.put(`http://localhost:5000/products/${product.id}`,product)
+      // .then(res=>console.log(res.data))
+      // .catch(err=>console.log(err))
+      // ))
      
       for (let i = 0; i < updatedata.length; i++) {
     
@@ -134,7 +157,7 @@ setupdatedata([...updatedata,...obj])
             </Grid>
             <TableContainer className={classes.paper} component={Paper}>
                 <div style={{ flexGrow: 1 }}>
-                <div style={{ height: 400, width: '100%' ,textAlign:"center"}}>
+                <div style={{ height: 400, width: '100%' ,textAlign:"center"}} className={classes.root}>
                 <DataGrid
         rows={rows}
         columns={columns}
@@ -143,12 +166,9 @@ setupdatedata([...updatedata,...obj])
         rowsPerPageOptions={[5, 10, 20]}
         // pagination
         // className={classes.DataGrid}
-
-
-
-
         onEditCellChangeCommitted={handleEditCellChange}
-        
+        disableColumnMenu={true}
+        hideFooterSelectedRowCount={true}
       />
                 </div>
                 </div>

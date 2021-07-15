@@ -6,9 +6,15 @@ export const useStyles2 = makeStyles({
     //   // marginTop: 50,
     //   // borderTop: "1px solid gray",
     // },
-    DataGrid:{
-textAlign:"center"
+    root:{
+      '& .super-app-theme--header': {
+        fontWeight: 400,
+        fontSize:15,
+      },
     },
+//     DataGrid:{
+// textAlign:"center"
+//     },
     paper: {
       width: "90%",
       display:"flex",

@@ -88,10 +88,10 @@ export const theme = createMuiTheme({
       },
     },
     MuiSelect: {
-      root:{
-        // display:"block"
-        // fontFamily: "Shabnam !important",
-      },
+      // root:{
+      //   // display:"block"
+      //   // fontFamily: "Shabnam !important",
+      // },
       icon: {
         color: "#B9B9B9",
       },
@@ -246,7 +246,12 @@ width:"100%"
     root:{
       display:"block"
     }
-  }
+  },
+//  MuiDataGrid:{
+//   columnHeaderTitle:{
+//     flexDirection:"row"
+//   }
+//  }
   // overrides: {
   //   MuiOutlinedInput: {
   //     root: {

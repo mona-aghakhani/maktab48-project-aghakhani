@@ -144,20 +144,29 @@ const Orders = () => {
   const orders = useSelector((state) => state.allOrders.orders);
   const deliveredOrders=orders.filter((item)=>item.status === "تحویل شده")
   const waitingOrders=orders.filter((item)=>item.status === " در انتظار ارسال")
+/*
+* initial states & functions for handle filtering with Radio
+*/
+
   const [value, setValue] = useState("در انتظار ارسال");
   
-  // const [data,setData]=useState(waitingOrders)
+ 
     const handleChange = (event) => {
       setValue(event.target.value);
     };
     let data=value === "در انتظار ارسال"  ? waitingOrders : deliveredOrders;
-// console.log(data);
 
-  // const products=orders.map((order)=>order.products)
-  // console.log(products);
+
+  
   const loading = useSelector((state) => state.allOrders.loading);
  
   const dispatch = useDispatch();
+  /*
+   * dispatch async action and get data
+   */
+  useEffect(() => {
+    dispatch(getOrders());
+  }, []);
   /*
    * dispatch sync action(setProducts) and get data
    */
@@ -168,12 +177,7 @@ const Orders = () => {
   //   });
   // }, []);
 
-  /*
-   * dispatch async action and get data
-   */
-  useEffect(() => {
-    dispatch(getOrders());
-  }, []);
+  
 
   /*
    * setState and functions for handle CustomDialog
@@ -234,9 +238,6 @@ const Orders = () => {
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
-/*
-* initial states & functions for handle filtering with Radio
-*/
 
 // <FormControl component="fieldset">
 //       <FormLabel component="legend">Gender</FormLabel>
@@ -313,7 +314,7 @@ const Orders = () => {
                         {row?.fullName}
                         {/* <img className={classes.img} src={row?.image} /> */}
                       </TableCell>
-                      <TableCell>{row?.total}</TableCell>
+                      <TableCell>{Number(row?.total).toLocaleString()}</TableCell>
                       <TableCell>{row?.orderTime}</TableCell>
                       <TableCell>
                         <Box onClick={() => handleOpen(row)}   className={classes.box}> بررسی سفارش </Box>

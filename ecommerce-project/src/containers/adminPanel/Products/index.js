@@ -179,7 +179,7 @@ const Products = () => {
     // console.log(editedObj);
     setIsOpenUpdate(true);
   };
-  // console.log(editedObj);
+  
 
   const handleDialogUpdateClose = () => {
     setIsOpenUpdate(false);

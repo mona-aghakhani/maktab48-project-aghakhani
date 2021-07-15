@@ -4,6 +4,10 @@ import React
 from "react";
 
 const ProductListing = () => {
+/*
+* without redux
+*/
+
     // const [tasks, setTasks] = useState([]);
     // useEffect(() => {
     //     const getTasks = async ()=>{
