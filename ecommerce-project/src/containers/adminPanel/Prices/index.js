@@ -113,9 +113,7 @@ setupdatedata([...updatedata,...obj])
       // .then(res=>console.log(res.data))
       // .catch(err=>console.log(err))
       // ))
-     
       for (let i = 0; i < updatedata.length; i++) {
-    
         const getData = async () => {
           try {
               return await axios.put(`http://localhost:5000/products/${updatedata[i].id}`, updatedata[i])
@@ -125,20 +123,19 @@ setupdatedata([...updatedata,...obj])
       }
       const callEndpoint = async () => {
         const responseData = await getData()
-    
         console.log(responseData)
     }
-    
     callEndpoint();
-        window.location.reload()
+        // window.location.reload()
       } 
+window.location.reload()
       // const getproducts = async () => {
       //       const productsFromServer = await getAllProducts();
       //       console.log(productsFromServer);
       //       // setproducts(productsFromServer.data);
       //     };
       //     getproducts();
-       dispatch(getProducts());
+      //  dispatch(getProducts());
     }
 
    
