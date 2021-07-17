@@ -128,7 +128,10 @@ setupdatedata([...updatedata,...obj])
     callEndpoint();
         // window.location.reload()
       } 
-window.location.reload()
+
+
+    
+// window.location.reload()
       // const getproducts = async () => {
       //       const productsFromServer = await getAllProducts();
       //       console.log(productsFromServer);
