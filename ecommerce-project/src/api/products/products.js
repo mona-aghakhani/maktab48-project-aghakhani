@@ -1,14 +1,19 @@
 import axios from "axios";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify"
+
+const instance = axios.create({
+  // ..  make baseURL
+  baseURL: 'http://localhost:5000'
+});
 /*
  * GET api for get all products
  */
 
 
 export const getAllProducts = async () => {
-  let res = await axios({
+  let res = await instance({
     method: "get",
-    url: "http://localhost:5000/products",
+    url: "/products",
     headers: { "content-type": "application/json" },
   }).catch((err) => console.log(err));
   // console.log(res);
@@ -19,32 +24,34 @@ export const getAllProducts = async () => {
  *  POST api for add a new product
  */
 
-export const postNewProduct =async (newProduct) => {
-   try { let res = await axios({
-    method: "post",
-    url: "http://localhost:5000/products",
-    headers: { "content-type": "application/json" },
-    data: newProduct
-   })
-if (res.status === 201) {
-  // console.log("post data is ok");
-  // toast.success(` added successfully`)
-}
-if (res.status === 404) {
-  // console.log("post data is ok");
-  return toast.error("Not found")
- } 
-if (res.status === 500) {
-  return toast.error("Network error")
- } 
-   console.log("post api",res);
-  return res;
-  }catch (err) {
+export const addedProduct = async (newProduct) => {
+  try {
+    let res = await instance({
+      method: "post",
+      url: "/products",
+      headers: { "content-type": "application/json" },
+      data: newProduct
+    })
+    if (res.status === 201) {
+      // console.log("post data is ok");
+      // toast.success(` added successfully`)
+    }
+    if (res.status === 404) {
+      // console.log("post data is ok");
+      return toast.error("Not found")
+    }
+    if (res.status === 500) {
+      return toast.error("Network error")
+    }
+    console.log("post api", res);
+    return res;
+  } catch (err) {
     //  console.log(err) 
+    throw err
   };
 }
 // export const postNewProduct =async (newProduct) => {
-//   let res = await axios({
+//   let res = await instance({
 //     method: "post",
 //     url: "http://localhost:5000/products",
 //     headers: { "content-type": "application/json" },
@@ -57,10 +64,10 @@ if (res.status === 500) {
 /*
  *  DELETE api for delete selected product
  */
-export const deleteApiProduct = async (id) => {
-  let res = await axios({
+export const deleteProduct = async (id) => {
+  let res = await instance({
     method: "delete",
-    url: `http://localhost:5000/products/${id}`,
+    url: `/products/${id}`,
     headers: { "content-type": "application/json" },
   });
   // console.log(res);
@@ -71,21 +78,22 @@ export const deleteApiProduct = async (id) => {
 */
 
 
-export const putApiProduct = async (id,updateProduct) => {
+export const updateProduct = async (id, updateProduct) => {
   try {
-  let res = await axios({
-    method: "put",
-    url: `http://localhost:5000/products/${id}`,
-    headers: { "content-type": "application/json" },
-    data: updateProduct,
-  })
-  return res;
-}
-catch (err) {
-  console.log(err) 
-};
+    let res = await instance({
+      method: "put",
+      url: `/products/${id}`,
+      headers: { "content-type": "application/json" },
+      data: updateProduct,
+    })
+    return res;
+  }
+  catch (err) {
+
+    throw err
+  };
   // console.log("res put api",res);
-  
+
 };
 
 
@@ -94,9 +102,9 @@ catch (err) {
  */
 
 export const getAProductById = async (id) => {
-  let res = await axios({
+  let res = await instance({
     method: "get",
-    url: ` http://localhost:5000/products/${id}`,
+    url: ` /products/${id}`,
     headers: { "content-type": "application/json" },
   }).catch((err) => console.log(err));
   return res;

@@ -8,7 +8,7 @@ import {
   // Link
 } from "@material-ui/core";
 import React from "react";
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { logout } from "../../utils/auth"
 import { useStyles } from "./styles";
 // import { useHistory } from "react-router-dom"
@@ -23,7 +23,7 @@ const PublicHeader = () => {
   };
   const location = useLocation();
   // const history = useHistory();
-  
+
   return (
 
     <AppBar className={appbar} position="relative">
@@ -47,7 +47,7 @@ const PublicHeader = () => {
             // TabIndicatorProps={{ style: { background: "red",width:"50px" } }}
             value={location.pathname}
             // indicatorColor="secondary"
-            textColor="black"
+
             onChange={handleChange}
             className={tabs}
             initialSelectedIndex={value}
