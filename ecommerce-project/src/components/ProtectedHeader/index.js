@@ -81,7 +81,7 @@ const PublicHeader = () => {
 
         </Grid>
         <Grid item md={2} sm={2} xs={12} className={item3} container>
-          <Link href="/" className={link}>
+          <Link to="/" className={link}>
             {/* <Typography className={link} variant="body1" >بازگشت به سایت</Typography>  */}
             بازگشت به سایت
             </Link>

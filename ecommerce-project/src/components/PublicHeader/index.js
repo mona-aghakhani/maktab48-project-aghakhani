@@ -1,54 +1,88 @@
-import { AppBar,  Toolbar, Typography,Box } from '@material-ui/core'
+import {
+    AppBar, Toolbar, Typography, Box, InputBase,
+    Grid
+} from '@material-ui/core'
 import React from 'react';
 import { NavLink } from "react-router-dom";
+import SearchIcon from "@material-ui/icons/Search";
 // import Badge from '@material-ui/core/Badge';
 // import IconButton from '@material-ui/core/IconButton';
 // import MailIcon from '@material-ui/icons/Mail';
-import {useStyles} from "./styles"
+import { useStyles } from "./styles"
 const PublicHeader = () => {
-    const {  appbar,box,link} =useStyles();
+    const { appbar, box, link, search, searchIcon, inputRoot, inputInput, grid, item1, item2, item3 } = useStyles();
     return (
         <div>
-            <AppBar  position="relative">
-                <Toolbar   className={appbar}>
-                    {/* <Grid container direction="row">
+            <AppBar className={appbar} position="static">
+                {/* <Toolbar   className={appbar}> */}
+                {/* <Grid container direction="row">
                     <Grid item> */}
-                    <Box>
-                    <Typography>
-                        فروشگاه 
+                {/* <Box> */}
+                <Grid container className={grid} >
+                    <Grid item md={3} sm={2} xs={12} className={item1}>
+                        <Typography>
+                            فروشگاه
                     </Typography>
-                    </Box>
+                    </Grid>
+                    <Grid
+                        item
+                        md={7}
+                        sm={8}
+                        xs={12}
+                        container
+                        spacing={1}
+                        className={item2}
+                    >
+                        <div className={search}>
+                            <div className={searchIcon}>
+                                <SearchIcon />
+                            </div>
+                            <InputBase
+                                placeholder="جستجو..."
+                                classes={{
+                                    root: inputRoot,
+                                    input: inputInput,
+                                }}
+                                inputProps={{ 'aria-label': 'search' }}
+                            />
+                        </div>
+                    </Grid>
+                    {/* </Box> */}
                     {/* </Grid> */}
                     {/* <Grid item alignItems="center">
                         <Grid item> */}
-                        <Box className={box}>
-                            <div>
-                    <NavLink to="/login" exact className={link}  >
-                        مدیریت 
+                    {/* <Box className={box}> */}
+                    {/* <div> */}
+                    <Grid item md={2} sm={2} xs={12} className={item3} container>
+                        <NavLink to="/login" exact className={link}  >
+                            مدیریت
                     </NavLink >
-                      {/* <NavLink to="/admin/login" exact >
+                        <NavLink to="/" className={link}>
+                            سبد خرید
+                    </NavLink>
+                        {/* <NavLink to="/admin/login" exact >
       login
       </NavLink> */}
-                    </div>
-                    {/* </Grid>
+                        {/* </div> */}
+                        {/* </Grid>
                     <Grid item> */}
-                    <div>
-                    <NavLink to="/" className={link}>
-                        سبد خرید 
-                    </NavLink>
-                    {/* <IconButton aria-label="show 4 new mails" color="inherit">
+                        {/* <div> */}
+
+                        {/* <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton> */}
-                    </div>
-                    </Box>
-                    {/* </Grid>
+                        {/* </div>
+                    </Box> */}
+                        {/* </Grid>
                     </Grid>
                     </Grid> */}
-                </Toolbar>
+                    </Grid>
+                </Grid>
+                {/* </Toolbar> */}
             </AppBar>
-            
+
         </div>
     )
 }

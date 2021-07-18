@@ -4,21 +4,23 @@ import {
   AppBar,
   Toolbar,
 
-  InputBase,
+  // InputBase,
    Grid
 } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
-import SearchIcon from "@material-ui/icons/Search";
+// import SearchIcon from "@material-ui/icons/Search";
 import { useStyles} from "./styles";
 import logoNew from "../../assets/images/logoNew.png"
 
 
 function MainHeader() {
-  const { header, appbar, search,searchIcon ,inputRoot,inputInput} = useStyles();
+  const { header, appbar,
+    //  search,searchIcon ,inputRoot,inputInput
+    } = useStyles();
   
   return (
     <>
-      <AppBar color="secondary" className={appbar} position="relative" >
+      <AppBar color="secondary" className={appbar} position="static" >
         <Toolbar  className={header}>
           <Grid container  alignItems="center"> 
             <Grid item>
@@ -35,7 +37,7 @@ function MainHeader() {
           {/* <div
           //    className={classes.search}
           > */}
-              <div className={search}>
+              {/* <div className={search}>
             <div className={searchIcon}>
               <SearchIcon />
             </div>
@@ -47,7 +49,7 @@ function MainHeader() {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
+          </div> */}
         
          
             <HomeIcon color="primary"/>

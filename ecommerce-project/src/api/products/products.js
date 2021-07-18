@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify"
 
-const instance = axios.create({
+const axiosConfig = axios.create({
   // ..  make baseURL
   baseURL: 'http://localhost:5000'
 });
@@ -11,7 +11,7 @@ const instance = axios.create({
 
 
 export const getAllProducts = async () => {
-  let res = await instance({
+  let res = await axiosConfig({
     method: "get",
     url: "/products",
     headers: { "content-type": "application/json" },
@@ -26,7 +26,7 @@ export const getAllProducts = async () => {
 
 export const addedProduct = async (newProduct) => {
   try {
-    let res = await instance({
+    let res = await axiosConfig({
       method: "post",
       url: "/products",
       headers: { "content-type": "application/json" },
@@ -51,7 +51,7 @@ export const addedProduct = async (newProduct) => {
   };
 }
 // export const postNewProduct =async (newProduct) => {
-//   let res = await instance({
+//   let res = await axiosConfig({
 //     method: "post",
 //     url: "http://localhost:5000/products",
 //     headers: { "content-type": "application/json" },
@@ -65,7 +65,7 @@ export const addedProduct = async (newProduct) => {
  *  DELETE api for delete selected product
  */
 export const deleteProduct = async (id) => {
-  let res = await instance({
+  let res = await axiosConfig({
     method: "delete",
     url: `/products/${id}`,
     headers: { "content-type": "application/json" },
@@ -80,7 +80,7 @@ export const deleteProduct = async (id) => {
 
 export const updateProduct = async (id, updateProduct) => {
   try {
-    let res = await instance({
+    let res = await axiosConfig({
       method: "put",
       url: `/products/${id}`,
       headers: { "content-type": "application/json" },
@@ -102,7 +102,7 @@ export const updateProduct = async (id, updateProduct) => {
  */
 
 export const getAProductById = async (id) => {
-  let res = await instance({
+  let res = await axiosConfig({
     method: "get",
     url: ` /products/${id}`,
     headers: { "content-type": "application/json" },
