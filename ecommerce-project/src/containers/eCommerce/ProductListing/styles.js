@@ -1,6 +1,8 @@
 import { makeStyles } from "@material-ui/core";
 import image1 from "../../../assets/images/shop3.jpg"
-export const useStyles=makeStyles((theme)=>({
+export const useStyles=makeStyles((
+    // theme
+    )=>({
     // root: {
     //     position: "relative",
     //     overflow: "hidden"

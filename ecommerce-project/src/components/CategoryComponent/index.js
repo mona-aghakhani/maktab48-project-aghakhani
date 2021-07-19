@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import { Box, Container, Grid, Toolbar } from "@material-ui/core";
+import { Box, Container, Grid, Link, Toolbar } from "@material-ui/core";
 import { useStyles } from "./styles";
 // import image1 from "../../../assets/images/shop3.jpg"
 // import image2 from '../../../assets/images/dairy1 (3).jpg';
@@ -16,9 +16,11 @@ const CategoryComponent = ({title,categorydata}) => {
         //   className={classes.cardGrid}
         maxWidth="xl">
         {/* <Paper className={paper}> */}
+        <Link href={`/listProducts/${title}`}>
             <div className={headerCategory}>
                 <Typography variant="h4">کالاهای  گروه {title}</Typography>
             </div>
+            </Link>
             <Grid container spacing={8}>
                 {categorydata.map((card) => (
                 <Grid item key={card} xs={12} sm={4} md={4}

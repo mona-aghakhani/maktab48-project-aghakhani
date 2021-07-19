@@ -27,7 +27,7 @@ const PublicHeader = () => {
                 <Grid container className={grid} >
                     <Grid item md={3} sm={2} xs={12} className={item1}>
                         <Typography>
-                            فروشگاه
+                            فروشگاه کسب و کالا
                     </Typography>
                     </Grid>
                     <Grid
@@ -61,10 +61,10 @@ const PublicHeader = () => {
                     {/* <div> */}
                     <Grid item md={2} sm={2} xs={12} className={item3} container>
                         <NavLink to="/login" exact className={link}  >
-                            مدیریت
+                           <Typography> مدیریت</Typography>
                     </NavLink >
                         <NavLink to="/" className={link}>
-                            سبد خرید
+                            <Typography>سبد خرید</Typography>
                     </NavLink>
                         {/* <NavLink to="/admin/login" exact >
       login
