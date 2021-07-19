@@ -122,7 +122,7 @@ export const getWasherList = async () => {
 export const getDrinkList = async () => {
   let res = await axiosConfig({
     method: "get",
-    url: '/products?category=شوینده&start=0&_limit=6',
+    url: '/products?category=نوشیدنی&start=0&_limit=6',
     headers: { "content-type": "application/json" },
   }).catch((err) => console.log(err));
   return res;
@@ -131,7 +131,7 @@ export const getDrinkList = async () => {
 export const getGroceryList = async () => {
   let res = await axiosConfig({
     method: "get",
-    url: '/products?category=شوینده&start=0&_limit=6',
+    url: '/products?category=خواروبار&start=0&_limit=6',
     headers: { "content-type": "application/json" },
   }).catch((err) => console.log(err));
   return res;

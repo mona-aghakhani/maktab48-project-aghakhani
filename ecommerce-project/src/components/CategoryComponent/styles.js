@@ -9,7 +9,7 @@ img:{
 objectFit:"cover",
 objectPosition:"center",
 height:"100%",
-width:"100%"
+width:"80%"
 },
 // container:{
 //     position:"relative"
@@ -59,15 +59,35 @@ item:{
 marginTop:"40px",
 height:"100%"
 },
-card:{
+cardItem:{
     width:"100%",
-    height:"100%" 
+    height:"100%", 
+    textAlign:"center",
+    background:"rgb(223 219 219 / 20%)"
 },
 paper:{
-    background:"#ededdc",
-    padding:"0 10px",
-marginTop:"30px"
+    // background:"#ededdc",
+    background:"gray",
+    padding:"2px 5px ",
+marginTop:"30px",
+textAlign:"center"
     // height:"300px"
+},
+boxContainer:{
+    background:"rgba(234,149,63,0.2)",
+    padding:"5px",
+    margin:"5px 20%",
+borderRadius:"5px",
+textAlign:"center",
+},
+box:{
+    // width:"150px",
+    height:"100%",
+    border:"1px solid rgba(234,149,63,0.9)",
+    borderRadius:"5px",
+    // margin:"5px auto",
+    textAlign:"center",
+    background:"white"
 },
 // container:{
 //     margin:"10px 0"

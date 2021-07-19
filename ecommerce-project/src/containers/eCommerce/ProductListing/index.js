@@ -147,6 +147,8 @@ const ProductListing = () => {
                 {/* </div> */}
             {/* <div style={{margin:"10px 0"}}> */}
                 <CategoryComponent title='شوینده' categorydata={dataWasher} />
+                <CategoryComponent title='خوار و بار' categorydata={dataِGrocery} />
+                <CategoryComponent title='نوشیدنی' categorydata={dataِDrinks} />
                 {/* </div> */}
            
            {/* <CategoryComponent title='شوینده' categorydata={dataWasher} /> */}
