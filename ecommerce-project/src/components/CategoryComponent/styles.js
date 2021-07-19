@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core";
-import image1 from "../../../assets/images/shop3.jpg"
+// import image1 from "../../../assets/images/shop3.jpg"
 export const useStyles=makeStyles((theme)=>({
     // root: {
     //     position: "relative",
@@ -18,7 +18,7 @@ imgContainer:{
    position:"relative",
    height:"300px",
    width:"100%",
-   backgroundImage:`url(${image1})` ,
+//    backgroundImage:`url(${image1})` ,
    backgroundSize: "cover",
 //    opacity:"0.6",
 //    marginTop:"40px"
@@ -63,10 +63,15 @@ card:{
     width:"100%",
     height:"100%" 
 },
-container:{
-    background:"beige",
-    height:"300px"
+paper:{
+    background:"#ededdc",
+    padding:"0 10px",
+marginTop:"30px"
+    // height:"300px"
 },
+// container:{
+//     margin:"10px 0"
+// },
 headerCategory:{
 background:"rgba(111, 101 ,101,0.4)",
 width:"100%",

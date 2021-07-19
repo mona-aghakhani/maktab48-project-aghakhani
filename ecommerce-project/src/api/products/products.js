@@ -96,6 +96,47 @@ export const updateProduct = async (id, updateProduct) => {
 
 };
 
+/*
+ * GET api for get categoryList & limit6
+ */
+// 'http://localhost:5000/products?category=&start=0&_limit=6'
+export const getDairyList = async () => {
+  let res = await axiosConfig({
+    method: "get",
+    url: '/products?category=لبنیات&start=0&_limit=6',
+    headers: { "content-type": "application/json" },
+  }).catch((err) => console.log(err));
+  return res;
+  // console.log(res.data);
+  // setData(res.data)
+}
+export const getWasherList = async () => {
+  let res = await axiosConfig({
+    method: "get",
+    url: '/products?category=شوینده&start=0&_limit=6',
+    headers: { "content-type": "application/json" },
+  }).catch((err) => console.log(err));
+  return res;
+  
+}
+export const getDrinkList = async () => {
+  let res = await axiosConfig({
+    method: "get",
+    url: '/products?category=شوینده&start=0&_limit=6',
+    headers: { "content-type": "application/json" },
+  }).catch((err) => console.log(err));
+  return res;
+ 
+}
+export const getGroceryList = async () => {
+  let res = await axiosConfig({
+    method: "get",
+    url: '/products?category=شوینده&start=0&_limit=6',
+    headers: { "content-type": "application/json" },
+  }).catch((err) => console.log(err));
+  return res;
+ 
+}
 
 /*
  * GET api for get a product

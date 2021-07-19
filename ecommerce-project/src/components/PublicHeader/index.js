@@ -1,5 +1,9 @@
 import {
-    AppBar, Toolbar, Typography, Box, InputBase,
+ AppBar,
+//   Toolbar,
+   Typography,
+    // Box,
+     InputBase,
     Grid
 } from '@material-ui/core'
 import React from 'react';
@@ -10,7 +14,9 @@ import SearchIcon from "@material-ui/icons/Search";
 // import MailIcon from '@material-ui/icons/Mail';
 import { useStyles } from "./styles"
 const PublicHeader = () => {
-    const { appbar, box, link, search, searchIcon, inputRoot, inputInput, grid, item1, item2, item3 } = useStyles();
+    const { appbar,
+        //  box,
+          link, search, searchIcon, inputRoot, inputInput, grid, item1, item2, item3 } = useStyles();
     return (
         <div>
             <AppBar className={appbar} position="static">
