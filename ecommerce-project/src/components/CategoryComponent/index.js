@@ -4,23 +4,26 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 // import Paper from '@material-ui/core/Paper';
-import { Box, Container, Grid, Link} from "@material-ui/core";
+import { Box, Container, Grid
+    // , Link
+} from "@material-ui/core";
 import { useStyles } from "./styles";
+import {NavLink} from "react-router-dom"
 // import image1 from "../../../assets/images/shop3.jpg"
 // import image2 from '../../../assets/images/dairy1 (3).jpg';
 const CategoryComponent = ({ title, categorydata }) => {
-    const { img,  headerCategory, box, boxContainer, cardItem } = useStyles()
+    const { img,  headerCategory, box, boxContainer, cardItem,link,headerTitle } = useStyles()
     return (
         <Container
             //   className={container}
             //   className={classes.cardGrid}
             maxWidth="xl">
             {/* <Paper className={paper}> */}
-            <Link href={`/listProducts/${title}`}>
+            <NavLink exact  to={`/listProducts/${title}`} className={link}>
                 <div className={headerCategory}>
-                    <Typography variant="h4">کالاهای  گروه {title}</Typography>
+                    <Typography variant="h4" className={headerTitle}>کالاهای  گروه {title}</Typography>
                 </div>
-            </Link>
+            </NavLink>
             <Grid container spacing={8}>
                 {categorydata?.map((card) => (
                     <Grid item key={card} xs={12} sm={4} md={4}

@@ -134,7 +134,7 @@ const ProductListing = () => {
     return (
 
         <div
-        //  style={{width:"100%",height:"500px"}}
+         style={{marginBottom:"5vh"}}
         >
 
             <div className={imgContainer}>

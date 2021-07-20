@@ -4,7 +4,7 @@ export const useStyles=makeStyles((theme)=>({
     appbar:{
         minHeight:"30px",
         justifyContent:"space-between",
-        padding:"5px",
+        padding:"10px",
         alignItems:"center"
     },
     grid:{
@@ -35,7 +35,7 @@ item3:{
         textDecoration:"none",
         color:"black",
         fontSize:"13px",
-        margin:"10px 0 0 5px",
+        // margin:"10px 0 0 5px",
         width:"60px",
         // color: COLORS.textColor,
         '&:hover':{

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import Divider from '@material-ui/core/Divider';
+// import { useHistory } from "react-router-dom"
 // import Drawer from '@material-ui/core/Drawer';
 // import Hidden from '@material-ui/core/Hidden';
 // import IconButton from '@material-ui/core/IconButton';
@@ -13,35 +14,41 @@ import ListItem from '@material-ui/core/ListItem';
 // import MenuIcon from '@material-ui/icons/Menu';
 // import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import CircularProgress from '@material-ui/core/CircularProgress';
+// import CircularProgress from '@material-ui/core/CircularProgress';
 import {
-    Container, Grid, Card, Box, CardContent, MenuItem, Select, InputBase,
-    FormControl, InputLabel,
-    TextField, OutlinedInput
+    Container, Grid, Card, Box, CardContent, MenuItem, Select,
+    //  InputBase,
+    FormControl,
+    //  InputLabel,   TextField,
+      OutlinedInput
 } from '@material-ui/core';
-import SearchIcon from "@material-ui/icons/Search";
+// import SearchIcon from "@material-ui/icons/Search";
 // import Pagination from '@material-ui/lab/Pagination';
 // import PaginationItem from '@material-ui/lab/PaginationItem';
 import ReactPaginate from 'react-paginate'
 import { useStyles } from "./styles";
-import { useParams } from "react-router-dom";
-import { getProducts } from "../../../store/actions/productActions"
-import { getChangeList } from "../../../api/products/products"
+import { NavLink, useParams } from "react-router-dom";
+// import { getProducts, setLoading } from "../../../store/actions/productActions"
+import { getChangeList,getAllCategoryList } from "../../../api/products/products"
 const ProductGroup = () => {
-    const { sidebar, progress, pagination, pages, select, active, label, img, containerPaginate, mainContainer, sort, sortTilte, headerCategory, searchIcon, inputInput, inputRoot } = useStyles()
+    const { sidebar, progress, pagination, pages,nav,activeNav,
+         select, active,mainGrid, cardContent, cardItem, box, boxContainer, label, img, containerPaginate, mainContainer, sort, sortTilte,
+        //   headerCategory, searchIcon, inputInput, inputRoot
+         } = useStyles()
     /*
     * useParams and get productCategory
     */
     const { productCategory } = useParams()
-
-
-    const products = useSelector((state) => state.allProducts.products);
-    const categoryData = products.filter((item) => item.category === productCategory)
-    const pageCount = Math.ceil(Number(categoryData.length) / 4)
+// console.log(productCategory);
+// const history = useHistory();
+// console.log(history);
+    // const products = useSelector((state) => state.allProducts.products);
+    // const categoryData = products.filter((item) => item.category === productCategory)
+    // const pageCount = Math.ceil(Number(categoryData.length) / 4)
     // console.log(pageCount);
     // console.log(categoryData);
-    const loading = useSelector((state) => state.allOrders.loading);
-    const dispatch = useDispatch();
+    // const loading = useSelector((state) => state.allOrders.loading);
+    // const dispatch = useDispatch();
     const [data, setData] = useState([])
     /*
      * useState and handlePagination
@@ -87,11 +94,16 @@ const ProductGroup = () => {
 
 
     // console.log(sortParam);
-
+    const [categoryData, setCategoryData] = useState([])
+    
     useEffect(() => {
-        dispatch(getProducts());
-    }, []);
+        // dispatch(getProducts());
+        getAllCategoryList(productCategory).then(res=>setCategoryData(res.data))
+    }, [productCategory]);
+    console.log(categoryData);
+    const pageCount = Math.ceil(Number(categoryData.length) / 4)
     useEffect(() => {
+        // setLoading
         if (search !== '') {
             console.log("search");
             const filteredData = categoryData.filter(item => item.title.toLowerCase().includes(search.toLowerCase()))
@@ -108,7 +120,7 @@ const ProductGroup = () => {
         // return () => {
 
         // }
-    }, [sortParam, page, order, search])
+    }, [sortParam, page, order, search,categoryData])
     console.log(data);
 
 
@@ -117,16 +129,18 @@ const ProductGroup = () => {
         <main>
             {/* {loading && <CircularProgress className={progress} size={100} thickness={4} disableShrink />} */}
             {/* <Container maxWidth='lg'> */}
-            <Grid container>
+            <Grid container className={mainGrid}>
                 {/* <div
          className={classes.toolbar}
           /> */}
                 <Grid className={sidebar} item xs={12} sm={3}>
                     <Divider />
                     <List>
+                        <NavLink exact to={"/listProducts/لبنیات"} className={nav} activeClassName={activeNav}>
                         <ListItem>
                             <Typography variant="h6">کالاهای گروه لبنیات</Typography>
                         </ListItem>
+                        </NavLink>
                         <ListItem>  <Typography> ماست </Typography>   </ListItem>
                         <ListItem> <Typography>پنیر  </Typography>    </ListItem>
                         <ListItem>  <Typography>شیر  </Typography> </ListItem>
@@ -140,9 +154,11 @@ const ProductGroup = () => {
                     </List>
                     <Divider />
                     <List>
+                    <NavLink exact to={"/listProducts/شوینده"} className={nav} activeClassName={activeNav}>
                         <ListItem>
                             <Typography variant="h6">کالاهای گروه شوینده</Typography>
                         </ListItem>
+                        </NavLink>
                         <ListItem>  <Typography> پودر لباسشویی </Typography>   </ListItem>
                         <ListItem> <Typography>قرص ماشین ظرفشویی  </Typography>    </ListItem>
                         <ListItem>  <Typography>مایع دستشویی  </Typography> </ListItem>
@@ -150,9 +166,13 @@ const ProductGroup = () => {
                     </List>
                     <Divider />
                     <List>
+                    <NavLink exact to={"/listProducts/نوشیدنی"}
+                     className={nav} 
+                     activeClassName={activeNav}>
                         <ListItem>
                             <Typography variant="h6">کالاهای گروه  نوشیدنی</Typography>
                         </ListItem>
+                        </NavLink>
                         <ListItem>  <Typography> چایی  </Typography>   </ListItem>
                         <ListItem> <Typography> قهوه   </Typography>    </ListItem>
                         <ListItem>  <Typography>آبمیوه   </Typography> </ListItem>
@@ -160,9 +180,13 @@ const ProductGroup = () => {
                     </List>
                     <Divider />
                     <List>
+                    <NavLink exact to={"/listProducts/خواروبار"}
+                     className={nav}
+                      activeClassName={activeNav}>
                         <ListItem>
                             <Typography variant="h6">کالاهای گروه خوار وبار</Typography>
                         </ListItem>
+                        </NavLink>
                         <ListItem>  <Typography> برنج  </Typography>   </ListItem>
                         <ListItem> <Typography> قند   </Typography>    </ListItem>
                         <ListItem>  <Typography>روغن   </Typography> </ListItem>
@@ -263,17 +287,19 @@ const ProductGroup = () => {
                                 <Grid item
                                     key={card}
                                     xs={12} sm={6} md={6}
+                                
+                                    
                                 //  lg={3}
                                 >
                                     <Card
-                                    //  className={cardItem}
+                                        className={cardItem}
                                     >
                                         <Box
-                                        //  className={boxContainer}
+                                            className={boxContainer}
 
                                         >
                                             <Box
-                                            //  className={box}
+                                                className={box}
                                             >
                                                 <img
                                                     className={img}
@@ -304,7 +330,7 @@ const ProductGroup = () => {
                                 </Grid>
                             ))}
                         </Grid>
-                        <div className={containerPaginate}>
+                        <Grid className={containerPaginate}>
                             <ReactPaginate
                                 previousLabel={"قبلی"}
                                 nextLabel={"بعدی"}
@@ -317,7 +343,7 @@ const ProductGroup = () => {
                                 containerClassName={pagination}
                                 // subContainerClassName={pages, pagination}
                                 activeClassName={active} />
-                        </div>
+                        </Grid>
                     </Container>
                 </Grid>
             </Grid>

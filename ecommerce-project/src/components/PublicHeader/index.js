@@ -8,7 +8,8 @@ import {
 } from '@material-ui/core'
 import React from 'react';
 import { NavLink } from "react-router-dom";
-import SearchIcon from "@material-ui/icons/Search";
+// import SearchIcon from "@material-ui/icons/Search";
+import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
 // import Badge from '@material-ui/core/Badge';
 // import IconButton from '@material-ui/core/IconButton';
 // import MailIcon from '@material-ui/icons/Mail';
@@ -64,6 +65,7 @@ const PublicHeader = () => {
                            <Typography> مدیریت</Typography>
                     </NavLink >
                         <NavLink to="/" className={link}>
+                            <LocalGroceryStoreIcon/>
                             <Typography>سبد خرید</Typography>
                     </NavLink>
                         {/* <NavLink to="/admin/login" exact >

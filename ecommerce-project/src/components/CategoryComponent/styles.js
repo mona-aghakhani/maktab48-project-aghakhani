@@ -102,6 +102,18 @@ color:"#636363",
 borderRadius:"5px",
 margin:"10px auto"
 },
+link:{
+    textDecoration:"none",
+    // '&>a:hover':{
+    //     color:" rgba(234,149,63,0.9)",
+    // }
+   
+},
+headerTitle:{
+    '&:hover':{
+        color:" rgba(234,149,63,0.9)",
+    }
+}
 
 
 }))

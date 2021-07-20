@@ -110,6 +110,16 @@ export const getCategoryList = async (category) => {
   // console.log(res.data);
   // setData(res.data)
 }
+export const getAllCategoryList = async (category) => {
+  let res = await axiosConfig({
+    method: "get",
+    url: `/products?category=${category}`,
+    headers: { "content-type": "application/json" },
+  }).catch((err) => console.log(err));
+  return res;
+  // console.log(res.data);
+  // setData(res.data)
+}
 // http://localhost:5000/products?category=%D8%B4%D9%88%DB%8C%D9%86%D8%AF%D9%87&_sort=id&_order=desc&_page=1&_limit=4
 /*
  * GET api for get sorting & pagination & limit4
