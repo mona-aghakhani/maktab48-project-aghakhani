@@ -39,7 +39,7 @@ const PublicHeader = () => {
                         spacing={1}
                         className={item2}
                     >
-                        <div className={search}>
+                        {/* <div className={search}>
                             <div className={searchIcon}>
                                 <SearchIcon />
                             </div>
@@ -51,7 +51,7 @@ const PublicHeader = () => {
                                 }}
                                 inputProps={{ 'aria-label': 'search' }}
                             />
-                        </div>
+                        </div> */}
                     </Grid>
                     {/* </Box> */}
                     {/* </Grid> */}

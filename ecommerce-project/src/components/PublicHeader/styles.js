@@ -4,7 +4,8 @@ export const useStyles=makeStyles((theme)=>({
     appbar:{
         minHeight:"30px",
         justifyContent:"space-between",
-        padding:"0 5px"
+        padding:"5px",
+        alignItems:"center"
     },
     grid:{
       alignItems:"center",

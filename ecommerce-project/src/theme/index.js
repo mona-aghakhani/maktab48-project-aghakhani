@@ -163,7 +163,7 @@ export const theme = createMuiTheme({
       input: {
         padding: "5px",
         fontSize: "12px",
-        margin: "10px 0",
+        margin: "5px 0",
       },
     },
     MuiFormControl:{

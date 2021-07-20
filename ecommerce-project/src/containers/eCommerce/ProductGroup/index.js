@@ -1,28 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+// import Drawer from '@material-ui/core/Drawer';
+// import Hidden from '@material-ui/core/Hidden';
+// import IconButton from '@material-ui/core/IconButton';
+// import InboxIcon from '@material-ui/icons/MoveToInbox';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
+// import ListItemIcon from '@material-ui/core/ListItemIcon';
+// import ListItemText from '@material-ui/core/ListItemText';
+// import MailIcon from '@material-ui/icons/Mail';
+// import MenuIcon from '@material-ui/icons/Menu';
+// import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Container, Grid, Card, Box, CardContent, MenuItem, Select } from '@material-ui/core';
+import {
+    Container, Grid, Card, Box, CardContent, MenuItem, Select, InputBase,
+    FormControl, InputLabel,
+    TextField, OutlinedInput
+} from '@material-ui/core';
+import SearchIcon from "@material-ui/icons/Search";
 // import Pagination from '@material-ui/lab/Pagination';
 // import PaginationItem from '@material-ui/lab/PaginationItem';
 import ReactPaginate from 'react-paginate'
 import { useStyles } from "./styles";
 import { useParams } from "react-router-dom";
 import { getProducts } from "../../../store/actions/productActions"
+import { getChangeList } from "../../../api/products/products"
 const ProductGroup = () => {
-    const { sidebar, progress, pagination, pages, active,mainContainer,sort,sortTilte } = useStyles()
+    const { sidebar, progress, pagination, pages, select, active, label, img, containerPaginate, mainContainer, sort, sortTilte, headerCategory, searchIcon, inputInput, inputRoot } = useStyles()
     /*
     * useParams and get productCategory
     */
@@ -31,19 +37,14 @@ const ProductGroup = () => {
 
     const products = useSelector((state) => state.allProducts.products);
     const categoryData = products.filter((item) => item.category === productCategory)
-    const pageCount=Math.ceil(Number(categoryData.length)/4)
-    console.log(pageCount);
+    const pageCount = Math.ceil(Number(categoryData.length) / 4)
+    // console.log(pageCount);
     // console.log(categoryData);
     const loading = useSelector((state) => state.allOrders.loading);
     const dispatch = useDispatch();
-
-
-    useEffect(() => {
-        dispatch(getProducts());
-    }, []);
-
+    const [data, setData] = useState([])
     /*
-    * useState and handlePagination
+     * useState and handlePagination
     */
     const [page, setPage] = useState(1)
     // const [pageCount, setPageCount] = useState(2)
@@ -56,14 +57,65 @@ const ProductGroup = () => {
     /*
     * useState and handleSorting
     */
-    const [sortParam, setSortParam] = useState('جدیدترین')
-// const [valueSort, setValueSort] = useState('')
-// const [order, setOrder] = useState('')
-    console.log(sortParam);
+    const [valueSort, setValueSort] = useState('')
+    const [sortParam, setSortParam] = useState('id')
+    const [order, setOrder] = useState('desc')
+    const handleSort = (e) => {
+        setValueSort(e.target.value)
+        if (e.target.value === 'جدید ترین') {
+            setSortParam('id')
+            setOrder('desc')
+        }
+        if (e.target.value === "قدیمی ترین") {
+            setSortParam('id')
+            setOrder('asc')
+        }
+        if (e.target.value === "گران ترین") {
+            setSortParam('price')
+            setOrder('desc')
+        }
+        if (e.target.value === "ارزان ترین") {
+            setSortParam('price')
+            setOrder('asc')
+        }
+
+    }
+    /*
+    * useState and handleSearching
+    */
+    const [search, setSearch] = useState("")
+
+
+    // console.log(sortParam);
+
+    useEffect(() => {
+        dispatch(getProducts());
+    }, []);
+    useEffect(() => {
+        if (search !== '') {
+            console.log("search");
+            const filteredData = categoryData.filter(item => item.title.toLowerCase().includes(search.toLowerCase()))
+            console.log(filteredData);
+            setData(filteredData)
+
+        } else {
+            getChangeList(productCategory, sortParam, order, page).then(res => {
+                console.log(res);
+                setData(res.data)
+            })
+        }
+        // console.log(data);
+        // return () => {
+
+        // }
+    }, [sortParam, page, order, search])
+    console.log(data);
+
+
 
     return (
         <main>
-            {loading && <CircularProgress className={progress} size={100} thickness={4} disableShrink />}
+            {/* {loading && <CircularProgress className={progress} size={100} thickness={4} disableShrink />} */}
             {/* <Container maxWidth='lg'> */}
             <Grid container>
                 {/* <div
@@ -120,96 +172,152 @@ const ProductGroup = () => {
                 <Grid item xs={12} sm={9}>
                     <Container maxWidth="xl" className={mainContainer}>
                         {/* <Grid container spacing={2} > */}
-                            <Grid  container spacing={4} alignItems="center" justify="space-between">
-                                <Grid item xs={12} sm={3} md={3} className={sort} >
+                        <Grid container spacing={4} alignItems="center" justify="space-between"
+                        //  className={headerCategory}
+                        >
+
+                            <Grid item xs={12} sm={3} md={3} className={sort} >
+
+
+
                                 <Typography className={sortTilte}>ترتیب:</Typography>
-                                <Select
-                                    //   labelId="demo-simple-select-outlined-label"
-                                    //   id="demo-simple-select-outlined"
-                                    value={sortParam}
-
-                                    onChange={(e) => setSortParam(e.target.value)}
-                                //   label="دسته بندی"
+                                <FormControl variant="outlined"
+                                // className={classes.formControl}
                                 >
-                                    <MenuItem value="">
-                                        <em>None</em>
-                                    </MenuItem>
-                                    <MenuItem value={"جدیدترین"}>جدیدترین</MenuItem>
-                                    <MenuItem value={"قدیمی ترین"}>قدیمی ترین</MenuItem>
-                                    {/* <MenuItem value={"گران ترین"}>گران ترین</MenuItem> */}
-                                    {/* <MenuItem value={"ارزان ترین"}>ارزان ترین</MenuItem> */}
-                                </Select>
-                                </Grid>
-                                <Grid item xs={12} sm={6} md={6}>
-                                    {/* <hr/> */}
-                                </Grid>
-                                <Grid item xs={12} sm={3} md={3}>
-                                    <input/>
-                                </Grid>
-
+                                    {/* <InputLabel 
+                                className={label}
+                                //   id="demo-simple-select-outlined-label"
+                                  shrink
+                                     htmlFor="component-outlined"
+                                     >
+                                         ترتیب
+                                         </InputLabel> */}
+                                    <Select
+                                        //  labelId="demo-simple-select-outlined-label"
+                                        id="component-outlined"
+                                        value={valueSort}
+                                        // fullWidth
+                                        onChange={(e) => handleSort(e)}
+                                        // onChange={(e) => setSortParam(e.target.value)}
+                                        label="جدیدترین"
+                                        className={select}
+                                    >
+                                        <MenuItem value=''>
+                                            <em>None</em>
+                                        </MenuItem>
+                                        <MenuItem value={"جدیدترین"}>جدیدترین</MenuItem>
+                                        <MenuItem value={"قدیمی ترین"}>قدیمی ترین</MenuItem>
+                                        <MenuItem value={"گران ترین"}>گران ترین</MenuItem>
+                                        <MenuItem value={"ارزان ترین"}>ارزان ترین</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </Grid>
+                            <Grid item xs={12} sm={6} md={6}>
+                                {/* <hr/> */}
+                                <Divider />
+                            </Grid>
+                            <Grid item xs={12} sm={3} md={3}>
+                                {/* <div className={search}>
+                            <div className={searchIcon}>
+                                <SearchIcon />
+                            </div>
+                            <InputBase
+                                placeholder="جستجو..."
+                                classes={{
+                                    root: inputRoot,
+                                    input: inputInput,
+                                }}
+                                inputProps={{ 'aria-label': 'search' }}
+                            />
+                        </div> */}
+                                {/* <SearchIcon /> */}
+                                {/* <TextField
+                                    variant="outlined"
+                                    placeholder="جستجو... "
+                                    color="primary"
+                                    fullWidth
+                                    name="جستجو"
+                                    className={search}
+                                    // value={title}
+                                    onChange={(e) => setSearch(e.target.value)}
+                                /> */}
+                                <OutlinedInput
+                                    variant="outlined"
+                                    placeholder="جستجو... "
+                                    color="primary"
+                                    fullWidth
+                                    name="جستجو"
+                                    className={search}
+                                    // value={title}
+                                    onChange={(e) => setSearch(e.target.value)}
+                                />
+                            </Grid>
+
+                        </Grid>
 
                         {/* </Grid> */}
                         {/* <Typography>search pagination sorting</Typography> */}
 
                         <Grid container spacing={8}>
-                            {/* {categorydata?.map((card) => ( */}
-                            <Grid item
-                                // key={card}
-                                xs={12} sm={4} md={4}
-                            //  lg={3}
-                            >
-                                <Card
-                                //  className={cardItem}
+                            {data?.map((card) => (
+                                <Grid item
+                                    key={card}
+                                    xs={12} sm={6} md={6}
+                                //  lg={3}
                                 >
-                                    <Box
-                                    //  className={boxContainer}
-
+                                    <Card
+                                    //  className={cardItem}
                                     >
                                         <Box
-                                        //  className={box}
-                                        >
-                                            <img
-                                                //  className={img}
+                                        //  className={boxContainer}
 
-                                                // src={card.image}
-                                                alt="کالا" />
+                                        >
+                                            <Box
+                                            //  className={box}
+                                            >
+                                                <img
+                                                    className={img}
+
+                                                    src={card.image}
+                                                    alt="کالا" />
+                                            </Box>
                                         </Box>
-                                    </Box>
-                                    {/* <CardMedia
+                                        {/* <CardMedia
             className={classes.cardMedia}
             image="https://source.unsplash.com/random"
             title="Image title"
           /> */}
-                                    <CardContent
-                                    //   className={classes.cardContent}
-                                    >
-                                        <Typography gutterBottom variant="h5" component="h5">
+                                        <CardContent
+                                        //   className={classes.cardContent}
+                                        >
+                                            <Typography gutterBottom variant="h5" component="h5">
 
-                                            {/* {card.title} */}
+                                                {card.title}
+                                            </Typography>
+                                            <Typography color="primary" variant="h5">
+                                                {(Number(card.price)).toLocaleString()}   تومان
+
                                         </Typography>
-                                        <Typography color="primary" variant="h5">
-                                            {/* {(Number(card.price)).toLocaleString()}   تومان */}
+                                        </CardContent>
 
-                                        </Typography>
-                                    </CardContent>
-
-                                </Card>
-                            </Grid>
-                            {/* ))} */}
+                                    </Card>
+                                </Grid>
+                            ))}
                         </Grid>
-                        <ReactPaginate
-                            previousLabel={"قبلی"}
-                            nextLabel={"بعدی"}
-                            breakLabel={"..."}
-                            breakClassName={"break-me"}
-                            pageCount={pageCount}
-                            marginPagesDisplayed={2}
-                            pageRangeDisplayed={5}
-                            onPageChange={handlePageClick}
-                            containerClassName={pagination}
-                            subContainerClassName={pages, pagination}
-                            activeClassName={active} />
+                        <div className={containerPaginate}>
+                            <ReactPaginate
+                                previousLabel={"قبلی"}
+                                nextLabel={"بعدی"}
+                                // breakLabel={"..."}
+                                // breakClassName={"break-me"}
+                                pageCount={pageCount}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
+                                onPageChange={handlePageClick}
+                                containerClassName={pagination}
+                                // subContainerClassName={pages, pagination}
+                                activeClassName={active} />
+                        </div>
                     </Container>
                 </Grid>
             </Grid>
