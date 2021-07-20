@@ -14,7 +14,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Container, Grid, Card, Box, CardContent } from '@material-ui/core';
+import { Container, Grid, Card, Box, CardContent, MenuItem, Select } from '@material-ui/core';
 // import Pagination from '@material-ui/lab/Pagination';
 // import PaginationItem from '@material-ui/lab/PaginationItem';
 import ReactPaginate from 'react-paginate'
@@ -22,7 +22,7 @@ import { useStyles } from "./styles";
 import { useParams } from "react-router-dom";
 import { getProducts } from "../../../store/actions/productActions"
 const ProductGroup = () => {
-    const { sidebar, progress,pagination,pages,active } = useStyles()
+    const { sidebar, progress, pagination, pages, active,mainContainer,sort,sortTilte } = useStyles()
     /*
     * useParams and get productCategory
     */
@@ -31,6 +31,8 @@ const ProductGroup = () => {
 
     const products = useSelector((state) => state.allProducts.products);
     const categoryData = products.filter((item) => item.category === productCategory)
+    const pageCount=Math.ceil(Number(categoryData.length)/4)
+    console.log(pageCount);
     // console.log(categoryData);
     const loading = useSelector((state) => state.allOrders.loading);
     const dispatch = useDispatch();
@@ -44,13 +46,20 @@ const ProductGroup = () => {
     * useState and handlePagination
     */
     const [page, setPage] = useState(1)
+    // const [pageCount, setPageCount] = useState(2)
+
     const handlePageClick = (e) => {
         const selectedPage = e.selected;
         // console.log(selectedPage);
-        setPage(selectedPage+1)
+        setPage(selectedPage + 1)
     }
-
-
+    /*
+    * useState and handleSorting
+    */
+    const [sortParam, setSortParam] = useState('جدیدترین')
+// const [valueSort, setValueSort] = useState('')
+// const [order, setOrder] = useState('')
+    console.log(sortParam);
 
     return (
         <main>
@@ -109,8 +118,39 @@ const ProductGroup = () => {
                     </List>
                 </Grid>
                 <Grid item xs={12} sm={9}>
-                    <Container maxWidth="xl">
-                        <Typography>search pagination sorting</Typography>
+                    <Container maxWidth="xl" className={mainContainer}>
+                        {/* <Grid container spacing={2} > */}
+                            <Grid  container spacing={4} alignItems="center" justify="space-between">
+                                <Grid item xs={12} sm={3} md={3} className={sort} >
+                                <Typography className={sortTilte}>ترتیب:</Typography>
+                                <Select
+                                    //   labelId="demo-simple-select-outlined-label"
+                                    //   id="demo-simple-select-outlined"
+                                    value={sortParam}
+
+                                    onChange={(e) => setSortParam(e.target.value)}
+                                //   label="دسته بندی"
+                                >
+                                    <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem>
+                                    <MenuItem value={"جدیدترین"}>جدیدترین</MenuItem>
+                                    <MenuItem value={"قدیمی ترین"}>قدیمی ترین</MenuItem>
+                                    {/* <MenuItem value={"گران ترین"}>گران ترین</MenuItem> */}
+                                    {/* <MenuItem value={"ارزان ترین"}>ارزان ترین</MenuItem> */}
+                                </Select>
+                                </Grid>
+                                <Grid item xs={12} sm={6} md={6}>
+                                    {/* <hr/> */}
+                                </Grid>
+                                <Grid item xs={12} sm={3} md={3}>
+                                    <input/>
+                                </Grid>
+
+                            </Grid>
+
+                        {/* </Grid> */}
+                        {/* <Typography>search pagination sorting</Typography> */}
 
                         <Grid container spacing={8}>
                             {/* {categorydata?.map((card) => ( */}
@@ -159,11 +199,11 @@ const ProductGroup = () => {
                             {/* ))} */}
                         </Grid>
                         <ReactPaginate
-                            previousLabel={"prev"}
-                            nextLabel={"next"}
+                            previousLabel={"قبلی"}
+                            nextLabel={"بعدی"}
                             breakLabel={"..."}
                             breakClassName={"break-me"}
-                            // pageCount={this.state.pageCount}
+                            pageCount={pageCount}
                             marginPagesDisplayed={2}
                             pageRangeDisplayed={5}
                             onPageChange={handlePageClick}

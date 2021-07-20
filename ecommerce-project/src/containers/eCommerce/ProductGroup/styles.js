@@ -34,6 +34,16 @@ export const useStyles=makeStyles((theme)=>({
             borderColor:"green",
             color:"#fff" 
           }
+      },
+      mainContainer:{
+          margin:"20% 10px"
+      },
+      sort:{
+          display:"flex",
+          alignItems:"center"
+      },
+      sortTilte:{
+          marginRight:"5px"
       }
 
 }))
