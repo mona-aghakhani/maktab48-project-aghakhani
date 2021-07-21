@@ -18,20 +18,23 @@ import Typography from '@material-ui/core/Typography';
 import {
     Container, Grid, Card, Box, CardContent, MenuItem, Select,
     //  InputBase,
+    Tooltip,
     FormControl,
     //  InputLabel,   TextField,
-      OutlinedInput
+      OutlinedInput,
+      
 } from '@material-ui/core';
-// import SearchIcon from "@material-ui/icons/Search";
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from "@material-ui/icons/Search";
 // import Pagination from '@material-ui/lab/Pagination';
 // import PaginationItem from '@material-ui/lab/PaginationItem';
 import ReactPaginate from 'react-paginate'
 import { useStyles } from "./styles";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams,Link } from "react-router-dom";
 // import { getProducts, setLoading } from "../../../store/actions/productActions"
 import { getChangeList,getAllCategoryList } from "../../../api/products/products"
 const ProductGroup = () => {
-    const { sidebar, progress, pagination, pages,nav,activeNav,
+    const { sidebar, progress, pagination, pages,nav,activeNav,link,
          select, active,mainGrid, cardContent, cardItem, box, boxContainer, label, img, containerPaginate, mainContainer, sort, sortTilte,
         //   headerCategory, searchIcon, inputInput, inputRoot
          } = useStyles()
@@ -284,6 +287,7 @@ const ProductGroup = () => {
 
                         <Grid container spacing={8}>
                             {data?.map((card) => (
+                                
                                 <Grid item
                                     key={card}
                                     xs={12} sm={6} md={6}
@@ -291,6 +295,11 @@ const ProductGroup = () => {
                                     
                                 //  lg={3}
                                 >
+                                    <Link exact to={`/product/${card.id}`} className={link}>
+                                    {/* <Tooltip title="جستجو"> */}
+                                    {/* <IconButton aria-label="جستجو">
+          <SearchIcon />
+        </IconButton> */}
                                     <Card
                                         className={cardItem}
                                     >
@@ -327,6 +336,8 @@ const ProductGroup = () => {
                                         </CardContent>
 
                                     </Card>
+                                    {/* </Tooltip> */}
+                                    </Link>
                                 </Grid>
                             ))}
                         </Grid>

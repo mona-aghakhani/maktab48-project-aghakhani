@@ -18,7 +18,7 @@ const StyledBadge = withStyles((theme) => ({
 
 
 const PublicHeader = () => {
-    const { appbar, link, grid, item1, item2, item3 } = useStyles();
+    const { appbar, link, grid, item1, item2, item3,svg } = useStyles();
     return (
         <div>
             <AppBar className={appbar} position="static">
@@ -41,7 +41,7 @@ const PublicHeader = () => {
                     </Grid>
                     <Grid item md={2} sm={4} xs={12} className={item3} container>
                         <NavLink to="/login" exact className={link}  >
-                            <AccountCircleIcon />
+                            <AccountCircleIcon className={svg} />
                             <Typography> مدیریت</Typography>
                         </NavLink >
                         <NavLink to="/" className={link}>

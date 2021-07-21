@@ -35,4 +35,8 @@ export const useStyles = makeStyles((theme) => ({
       borderBottom: "1px solid rgb(214,230,215)",
     }
   },
+  svg:{
+    margin:"0 5px"
+  },
+  
 }))

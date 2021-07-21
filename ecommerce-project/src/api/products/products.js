@@ -144,7 +144,7 @@ export const getChangeList = async (category,sort,order,page) => {
 export const getAProductById = async (id) => {
   let res = await axiosConfig({
     method: "get",
-    url: ` /products/${id}`,
+    url: `/products/${id}`,
     headers: { "content-type": "application/json" },
   }).catch((err) => console.log(err));
   return res;
