@@ -223,7 +223,7 @@ width:"100%"
       root: {
         // fontFamily: "Shabnam !important",
         fontSize: "20px",
-        color: "gray",
+        // color: "gray",
       },
     },
     MuiTableSortLabel:{
@@ -247,6 +247,8 @@ width:"100%"
       display:"block"
     }
   },
+  
+  
 //  MuiDataGrid:{
 //   columnHeaderTitle:{
 //     flexDirection:"row"
