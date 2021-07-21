@@ -44,7 +44,7 @@ const PublicHeader = () => {
                             <AccountCircleIcon className={svg} />
                             <Typography> مدیریت</Typography>
                         </NavLink >
-                        <NavLink to="/" className={link}>
+                        <NavLink to="/Cart" className={link}>
                             <IconButton aria-label="cart" color="inherit">
                                 <StyledBadge badgeContent={0}
                                 //    badgeContent={numItems}

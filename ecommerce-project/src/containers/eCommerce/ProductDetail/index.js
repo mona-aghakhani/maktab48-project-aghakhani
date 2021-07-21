@@ -9,13 +9,14 @@ import {useStyles} from "./styles"
 const ProductDetail = () => {
     const {img,box,container,boxDetail,btn,paper,divider,input,gridImg}=useStyles()
     const { productId } = useParams();
-    console.log(productId);
     const dispatch = useDispatch();
     const selectedProduct = useSelector( (state) => state.allProducts.selectedProduct );
-    console.log(selectedProduct);
+    console.log(selectedProduct.amount);
     useEffect(() => {
         dispatch(getAProduct(productId));
       }, []);
+const [num, setNum] = useState(0)
+// console.log(num);
     return (
         <Container className={container} maxWidth="lg">
           <Grid container spacing={4} alignItems="center" justify="center">
@@ -40,16 +41,23 @@ const ProductDetail = () => {
     </Typography>
     {/* </Card> */}
     <Grid container spacing={3} alignItems="center">
-        <Grid>
-    <TextField  item
+        <Grid item>
+    <TextField  
     type="number"
+    onChange={e=>setNum(e.target.value)}
     InputProps={{
         inputProps: { 
-            max: 100, min: 0 
+            max: selectedProduct.amount, min: 0 
         }
     }}
     variant="outlined"
     className={input}
+    onkeydown={(e) => {
+        e.preventDefault();
+      }}
+      onKeyPress={(e) => {
+        e.preventDefault();
+      }}
     // size="small"
     // label="what ever"
 />
@@ -58,12 +66,16 @@ const ProductDetail = () => {
 <Button 
 className={btn}
 //  onClick={handleOpenAddDialog}
+disabled={selectedProduct.amount === "0"}
 >
     
               افزودن به سبد خرید
               <AddCircleIcon/>
             </Button>
+            
+           
             </Grid>
+            {selectedProduct.amount === "0" ? <Typography style={{color:"red"}}>اتمام موجودی</Typography> : null}
             </Grid>
             <Divider  className={divider} />
             <Typography>توضیحات :

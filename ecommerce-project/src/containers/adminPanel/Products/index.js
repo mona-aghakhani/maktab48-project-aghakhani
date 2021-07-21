@@ -173,10 +173,8 @@ const Products = () => {
   const handleDialogAddClose = () => {
     setIsOpenAdd(false);
   };
-  const handleOpenUpdateDialog = (obj) => {
-    // console.log("edit");
-    setEditedObj(obj)
-    // console.log(editedObj);
+  const handleOpenUpdateDialog = (obj) => { 
+    setEditedObj(obj)  
     setIsOpenUpdate(true);
   };
   

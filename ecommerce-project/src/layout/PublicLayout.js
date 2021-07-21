@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import ProductListing from "../containers/eCommerce/ProductListing";
 import ProductGroup from "../containers/eCommerce/ProductGroup";
 import ProductDetail from "../containers/eCommerce/ProductDetail";
-import ShoppingCart from "../containers/eCommerce/ShoppingCart";
+import Cart from "../containers/eCommerce/Cart";
 import Payment from "../containers/eCommerce/Payment";
 import SuccessPayment from "../containers/eCommerce/SuccessPayment";
 import FailedPayment from "../containers/eCommerce/FailedPayment";
@@ -26,7 +26,7 @@ export const PublicRouters = (props) => {
           component={ProductGroup}
         />
         <Route path="/product/:productId" exact component={ProductDetail} />
-        <Route path="/shoppingCart" exact component={ShoppingCart} />
+        <Route path="/Cart" exact component={Cart} />
         <Route path="/payment" exact component={Payment} />
         <Route path="/success" exact component={SuccessPayment} />
         <Route path="/failed" exact component={FailedPayment} />
