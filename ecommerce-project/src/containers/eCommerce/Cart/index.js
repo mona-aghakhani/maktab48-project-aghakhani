@@ -4,7 +4,7 @@ import { Typography, Container, Paper, Grid, Button, IconButton, TableContainer,
 import DeleteIcon from '@material-ui/icons/Delete';
 // import { makeStyles } from '@material-ui/core/styles';
 import { CustomDialog } from "../../../components/CustomDialog";
-import CartForm from "../../../components/CartForm"
+// import CartForm from "../../../components/CartForm"
 import { useStyles } from "./styles"
 import { removeCart } from "../../../store/actions/cartActions"
 import {useHistory} from "react-router-dom"
