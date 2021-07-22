@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import { useFilePicker } from "use-file-picker";
 // import { useDispatch } from "react-redux";
 import {
-    Button, TextField, Grid, Container,
+    Button, TextField, Grid, Container, Paper, Card,Typography
     // FormControl,// InputLabel, // Select,// MenuItem,
 } from "@material-ui/core";
 import { useStyles } from "./styles";
@@ -18,7 +18,7 @@ import JalaliUtils from "@date-io/jalaali";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 jMoment.loadPersian({ dialect: "persian-modern", usePersianDigits: true });
-export default function CartForm({ handleClose }) {
+export default function FinalizeCart({  }) {
     const classes = useStyles();
     /*
       * usedispatch action for add product
@@ -68,7 +68,14 @@ export default function CartForm({ handleClose }) {
         <>
             <MuiPickersUtilsProvider utils={JalaliUtils} locale="fa">
                 <ToastContainer />
-                <Container component="main" maxWidth="sm">
+                <Container component="main" maxWidth="md">
+                {/* <Typography component="h1" variant="h5">
+             نهایی کردن خرید
+          </Typography> */}
+                <Card className={classes.paper}>
+                <Typography component="h1" variant="h5" className={classes.title}>
+             نهایی کردن خرید
+          </Typography>
                     <form
                         onSubmit={handleAdd}
                         className={classes.form}
@@ -195,6 +202,7 @@ export default function CartForm({ handleClose }) {
                             </Grid>
                         </Grid>
                     </form>
+                    </Card>
                 </Container>
             </MuiPickersUtilsProvider>
         </>
