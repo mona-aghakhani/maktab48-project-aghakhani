@@ -17,7 +17,7 @@ export const setOrders = (orders) => {
 }
 export function changeStatus(updatedObj){
 return{
-  type:ActionTypes.PUT_STATUS,
+  type:ActionTypes.SET_STATUS_ORDER,
   payload:updatedObj,
 }
 }
