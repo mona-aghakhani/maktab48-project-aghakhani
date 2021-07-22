@@ -1,8 +1,8 @@
 import { ActionTypes } from "../constants/action-type";
-const initialState=[]
-    
+const initialState = []
 
-export const cartReducer=(state=initialState,{type,payload})=>{
+
+export const cartReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case ActionTypes.ADD_TO_CART:
             // return [...state,payload]
@@ -10,16 +10,18 @@ export const cartReducer=(state=initialState,{type,payload})=>{
             console.log(tempItem);
             console.log(state);
             if (tempItem) {
-                let item=state.splice(state.findIndex(item=>item.title === payload.title),1,payload)
+                let item = state.splice(state.findIndex(item => item.title === payload.title), 1, payload)
                 console.log(item);
                 return state
                 // return state.splice(state.findIndex(item=>item.title === payload.title),1,payload)     
-            }else{
-                return [...state,payload]
+            } else {
+                return [...state, payload]
             }
+        case ActionTypes.REMOVE_CART_ITEM:
+            return state.filter((item, index) => index !== payload);
         //    case ActionTypes.TOGGLE_CART_ITEM:
         //     return state.splice(state.findIndex(item=>item.title === payload.title),1,payload)
-    
+
         default:
             return state;
     }
@@ -43,8 +45,8 @@ export const cartReducer=(state=initialState,{type,payload})=>{
 //                     cart:[...state.cart,payload]
 //                 }
 //             }
-            
-    
+
+
 //         default:
 //             break;
 //     }

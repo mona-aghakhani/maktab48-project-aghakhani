@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 import Divider from '@material-ui/core/Divider';
 // import { useHistory } from "react-router-dom"
 // import Drawer from '@material-ui/core/Drawer';
@@ -18,14 +18,14 @@ import Typography from '@material-ui/core/Typography';
 import {
     Container, Grid, Card, Box, CardContent, MenuItem, Select,
     //  InputBase,
-    Tooltip,
+    // Tooltip,
     FormControl,
     //  InputLabel,   TextField,
       OutlinedInput,
       
 } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from "@material-ui/icons/Search";
+// import IconButton from '@material-ui/core/IconButton';
+// import SearchIcon from "@material-ui/icons/Search";
 // import Pagination from '@material-ui/lab/Pagination';
 // import PaginationItem from '@material-ui/lab/PaginationItem';
 import ReactPaginate from 'react-paginate'
@@ -34,8 +34,10 @@ import { NavLink, useParams,Link } from "react-router-dom";
 // import { getProducts, setLoading } from "../../../store/actions/productActions"
 import { getChangeList,getAllCategoryList } from "../../../api/products/products"
 const ProductGroup = () => {
-    const { sidebar, progress, pagination, pages,nav,activeNav,link,
-         select, active,mainGrid, cardContent, cardItem, box, boxContainer, label, img, containerPaginate, mainContainer, sort, sortTilte,
+    const { sidebar,
+        //  progress, pages, cardContent, label
+    pagination,nav,activeNav,link,
+         select, active,mainGrid, cardItem, box, boxContainer, img, containerPaginate, mainContainer, sort, sortTilte,
         //   headerCategory, searchIcon, inputInput, inputRoot
          } = useStyles()
     /*

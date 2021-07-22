@@ -6,6 +6,13 @@ export function addToCart(cartItem){
         payload:cartItem
     }
 }
+export function removeCart(id){
+    return{
+        type:ActionTypes.REMOVE_CART_ITEM,
+        payload:id
+    }
+
+}
 // export function toggleCart(cartItem){
 //     return {
 //         type:ActionTypes.TOGGLE_CART_ITEM,

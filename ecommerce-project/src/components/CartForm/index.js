@@ -7,14 +7,16 @@ import {
     TextField,
     Grid,
     Container,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
+    // FormControl,
+    // InputLabel,
+    // Select,
+    // MenuItem,
 } from "@material-ui/core";
 import { useStyles } from "./styles";
-import { addNewProduct } from "../../store/actions/productActions";
-import { ToastContainer, toast } from "react-toastify";
+// import { addNewProduct } from "../../store/actions/productActions";
+import { ToastContainer,
+    //  toast 
+    } from "react-toastify";
 
 
 export default function CartForm({ handleClose }) {

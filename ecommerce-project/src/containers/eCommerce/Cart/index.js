@@ -1,10 +1,12 @@
 import React,{useState} from 'react';
-import { Typography,Container,Paper,Grid,Button,TableContainer ,Table,TableHead,TableRow,TableCell,TableBody} from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux';
+import { Typography,Container,Paper,Grid,Button,IconButton,TableContainer,Tooltip ,Table,TableHead,TableRow,TableCell,TableBody} from '@material-ui/core'
+import DeleteIcon from '@material-ui/icons/Delete';
 // import { makeStyles } from '@material-ui/core/styles';
 import { CustomDialog } from "../../../components/CustomDialog";
 import CartForm from "../../../components/CartForm"
 import {useStyles} from "./styles"
+import {removeCart} from "../../../store/actions/cartActions"
 // const useStyles = makeStyles({
 //     table: {
 //       minWidth: 650,
@@ -31,7 +33,7 @@ const Cart = () => {
 
 
 const cartItems=useSelector((state)=>state.cartItems)
-console.log(cartItems);
+// console.log(cartItems);
 const dispatch=useDispatch()
     // const cartItems=[{
     //     "id": 1,
@@ -69,10 +71,10 @@ const dispatch=useDispatch()
   // const [isOpenUpdate, setIsOpenUpdate] = useState(false);
 
 
-  const [orderObj, setOrderObj] = useState(null);
+  // const [orderObj, setOrderObj] = useState(null);
 
-  const handleOpen = (obj) => {
-    setOrderObj(obj)
+  const handleOpen = () => {
+    // setOrderObj(obj)
     setIsOpen(true);
 
     // console.log(isOpenAdd);
@@ -96,14 +98,21 @@ const dispatch=useDispatch()
           </TableRow>
         </TableHead>
         <TableBody>
-          {cartItems.map((row) => (
-            <TableRow key={row.id}>
+          {cartItems.map((row,index) => (
+            <TableRow key={row.index}>
               <TableCell align="left" component="th" scope="row">
                 {row.title}
               </TableCell>
               <TableCell align="left">{row.price}</TableCell>
               <TableCell align="left">{row.number}</TableCell>
               <TableCell align="left">
+              <Tooltip title="حذف کالا" placement="top">
+ <IconButton aria-label="delete"
+ onClick={()=>{dispatch(removeCart(index))}}
+ >
+          <DeleteIcon />
+        </IconButton>
+ </Tooltip>
               {/* <Box onClick={() => { dispatch(deleteProductById(row.id)); }} className={box} > حذف</Box> */}
               </TableCell>
               
