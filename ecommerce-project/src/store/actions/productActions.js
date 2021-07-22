@@ -93,6 +93,6 @@ export const updateProductById = (id, updatedProduct) => async (dispatch, getSta
 
 export const getAProduct = (id) => async (dispatch) => {
   let res = await getAProductById(id);
-console.log("selected",res.data);
+// console.log("selected",res.data);
   dispatch(selectedProduct(res.data));
 };

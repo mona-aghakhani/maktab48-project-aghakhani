@@ -1,6 +1,7 @@
+import React,{useState} from 'react';
 import { Typography,Container,Paper,Grid,Button,TableContainer ,Table,TableHead,TableRow,TableCell,TableBody} from '@material-ui/core'
-import React,{useState} from 'react'
-import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch, useSelector } from 'react-redux';
+// import { makeStyles } from '@material-ui/core/styles';
 import { CustomDialog } from "../../../components/CustomDialog";
 import CartForm from "../../../components/CartForm"
 import {useStyles} from "./styles"
@@ -27,33 +28,38 @@ import {useStyles} from "./styles"
 //       },
 //   });
 const Cart = () => {
-    const cartItems=[{
-        "id": 1,
-        "fullName": "اکبر زمانی",
-        "address": "مشهد،بلوار فرامرز عباسی",
-        "phone": "09388888888",
-        "orderTime": "1400/03/04",
-        "deliveryTime": "1400/03/14",
-        "products": [
-          {
-            "title": "قرص ظرفشویی  ",
-            "price": "120000",
-            "number": "1"
-          },
-          {
-            "title": "لپه  ",
-            "price": "40000",
-            "number": "2"
-          },
-          {
-            "title": "  دلستر ",
-            "price": "16000",
-            "number": "1"
-          }
-        ],
-        "total": "216000",
-        "status": "تحویل شده"
-      },]
+
+
+const cartItems=useSelector((state)=>state.cartItems)
+console.log(cartItems);
+const dispatch=useDispatch()
+    // const cartItems=[{
+    //     "id": 1,
+    //     "fullName": "اکبر زمانی",
+    //     "address": "مشهد،بلوار فرامرز عباسی",
+    //     "phone": "09388888888",
+    //     "orderTime": "1400/03/04",
+    //     "deliveryTime": "1400/03/14",
+    //     "products": [
+    //       {
+    //         "title": "قرص ظرفشویی  ",
+    //         "price": "120000",
+    //         "number": "1"
+    //       },
+    //       {
+    //         "title": "لپه  ",
+    //         "price": "40000",
+    //         "number": "2"
+    //       },
+    //       {
+    //         "title": "  دلستر ",
+    //         "price": "16000",
+    //         "number": "1"
+    //       }
+    //     ],
+    //     "total": "216000",
+    //     "status": "تحویل شده"
+    //   },]
     const {paper,table,grid,btn,dialogTitle} = useStyles();
 
     /*
@@ -91,7 +97,7 @@ const Cart = () => {
         </TableHead>
         <TableBody>
           {cartItems.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row.id}>
               <TableCell align="left" component="th" scope="row">
                 {row.title}
               </TableCell>

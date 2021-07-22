@@ -14,8 +14,12 @@ import {CssBaseline } from "@material-ui/core";
 import rtl from "jss-rtl";
 import {theme} from "./theme/index"
 import { ToastContainer } from "react-toastify";
+import { saveState } from './localStorage';
+store.subscribe(()=>{
+  let state=store.getState().cartItems;
 
-
+  saveState({cartItems:state})
+})
 // Configure JSS
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 

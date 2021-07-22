@@ -6,17 +6,28 @@ import { Box, Card, Container, Grid, Paper,Button, Typography,Divider,TextField 
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 // import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import {useStyles} from "./styles"
+import {addToCart,actionCreatorAdd} from "../../../store/actions/cartActions"
+
+
 const ProductDetail = () => {
     const {img,box,container,boxDetail,btn,paper,divider,input,gridImg}=useStyles()
     const { productId } = useParams();
     const dispatch = useDispatch();
     const selectedProduct = useSelector( (state) => state.allProducts.selectedProduct );
-    console.log(selectedProduct.amount);
+    // console.log(selectedProduct.amount);
     useEffect(() => {
         dispatch(getAProduct(productId));
       }, []);
 const [num, setNum] = useState(0)
+// const [cart, setCart] = useState(null)
 // console.log(num);
+
+const handleAdd =()=>{
+  let cartItem={title:selectedProduct.title,price:Number(selectedProduct.price),number:Number(num)}
+console.log(cartItem);
+dispatch(addToCart(cartItem))
+//  dispatch(actionCreatorAdd(cartItem))
+}
     return (
         <Container className={container} maxWidth="lg">
           <Grid container spacing={4} alignItems="center" justify="center">
@@ -65,7 +76,7 @@ const [num, setNum] = useState(0)
 <Grid item>
 <Button 
 className={btn}
-//  onClick={handleOpenAddDialog}
+ onClick={handleAdd}
 disabled={selectedProduct.amount === "0"}
 >
     

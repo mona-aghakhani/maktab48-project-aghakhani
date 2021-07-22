@@ -41,8 +41,8 @@ const ProductGroup = () => {
     /*
     * useParams and get productCategory
     */
-    const { productCategory } = useParams()
-// console.log(productCategory);
+    const {productCategory} = useParams()
+console.log(productCategory);
 // const history = useHistory();
 // console.log(history);
     // const products = useSelector((state) => state.allProducts.products);
@@ -187,7 +187,7 @@ const ProductGroup = () => {
                      className={nav}
                       activeClassName={activeNav}>
                         <ListItem>
-                            <Typography variant="h6">کالاهای گروه خوار وبار</Typography>
+                            <Typography variant="h6">کالاهای گروه خواروبار</Typography>
                         </ListItem>
                         </NavLink>
                         <ListItem>  <Typography> برنج  </Typography>   </ListItem>
