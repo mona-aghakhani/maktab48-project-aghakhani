@@ -33,6 +33,11 @@ const Cart = () => {
 
 
 const cartItems=useSelector((state)=>state.cartItems)
+const productSum=cartItems.map(item=>item.price*item.number)
+// console.log(productSum);
+const total=productSum.reduce((sum, item) => (sum += item))
+// console.log(total);
+
 // console.log(cartItems);
 const dispatch=useDispatch()
     // const cartItems=[{
@@ -123,7 +128,7 @@ const dispatch=useDispatch()
     </TableContainer>
     <Grid container justify="space-between" className={grid}>
           <Grid item>
-          <Typography variant="h5"> جمع : 1،035،500 تومان</Typography>
+          <Typography variant="h5"> جمع : {total.toLocaleString()} تومان</Typography>
           </Grid>
           <Grid item>
           <Button className={btn}
