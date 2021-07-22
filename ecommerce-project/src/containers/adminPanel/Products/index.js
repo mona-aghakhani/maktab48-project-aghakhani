@@ -23,7 +23,7 @@ import { CustomDialog } from "../../../components/CustomDialog";
 import AddProduct from "../../../components/AddProduct";
 import EditProduct from "../../../components/EditProduct";
 
-import {  getProducts, deleteProductById } from "../../../store/actions/productActions";
+import { getProducts, deleteProductById } from "../../../store/actions/productActions";
 // import { getAllProducts, deleteApiProduct, postNewProduct, putApiProduct } from "../../../api/products/products";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -57,18 +57,19 @@ function stableSort(array, comparator) {
 const headCells = [
   { id: 'image', label: 'تصویر', disableSorting: true },
   { id: 'titleProduct', label: 'نام کالا', disableSorting: true },
-  { id: 'category', label: 'دسته بندی',
-   disableSorting: true
-   },
+  {
+    id: 'category', label: 'دسته بندی',
+    disableSorting: true
+  },
   { id: 'edit', label: '', disableSorting: true },
 ]
 const styles = {
   activeSortIcon: {
     // "& > :not(nth-of-child(2))": {
-      // fontSize: "1.25rem",
-      opacity:1,
-      color:"red"
-      // fontWeight: 600
+    // fontSize: "1.25rem",
+    opacity: 1,
+    color: "red"
+    // fontWeight: 600
     // }
     // opacity: 1,
     // color:"black"
@@ -78,13 +79,13 @@ const styles = {
     opacity: 0,
   },
   icon: {
-      display: 'none',
-      color:"red"
+    display: 'none',
+    color: "red"
   },
   active: {
-      '& $icon': {
-          display: 'inline',
-      },
+    '& $icon': {
+      display: 'inline',
+    },
   },
 };
 
@@ -103,27 +104,27 @@ function EnhancedTableHead(props) {
       <TableRow>
         {headCells.map(headCell => (
           <TableCell
-          olSpan={1}
+            olSpan={1}
             key={headCell.id}
             sortDirection={orderBy === headCell.id ? order : false}
           >
-             {headCell.disableSorting ? headCell.label :
-            <TableSortLabel
-              active={orderBy === headCell.id }
-              direction={orderBy === headCell.id ? order : "asc"}
-              onClick={createSortHandler(headCell.id)}
-              // style={styles}
-              // style={{ opacity: (true === headCell.disableSorting ) ? 0 :1 }}
-              classes={{
-                // Override with the active class if this is the selected column or inactive otherwise
-                icon: ((true === headCell.disableSorting) ? styles.activeSortIcon : styles.inactiveSortIcon ) 
-                // icon: ((orderBy === 'category') ? styles.activeSortIcon : styles.inactiveSortIcon ) 
-                // icon:  classes.activeSortIcon 
+            {headCell.disableSorting ? headCell.label :
+              <TableSortLabel
+                active={orderBy === headCell.id}
+                direction={orderBy === headCell.id ? order : "asc"}
+                onClick={createSortHandler(headCell.id)}
+                // style={styles}
+                // style={{ opacity: (true === headCell.disableSorting ) ? 0 :1 }}
+                classes={{
+                  // Override with the active class if this is the selected column or inactive otherwise
+                  icon: ((true === headCell.disableSorting) ? styles.activeSortIcon : styles.inactiveSortIcon)
+                  // icon: ((orderBy === 'category') ? styles.activeSortIcon : styles.inactiveSortIcon ) 
+                  // icon:  classes.activeSortIcon 
                 }}
-            >
-              {headCell.label}
-            </TableSortLabel>
-             }
+              >
+                {headCell.label}
+              </TableSortLabel>
+            }
           </TableCell>
         ))}
       </TableRow>
@@ -173,11 +174,11 @@ const Products = () => {
   const handleDialogAddClose = () => {
     setIsOpenAdd(false);
   };
-  const handleOpenUpdateDialog = (obj) => { 
-    setEditedObj(obj)  
+  const handleOpenUpdateDialog = (obj) => {
+    setEditedObj(obj)
     setIsOpenUpdate(true);
   };
-  
+
 
   const handleDialogUpdateClose = () => {
     setIsOpenUpdate(false);
@@ -277,7 +278,7 @@ const Products = () => {
                       <TableCell>{row?.title}</TableCell>
                       <TableCell>{row?.category}</TableCell>
                       <TableCell>
-                        <Box onClick={() => handleOpenUpdateDialog(row)}   className={classes.box}> ویرایش </Box>
+                        <Box onClick={() => handleOpenUpdateDialog(row)} className={classes.box}> ویرایش </Box>
                         <Box onClick={() => { dispatch(deleteProductById(row.id)); }} className={classes.box} > حذف</Box>
                       </TableCell>
                     </TableRow>

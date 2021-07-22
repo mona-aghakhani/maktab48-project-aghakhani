@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 import { useHistory } from "react-router-dom";
-import {Button,TextField,Card,Container,Typography} from "@material-ui/core";
+import { Button, TextField, Card, Container, Typography } from "@material-ui/core";
 import { useStyles } from "./styles";
 import { login } from "../../../api/login";
-import {isLoggedIn} from "../../../utils/auth"
+import { isLoggedIn } from "../../../utils/auth"
 import { ToastContainer, toast } from "react-toastify";
 // import { setToken, getProducts } from "../../../store/actions/productActions";
 
@@ -22,7 +22,7 @@ export default function AdminLogin() {
     if ((email, password)) {
       login(email, password)
         .then((res) => {
-          
+
           if (res.status === 200) {
             localStorage.setItem("token", res.data.token);
           }
@@ -39,11 +39,11 @@ export default function AdminLogin() {
           if (isLoggedIn()) {
             history.push("/admin/products");
           }
-          
+
         })
         .catch((err) => console.error(err));
     }
-     else {
+    else {
       toast.error("ایمیل و پسورد را لطفاوارد کنید ");
       console.error("err")
     }
@@ -57,19 +57,19 @@ export default function AdminLogin() {
   };
 
   return (
-     <>
-    <ToastContainer/>
+    <>
+      <ToastContainer />
       <Container component="main" maxWidth="sm">
-           <Card className={classes.paper}>
-        
-        
+        <Card className={classes.paper}>
+
+
           <Typography component="h1" variant="h5">
             فرم ورود
           </Typography>
           <form
             onSubmit={handleLogin}
             className={classes.form}
-           
+
             noValidate
             autoComplete="off"
           >
@@ -87,9 +87,9 @@ export default function AdminLogin() {
                 value={email}
                 onChange={handleChange}
               />
-        
+
             </div>
-          
+
             <TextField
               variant="outlined"
               margin="normal"
@@ -103,7 +103,7 @@ export default function AdminLogin() {
               value={password}
               onChange={handleChange}
             />
-           
+
             <Button
               // onClick={handleLogin}
               type="submit"
@@ -115,14 +115,14 @@ export default function AdminLogin() {
             >
               ورود
             </Button>
-          
-            
+
+
           </form>
-        
-        
+
+
         </Card>
-       </Container>
-    
-       </>
+      </Container>
+
+    </>
   );
 }

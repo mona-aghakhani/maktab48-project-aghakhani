@@ -197,17 +197,7 @@ const Orders = () => {
   const handleClose = () => {
     setIsOpen(false);
   };
-  // const handleOpenUpdateDialog = (obj) => {
-  //   // console.log("edit");
-  //   setEditedObj(obj)
-  //   // console.log(editedObj);
-  //   setIsOpenUpdate(true);
-  // };
-  // // console.log(editedObj);
-
-  // const handleDialogUpdateClose = () => {
-  //   setIsOpenUpdate(false);
-  // };
+  
 
   /*
    * const states and function for pagination table

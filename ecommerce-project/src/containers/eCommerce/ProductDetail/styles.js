@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 export const useStyles=makeStyles((theme)=>({
     container:{
-        margin:"5vh 0",
+        margin:"5vh auto",
         padding:'0 10%'
     },
     img:{
@@ -50,6 +50,6 @@ export const useStyles=makeStyles((theme)=>({
             },
           },
           gridImg:{
-              height:"60%"
+              height:"70%"
           }
 }))
