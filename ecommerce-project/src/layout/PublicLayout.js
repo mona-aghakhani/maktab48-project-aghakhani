@@ -9,7 +9,8 @@ import FinalizeCart from "../containers/eCommerce/FinalizeCart";
 import Payment from "../containers/eCommerce/Payment";
 import SuccessPayment from "../containers/eCommerce/SuccessPayment";
 import FailedPayment from "../containers/eCommerce/FailedPayment";
-import PublicHeader from "../components/PublicHeader"
+import PublicHeader from "../components/PublicHeader";
+import NotFound from "../containers/NotFound"
 // import AdminLogin from "../containers/eCommerce/AdminLogin";
 /*
  * separate public eCommerce website pages
@@ -32,7 +33,7 @@ export const PublicRouters = (props) => {
         <Route path="/payment" exact component={Payment} />
         <Route path="/success" exact component={SuccessPayment} />
         <Route path="/failed" exact component={FailedPayment} />
-       
+        <Route path="*" component={NotFound} />
       </Switch>
     </>
   );
