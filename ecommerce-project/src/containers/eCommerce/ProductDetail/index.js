@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Box, Container, Grid, Paper,Button, Typography,Divider,TextField } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-// import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import {useStyles} from "./styles"
 import {addToCart
   // ,actionCreatorAdd
@@ -16,13 +15,13 @@ const ProductDetail = () => {
     const { productId } = useParams();
     const dispatch = useDispatch();
     const selectedProduct = useSelector( (state) => state.allProducts.selectedProduct );
-    // console.log(selectedProduct.amount);
+   
     useEffect(() => {
         dispatch(getAProduct(productId));
       }, []);
 const [num, setNum] = useState(0)
 // const [cart, setCart] = useState(null)
-// console.log(num);
+
 
 const handleAdd =()=>{
   let cartItem={title:selectedProduct.title,price:Number(selectedProduct.price),number:Number(num)}

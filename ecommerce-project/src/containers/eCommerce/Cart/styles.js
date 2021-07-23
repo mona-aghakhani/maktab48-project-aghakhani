@@ -30,13 +30,13 @@ export const useStyles = makeStyles({
         width: "400px",
         // margin:"auto"
     },
-    box:{
+    box: {
         height: "200px",
         width: "400px",
-        margin:"auto"
+        margin: "auto"
     },
-    title:{
-        margin:"20px auto",
-        textAlign:"center"
+    title: {
+        margin: "20px auto",
+        textAlign: "center"
     }
 })
