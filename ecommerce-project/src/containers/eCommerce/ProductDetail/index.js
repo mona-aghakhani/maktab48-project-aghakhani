@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Box, Container, Grid, Paper,Button, Typography,Divider,TextField } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-// import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import {useStyles} from "./styles"
 import {addToCart
   // ,actionCreatorAdd
@@ -20,9 +19,8 @@ const ProductDetail = () => {
     useEffect(() => {
         dispatch(getAProduct(productId));
       }, []);
-const [num, setNum] = useState(0)
-// const [cart, setCart] = useState(null)
-// console.log(num);
+const [num, setNum] = useState(1)
+
 
 const handleAdd =()=>{
   let cartItem={title:selectedProduct.title,price:Number(selectedProduct.price),number:Number(num)}
@@ -63,6 +61,7 @@ dispatch(addToCart(cartItem))
             max: selectedProduct.amount, min: 0 
         }
     }}
+    defaultValue="1"
     variant="outlined"
     className={input}
     onkeydown={(e) => {
