@@ -22,6 +22,12 @@ return{
 }
 }
 
+export function setNewOrder(newOrder){
+  return{
+    type:ActionTypes.SET_NEW_ORDER,
+    payload:newOrder
+  }
+}
   /*
  * async action for get all Orders
  */

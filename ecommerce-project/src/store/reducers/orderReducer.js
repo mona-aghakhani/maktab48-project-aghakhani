@@ -2,20 +2,25 @@ import { ActionTypes } from "../constants/action-type";
 
 const initialState = {
   orders: [],
-  loading:true,
-//   selectedOrder: {},
+  loading: true,
+  newOrder: {},
 };
 export const orderReducer = (state = initialState, { type, payload }) => {
-    switch (type) {
-      case ActionTypes.SET_ORDERS:
-        return { ...state, orders: payload };
-        case ActionTypes.SET_LOADING:
+  switch (type) {
+    case ActionTypes.SET_ORDERS:
+      return { ...state, orders: payload };
+    case ActionTypes.SET_LOADING:
       return { ...state, loading: false };
-      case ActionTypes.SET_STATUS_ORDER:
-        return{
-          ...state,
-          orders:state.orders.splice(state.orders.findIndex(item=>item.id === payload.id),1,payload)
-        }
+    case ActionTypes.SET_STATUS_ORDER:
+      return {
+        ...state,
+        orders: state.orders.splice(state.orders.findIndex(item => item.id === payload.id), 1, payload)
+      }
+    case ActionTypes.SET_NEW_ORDER:
+      return {
+        ...state,
+        newOrder: payload
+      }
     //   case ActionTypes.ADD_PRODUCT:
     //     return { ...state, products:[payload,...state.products] };
     //   case ActionTypes.DELETE_PRODUCT:
@@ -33,8 +38,8 @@ export const orderReducer = (state = initialState, { type, payload }) => {
     //     return { ...state, loading: false };
     //   case ActionTypes.SELECTED_PRODUCT:
     //     return { ...state, selectedProduct: payload };
-  
-      default:
-        return state;
-    }
-  };
+
+    default:
+      return state;
+  }
+};

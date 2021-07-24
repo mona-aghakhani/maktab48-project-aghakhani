@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import {  useSelector } from 'react-redux';
+
 // import { useFilePicker } from "use-file-picker";
-// import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import {Button, TextField, Grid, Container, Paper, Card, Typography} from "@material-ui/core";
 import { useStyles } from "./styles";
 import { ToastContainer, toast } from "react-toastify";
+import {setNewOrder} from "../../../store/actions/ordersActions"
 import moment from "moment";
 import jMoment from "moment-jalaali";
 import JalaliUtils from "@date-io/jalaali";
@@ -16,10 +17,13 @@ jMoment.loadPersian({ dialect: "persian-modern", usePersianDigits: true });
 export default function FinalizeCart({ }) {
     const classes = useStyles();
     /*
-      * useSelector and get cardItems 
+      * useSelector and get cardItems & calculate total
       */
     const cartItems=useSelector((state)=>state.cartItems)
-    //   const dispatch = useDispatch();
+    const productSum = cartItems.map(item => item.price * item.number)
+    // console.log(productSum);
+    const total = productSum.reduce((sum, item) => (sum += item))
+      const dispatch = useDispatch();
 
 
     /*
@@ -58,9 +62,9 @@ export default function FinalizeCart({ }) {
             // console.log(moment(selectedDate).format("YYYY/M/D"));
             // console.log(selectedDate.format("jYYYY/jMM/jDD"));
             // console.log(selectedDate.toLocaleDateString('fa-IR'));
-        let newOrder = { fullName: fullName, address:address, phone: phone, orderTime: orderTime, deliveryTime: selectedDate.format("jYYYY/jMM/jDD"), products:cartItems };
-          
-        console.log(newOrder);
+        let newOrder = { fullName: fullName, address:address, phone: phone, orderTime: orderTime, deliveryTime: selectedDate.format("jYYYY/jMM/jDD"), products:cartItems,total:total,status:" در انتظار ارسال"};
+          dispatch(setNewOrder(newOrder))
+        // console.log(newOrder);
 
             // dispatch(addNewProduct(newProduct))
             // handleClose();
