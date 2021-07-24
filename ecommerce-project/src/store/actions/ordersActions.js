@@ -1,4 +1,4 @@
-import {getAllOrders,putStatus} from "../../api/orders/orders"
+import {getAllOrders,putStatus,addedOrder} from "../../api/orders/orders"
 import { ActionTypes } from "../constants/action-type.js";
 /*
 * declare sync actions
@@ -28,6 +28,12 @@ export function setNewOrder(newOrder){
     payload:newOrder
   }
 }
+export function addOrder(newOrder) {
+  return{
+    type:ActionTypes.ADD_ORDER,
+    payload:newOrder
+  }
+}
   /*
  * async action for get all Orders
  */
@@ -38,9 +44,19 @@ export const getOrders = () => async(dispatch, getState) => {
     dispatch(setOrders(res.data));
     dispatch(setLoading())
   }
-
+ /*
+ * async action for update orderStatus
+ */
   export const updateOrderById = (id,updateOrder) => async (dispatch, getState) => {
     let res = await putStatus(id,updateOrder);
     console.log("res from put api",res);
     dispatch(changeStatus(updateOrder));
   };
+  /*
+ * async action for add new Order
+ */
+
+export const addNewOrder = (newOrder) => async (dispatch, getState) => {
+  let res = await addedOrder(newOrder);
+  dispatch(addOrder(newOrder));
+};

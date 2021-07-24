@@ -29,8 +29,7 @@ const Cart = () => {
   return (
     <main>
       <Container maxWidth="lg">
-        {false
-        // cartItems.length > 0
+        {cartItems.length > 0
          ? 
         (
           <>

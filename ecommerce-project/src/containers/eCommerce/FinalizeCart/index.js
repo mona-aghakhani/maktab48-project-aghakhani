@@ -47,10 +47,7 @@ export default function FinalizeCart({ }) {
 
         e.preventDefault();
         const fullName = `${name}${lastName}`
-        // console.log(fullName);
         const orderTime=new Date().toLocaleDateString('fa-IR')
-        console.log(orderTime);
-        // console.log(moment());
         const regex = RegExp(
             /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
           );
