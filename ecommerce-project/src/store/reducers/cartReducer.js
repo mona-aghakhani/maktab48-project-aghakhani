@@ -7,8 +7,8 @@ export const cartReducer = (state = initialState, { type, payload }) => {
         case ActionTypes.ADD_TO_CART:
             // return [...state,payload]
             const tempItem = state.find((item) => item.title === payload.title);
-            console.log(tempItem);
-            console.log(state);
+            // console.log(tempItem);
+            // console.log(state);
             if (tempItem) {
                 let item = state.splice(state.findIndex(item => item.title === payload.title), 1, payload)
                 console.log(item);
@@ -21,7 +21,8 @@ export const cartReducer = (state = initialState, { type, payload }) => {
             return state.filter((item, index) => index !== payload);
         //    case ActionTypes.TOGGLE_CART_ITEM:
         //     return state.splice(state.findIndex(item=>item.title === payload.title),1,payload)
-
+case ActionTypes.CLEAR_CART:
+    return initialState;
         default:
             return state;
     }

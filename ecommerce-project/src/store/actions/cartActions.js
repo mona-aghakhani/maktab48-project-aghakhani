@@ -13,6 +13,12 @@ export function removeCart(id){
     }
 
 }
+export function clearCart() {
+    return{
+        type:ActionTypes.CLEAR_CART,
+    }
+    
+}
 // export function toggleCart(cartItem){
 //     return {
 //         type:ActionTypes.TOGGLE_CART_ITEM,

@@ -34,6 +34,7 @@ export function addOrder(newOrder) {
     payload:newOrder
   }
 }
+
   /*
  * async action for get all Orders
  */

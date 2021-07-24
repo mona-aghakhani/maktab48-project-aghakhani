@@ -10,9 +10,9 @@ import basket from "../../../assets/images/basket.png"
 const Cart = () => {
 
   const cartItems = useSelector((state) => state.cartItems)
-  const productSum = cartItems.map(item => item.price * item.number)
+  const productSum = cartItems?.map(item => item.price * item.number)
   // console.log(productSum);
-  const total = productSum.reduce((sum, item) => (sum += item))
+  const total =productSum.length>0 ? productSum.reduce((sum, item) => (sum += item)) :0
   const dispatch = useDispatch()
 
   const { paper, table, grid, btn, img, box, title } = useStyles();

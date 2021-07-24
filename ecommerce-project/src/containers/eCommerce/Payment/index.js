@@ -2,6 +2,7 @@ import React from 'react'
 import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
 import {addNewOrder} from "../../../store/actions/ordersActions"
+import {clearCart} from "../../../store/actions/cartActions"
 import {Box,Button,Container,Grid,Typography} from '@material-ui/core'
 import dargah0 from "../../../assets/images/dargah0.jpg"
 import { useStyles } from "./styles"
@@ -17,6 +18,7 @@ console.log(newOrder);
 let history=useHistory()
 const handleSuccess=()=>{
     dispatch(addNewOrder(newOrder))
+    dispatch(clearCart())
     history.push('/success')
 }
 const handleFailed=()=>{

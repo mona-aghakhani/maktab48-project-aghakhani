@@ -19,13 +19,13 @@ const ProductDetail = () => {
     useEffect(() => {
         dispatch(getAProduct(productId));
       }, []);
-const [num, setNum] = useState(0)
+const [num, setNum] = useState(1)
 // const [cart, setCart] = useState(null)
 
 
 const handleAdd =()=>{
   let cartItem={title:selectedProduct.title,price:Number(selectedProduct.price),number:Number(num)}
-console.log(cartItem);
+// console.log(cartItem);
 dispatch(addToCart(cartItem))
 //  dispatch(actionCreatorAdd(cartItem))
 }
@@ -57,6 +57,7 @@ dispatch(addToCart(cartItem))
     <TextField  
     type="number"
     onChange={e=>setNum(e.target.value)}
+    value={num}
     InputProps={{
         inputProps: { 
             max: selectedProduct.amount, min: 0 
