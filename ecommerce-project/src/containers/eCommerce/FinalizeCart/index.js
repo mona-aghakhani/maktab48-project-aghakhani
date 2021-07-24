@@ -10,7 +10,7 @@ import moment from "moment";
 import jMoment from "moment-jalaali";
 import JalaliUtils from "@date-io/jalaali";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
-
+import { useHistory } from "react-router-dom"
 jMoment.loadPersian({ dialect: "persian-modern", usePersianDigits: true });
 
 
@@ -24,7 +24,7 @@ export default function FinalizeCart({ }) {
     // console.log(productSum);
     const total = productSum.reduce((sum, item) => (sum += item))
       const dispatch = useDispatch();
-
+      let history = useHistory()
 
     /*
      * set states for input values
@@ -64,6 +64,7 @@ export default function FinalizeCart({ }) {
             // console.log(selectedDate.toLocaleDateString('fa-IR'));
         let newOrder = { fullName: fullName, address:address, phone: phone, orderTime: orderTime, deliveryTime: selectedDate.format("jYYYY/jMM/jDD"), products:cartItems,total:total,status:" در انتظار ارسال"};
           dispatch(setNewOrder(newOrder))
+          history.push(`/payment`)
         // console.log(newOrder);
 
             // dispatch(addNewProduct(newProduct))
