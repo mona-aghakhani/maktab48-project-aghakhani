@@ -3,9 +3,8 @@ import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Typography from '@material-ui/core/Typography';
-
 import { Container, Grid, Card, Box, CardContent, MenuItem, Select, FormControl, OutlinedInput } from '@material-ui/core';
-
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import ReactPaginate from 'react-paginate'
 import { useStyles } from "./styles";
 import { NavLink, useParams, Link } from "react-router-dom";
@@ -104,6 +103,7 @@ const ProductGroup = () => {
                     <List>
                         <NavLink exact to={"/listProducts/لبنیات"} className={nav} activeClassName={activeNav}>
                             <ListItem>
+                                <AssignmentTurnedInIcon/>
                                 <Typography variant="h6">کالاهای گروه لبنیات</Typography>
                             </ListItem>
                         </NavLink>
@@ -117,6 +117,7 @@ const ProductGroup = () => {
                     <List>
                         <NavLink exact to={"/listProducts/شوینده"} className={nav} activeClassName={activeNav}>
                             <ListItem>
+                            <AssignmentTurnedInIcon/>
                                 <Typography variant="h6">کالاهای گروه شوینده</Typography>
                             </ListItem>
                         </NavLink>
@@ -131,6 +132,7 @@ const ProductGroup = () => {
                             className={nav}
                             activeClassName={activeNav}>
                             <ListItem>
+                            <AssignmentTurnedInIcon/>
                                 <Typography variant="h6">کالاهای گروه  نوشیدنی</Typography>
                             </ListItem>
                         </NavLink>
@@ -145,6 +147,7 @@ const ProductGroup = () => {
                             className={nav}
                             activeClassName={activeNav}>
                             <ListItem>
+                            <AssignmentTurnedInIcon/>
                                 <Typography variant="h6">کالاهای گروه خواروبار</Typography>
                             </ListItem>
                         </NavLink>
