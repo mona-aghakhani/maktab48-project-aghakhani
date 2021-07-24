@@ -5,10 +5,12 @@ import Products from '../containers/adminPanel/Products';
 import Prices from '../containers/adminPanel/Prices';
 import Orders from '../containers/adminPanel/Orders';
 import NotFound from "../containers/NotFound";
+import PageLayout from "../layout/PageLayout"
 import ProtectedHeader from "../components/ProtectedHeader"
 export const ProtectedRouters=(props)=>{
     return(
         <>
+        <PageLayout>
         <ProtectedHeader/>
       {/* <main style={{height:"80vh"}}> */}
         <Switch>
@@ -21,6 +23,7 @@ export const ProtectedRouters=(props)=>{
             <Route path="*" component={NotFound} />
         </Switch>
         {/* </main> */}
+        </PageLayout>
         </>
     )
 }

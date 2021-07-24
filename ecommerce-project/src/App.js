@@ -7,6 +7,7 @@ import PageLayout from "./layout/PageLayout";
 import { ProtectedRouters } from "./layout/ProtectedLayout";
 import { PublicRouters } from "./layout/PublicLayout";
 import AdminLogin from "./containers/adminPanel/AdminLogin";
+import Payment from "./containers/eCommerce/Payment"
 // import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 /*
@@ -19,17 +20,19 @@ function App() {
     <React.Fragment>
        
       <Router>
-        <PageLayout>
+        {/* <PageLayout> */}
         {/* <ToastContainer /> */}
           <Switch>
          
           <Route path="/login" exact component={AdminLogin} />
+          <Route path="/shaparak/payment" exact component={Payment} />
+
             <Route path="/admin"  component={ProtectedRouters} />
             <Route path="/"  component={PublicRouters} />
             
           
           </Switch>
-        </PageLayout>
+        {/* </PageLayout> */}
       </Router>
     </React.Fragment>
   );

@@ -29,7 +29,10 @@ const Cart = () => {
   return (
     <main>
       <Container maxWidth="lg">
-        {cartItems.length > 0 ? (
+        {false
+        // cartItems.length > 0
+         ? 
+        (
           <>
             <Typography variant="h4"> سبد خرید</Typography>
             <Container style={{ width: "80%" }}>

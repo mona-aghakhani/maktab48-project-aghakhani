@@ -26,13 +26,13 @@ export const useStyles = makeStyles({
     img: {
         objectFit: "contain",
         objectPosition: "center",
-        height: "200px",
-        width: "400px",
+        height: "100%",
+        width: "100%",
         // margin:"auto"
     },
     box: {
-        height: "200px",
-        width: "400px",
+        height: "40%",
+        width: "60%",
         margin: "auto"
     },
     title: {

@@ -4,7 +4,13 @@ import {Box,Button,Container,Grid,Typography} from '@material-ui/core'
 import dargah0 from "../../../assets/images/dargah0.jpg"
 import { useStyles } from "./styles"
 const Payment = () => {
-
+let history=useHistory()
+const handleGoToSuccess=()=>{
+    history.push('/success')
+}
+const handleGoToFailed=()=>{
+    history.push('/failed')
+}
     const {  grid, btn, img, box,container,cancel } = useStyles();
     return (
         <>
@@ -14,8 +20,8 @@ const Payment = () => {
         <Box className={box}><img className={img} src={dargah0} alt="درگاه بانکی" /></Box>
         </Grid>
         <Grid className={grid} xs={12} >
-        <Button   className={btn}>پرداخت موفق</Button>
-        <Button   className={cancel}>انصراف </Button>
+        <Button onClick={handleGoToSuccess}  className={btn}>پرداخت موفق</Button>
+        <Button onClick={handleGoToFailed}  className={cancel}>انصراف </Button>
 
         </Grid>
         </Grid>

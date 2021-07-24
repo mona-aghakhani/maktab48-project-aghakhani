@@ -12,6 +12,7 @@ import SuccessPayment from "../containers/eCommerce/SuccessPayment";
 import FailedPayment from "../containers/eCommerce/FailedPayment";
 // import NotFound from "../containers/NotFound"
 import PublicHeader from "../components/PublicHeader"
+import PageLayout from "./PageLayout/index"
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -40,6 +41,7 @@ export const PublicRouters = (props) => {
   const classes=useStyles()
   return (
     <>
+    <PageLayout>
       <PublicHeader/>
      <Suspense fallback={<CircularProgress className={classes.progress} size={100} thickness={4} disableShrink />}>
       <Switch>
@@ -52,12 +54,13 @@ export const PublicRouters = (props) => {
         <Route path="/product/:productId" exact component={ProductDetail} />
         <Route path="/cart" exact component={Cart} />
         <Route exact path="/finalizeCart" component={FinalizeCart} />
-        <Route path="/payment" exact component={Payment} />
+        {/* <Route path="/payment" exact component={Payment} /> */}
         <Route path="/success" exact component={SuccessPayment} />
         <Route path="/failed" exact component={FailedPayment} />
         <Route path="*" component={NotFound} />
       </Switch>
       </Suspense>
+      </PageLayout>
     </>
   );
 };

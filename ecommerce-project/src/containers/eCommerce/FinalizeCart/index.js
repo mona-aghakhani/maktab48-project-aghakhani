@@ -64,7 +64,7 @@ export default function FinalizeCart({ }) {
             // console.log(selectedDate.toLocaleDateString('fa-IR'));
         let newOrder = { fullName: fullName, address:address, phone: phone, orderTime: orderTime, deliveryTime: selectedDate.format("jYYYY/jMM/jDD"), products:cartItems,total:total,status:" در انتظار ارسال"};
           dispatch(setNewOrder(newOrder))
-          history.push(`/payment`)
+          history.push(`/shaparak/payment`)
         // console.log(newOrder);
 
             // dispatch(addNewProduct(newProduct))
