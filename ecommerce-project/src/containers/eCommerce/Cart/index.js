@@ -12,7 +12,7 @@ const Cart = () => {
   const cartItems = useSelector((state) => state.cartItems)
   const productSum = cartItems?.map(item => item.price * item.number)
   // console.log(productSum);
-  const total =productSum.length>0 ? productSum.reduce((sum, item) => (sum += item)) :0
+  const total = productSum.length > 0 ? productSum.reduce((sum, item) => (sum += item)) : 0
   const dispatch = useDispatch()
 
   const { paper, table, grid, btn, img, box, title } = useStyles();
@@ -30,67 +30,67 @@ const Cart = () => {
     <main>
       <Container maxWidth="lg">
         {cartItems.length > 0
-         ? 
-        (
-          <>
-            <Typography variant="h4"> سبد خرید</Typography>
-            <Container style={{ width: "80%" }}>
-              <TableContainer className={paper} component={Paper}>
-                <Table className={table} aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align="left">کالا</TableCell>
-                      <TableCell align="left">قیمت</TableCell>
-                      <TableCell align="left">تعداد</TableCell>
-                      <TableCell align="left"></TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {cartItems.map((row, index) => (
-                      <TableRow key={row.index}>
-                        <TableCell align="left" component="th" scope="row">
-                          {row.title}
-                        </TableCell>
-                        <TableCell align="left">{row.price}</TableCell>
-                        <TableCell align="left">{row.number}</TableCell>
-                        <TableCell align="left">
-                          <Tooltip title="حذف کالا" placement="top">
-                            <IconButton aria-label="delete"
-                              onClick={() => { dispatch(removeCart(index)) }}
-                            >
-                              <DeleteIcon />
-                            </IconButton>
-                          </Tooltip>
-                          {/* <Box onClick={() => { dispatch(deleteProductById(row.id)); }} className={box} > حذف</Box> */}
-                        </TableCell>
-
+          ?
+          (
+            <>
+              <Typography variant="h4"> سبد خرید</Typography>
+              <Container style={{ width: "80%" }}>
+                <TableContainer className={paper} component={Paper}>
+                  <Table className={table} aria-label="simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell align="left">کالا</TableCell>
+                        <TableCell align="left">قیمت</TableCell>
+                        <TableCell align="left">تعداد</TableCell>
+                        <TableCell align="left"></TableCell>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-              <Grid container justify="space-between" className={grid}>
-                <Grid item>
-                  <Typography variant="h5"> جمع : {total.toLocaleString()} تومان</Typography>
-                </Grid>
-                <Grid item>
-                  <Button className={btn}
-                    //  onClick={handleOpen}
-                    onClick={handleGoToFinalizePage}
-                  >
-                    نهایی کردن سبد خرید
-            </Button>
-                </Grid>
-              </Grid>
-            </Container>
-          </>
-        ) : (
-          <>
-            <Box className={box}><img className={img} src={basket} alt="سبد" /></Box>
+                    </TableHead>
+                    <TableBody>
+                      {cartItems.map((row, index) => (
+                        <TableRow key={row.index}>
+                          <TableCell align="left" component="th" scope="row">
+                            {row.title}
+                          </TableCell>
+                          <TableCell align="left">{row.price}</TableCell>
+                          <TableCell align="left">{row.number}</TableCell>
+                          <TableCell align="left">
+                            <Tooltip title="حذف کالا" placement="top">
+                              <IconButton aria-label="delete"
+                                onClick={() => { dispatch(removeCart(index)) }}
+                              >
+                                <DeleteIcon />
+                              </IconButton>
+                            </Tooltip>
 
-            <Typography variant="h6" className={title}>سبد خرید شماخالی است...</Typography>
-          </>
-        )}
+                          </TableCell>
+
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <Grid container justify="space-between" className={grid}>
+                  <Grid item>
+                    <Typography variant="h5"> جمع : {total.toLocaleString()} تومان</Typography>
+                  </Grid>
+                  <Grid item>
+                    <Button className={btn}
+                      //  onClick={handleOpen}
+                      onClick={handleGoToFinalizePage}
+                    >
+                      نهایی کردن سبد خرید
+            </Button>
+                  </Grid>
+                </Grid>
+              </Container>
+            </>
+          ) : (
+            <>
+              <Box className={box}><img className={img} src={basket} alt="سبد" /></Box>
+
+              <Typography variant="h6" className={title}>سبد خرید شماخالی است...</Typography>
+            </>
+          )}
 
       </Container>
 

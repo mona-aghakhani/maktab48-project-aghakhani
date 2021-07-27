@@ -7,7 +7,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 // import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { useStyles } from "./styles"
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const StyledBadge = withStyles((theme) => ({
     badge: {
@@ -19,8 +19,8 @@ const StyledBadge = withStyles((theme) => ({
 
 
 const PublicHeader = () => {
-    const { appbar, link, grid, item1, item2, item3,svg } = useStyles();
-    const cartItems=useSelector((state)=>state.cartItems)
+    const { appbar, link, grid, item1, item2, item3, svg } = useStyles();
+    const cartItems = useSelector((state) => state.cartItems)
     return (
         <div>
             <AppBar className={appbar} position="static">

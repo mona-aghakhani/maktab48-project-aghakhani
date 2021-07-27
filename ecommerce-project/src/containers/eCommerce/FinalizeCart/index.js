@@ -2,29 +2,29 @@ import React, { useState } from "react";
 
 // import { useFilePicker } from "use-file-picker";
 import { useDispatch, useSelector } from 'react-redux';
-import {Button, TextField, Grid, Container, Paper, Card, Typography} from "@material-ui/core";
+import { Button, TextField, Grid, Container, Card, Typography } from "@material-ui/core";
 import { useStyles } from "./styles";
-import { ToastContainer, toast } from "react-toastify";
-import {setNewOrder} from "../../../store/actions/ordersActions"
+import { toast } from "react-toastify";
+import { setNewOrder } from "../../../store/actions/ordersActions"
 import moment from "moment";
 import jMoment from "moment-jalaali";
 import JalaliUtils from "@date-io/jalaali";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
-import { useHistory } from "react-router-dom"
+import { Redirect, useHistory } from "react-router-dom"
 jMoment.loadPersian({ dialect: "persian-modern", usePersianDigits: true });
 
 
-export default function FinalizeCart({ }) {
+export default function FinalizeCart() {
     const classes = useStyles();
     /*
       * useSelector and get cardItems & calculate total
       */
-    const cartItems=useSelector((state)=>state.cartItems)
+    const cartItems = useSelector((state) => state.cartItems)
     const productSum = cartItems.map(item => item.price * item.number)
     // console.log(productSum);
     const total = productSum.reduce((sum, item) => (sum += item))
-      const dispatch = useDispatch();
-      let history = useHistory()
+    const dispatch = useDispatch();
+    // let history = useHistory()
 
     /*
      * set states for input values
@@ -35,37 +35,43 @@ export default function FinalizeCart({ }) {
     const [lastName, setLastName] = useState('')
     const [address, setAddress] = useState('')
     const [phone, setPhone] = useState("");
+    const [shouldRedirect, setShouldRedirect] = useState(false);
     /*
      * 'use-date-picker' 
      */
 
-  
+
     const [selectedDate, handleDateChange] = useState(moment());
 
 
     const handleNewOrder = (e) => {
 
         e.preventDefault();
-        const fullName = `${name}${lastName}`
-        const orderTime=new Date().toLocaleDateString('fa-IR')
+        const fullName = `${name}  ${lastName}`
+        const orderTime = new Date().toLocaleDateString('fa-IR')
+        // const regex = RegExp(
+        //     /$d{9}\09^/
+        // );
         const regex = RegExp(
             /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
-          );
-        if (name && lastName &&  address && phone && selectedDate) {
+        );
+        if (name && lastName && address && phone && selectedDate) {
             if (!regex.test(phone)) {
                 toast.error("لطفا شماره تماس را  به درستی وارد کنید");
-            }
-            // console.log(selectedDate.getFullYear());
-            // console.log(moment(selectedDate).format("YYYY/M/D"));
-            // console.log(selectedDate.format("jYYYY/jMM/jDD"));
-            // console.log(selectedDate.toLocaleDateString('fa-IR'));
-        let newOrder = { fullName: fullName, address:address, phone: phone, orderTime: orderTime, deliveryTime: selectedDate.format("jYYYY/jMM/jDD"), products:cartItems,total:total,status:" در انتظار ارسال"};
-          dispatch(setNewOrder(newOrder))
-          history.push(`/shaparak/payment`)
-        // console.log(newOrder);
+            } else {
+                // console.log(selectedDate.format("jYYYY/jMM/jDD"));
 
-            // dispatch(addNewProduct(newProduct))
-            // handleClose();
+                let newOrder = { fullName: fullName, address: address, phone: phone, orderTime: orderTime, deliveryTime: selectedDate.format("jYYYY/jMM/jDD"), products: cartItems, total: total, status: " در انتظار ارسال" };
+                dispatch(setNewOrder(newOrder))
+                setShouldRedirect(true)
+                //   history.push(`/shaparak/payment`)
+                // console.log(newOrder);
+
+                // dispatch(addNewProduct(newProduct))
+                // handleClose();
+            }
+
+
         } else {
             toast.error("لطفا تمام اطلاعات را وارد کنید");
             // console.error("err")
@@ -112,9 +118,9 @@ export default function FinalizeCart({ }) {
                                         // margin="normal"
                                         // disabled
                                         className={classes.input}
-                                    // fullWidth
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
+                                        // fullWidth
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
 
                                     />
                                 </Grid>
@@ -131,9 +137,9 @@ export default function FinalizeCart({ }) {
                                         // margin="normal"
                                         // disabled
                                         className={classes.input}
-                                    // fullWidth
-                                    value={lastName}
-                                    onChange={(e) => setLastName(e.target.value)}
+                                        // fullWidth
+                                        value={lastName}
+                                        onChange={(e) => setLastName(e.target.value)}
 
                                     />
                                 </Grid>
@@ -146,8 +152,8 @@ export default function FinalizeCart({ }) {
                                         required
                                         rows={1}
                                         rowsMax={3}
-                                    value={address}
-                                    onChange={(e) => setAddress(e.target.value)}
+                                        value={address}
+                                        onChange={(e) => setAddress(e.target.value)}
                                     />
                                 </Grid>
                                 <Grid item
@@ -162,9 +168,9 @@ export default function FinalizeCart({ }) {
                                         // margin="normal"
                                         // disabled
                                         className={classes.input}
-                                    // fullWidth
-                                    value={phone}
-                                    onChange={(e) => setPhone(e.target.value)}
+                                        // fullWidth
+                                        value={phone}
+                                        onChange={(e) => setPhone(e.target.value)}
 
                                     />
                                 </Grid>
@@ -184,18 +190,7 @@ export default function FinalizeCart({ }) {
                                         value={selectedDate}
                                         onChange={handleDateChange}
                                     />
-                                    {/* <TextField
-                                variant="outlined"
-                                placeholder=" تاریخ تحویل  "
-                                name="date"
-                                // margin="normal"
-                                // disabled
-                                className={classes.input}
-                            // fullWidth
-                            // value={image}
-                            // onChange={(e) => setImage(e.target.value)}
 
-                            /> */}
                                 </Grid>
                                 <Grid container xs={12} justify="center">
                                     <Button
@@ -203,7 +198,7 @@ export default function FinalizeCart({ }) {
                                         // type="submit"
                                         // fullWidth
                                         variant="contained"
-                                        disabled={!name && !lastName && !phone && !address }
+                                        disabled={!name && !lastName && !phone && !address}
 
                                         className={classes.btn}
                                     >
@@ -214,6 +209,7 @@ export default function FinalizeCart({ }) {
                         </form>
                     </Card>
                 </Container>
+                {shouldRedirect && <Redirect to='/shaparak/payment' />}
             </MuiPickersUtilsProvider>
         </>
     );

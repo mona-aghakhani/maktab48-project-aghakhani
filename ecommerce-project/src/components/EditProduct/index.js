@@ -15,7 +15,7 @@ import { useStyles } from "./styles";
 import { updateProductById } from "../../store/actions/productActions";
 
 
-export default function EditProduct({handleClose,editedObj}) {
+export default function EditProduct({ handleClose, editedObj }) {
   const classes = useStyles();
 
   // console.log(editedObj);
@@ -32,7 +32,7 @@ export default function EditProduct({handleClose,editedObj}) {
   /*
    * usedispatch action for edit product
    */
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   /*
    * 'use-file-picker' : Simple react hook to open browser file selector.
@@ -43,20 +43,20 @@ export default function EditProduct({handleClose,editedObj}) {
     multiple: true,
   });
 
- 
+
   const handleEdit = (e) => {
     e.preventDefault();
     // console.log("edit comp");
-   
-      let updatedProductObj={...editedObj, title,image:filesContent[0]?.content || image ,category,description};
-     console.log(updatedProductObj);
-     dispatch(updateProductById(editedObj.id,updatedProductObj))
+
+    let updatedProductObj = { ...editedObj, title, image: filesContent[0]?.content || image, category, description };
+    console.log(updatedProductObj);
+    dispatch(updateProductById(editedObj.id, updatedProductObj))
 
     handleClose();
     // dispatch(getProducts())
     window.location.reload()
   };
-  
+
   return (
     <Container component="main" maxWidth="sm">
       <form
@@ -83,15 +83,15 @@ export default function EditProduct({handleClose,editedObj}) {
                 // disabled
                 className={classes.input}
                 fullWidth
-// value={image}
-onChange={(e)=>setImage(e.target.value)}
+                // value={image}
+                onChange={(e) => setImage(e.target.value)}
 
               />
             </Grid>
             <Grid item xs={2}>
               <button
                 type="button"
-                onClick={() =>openFileSelector()}
+                onClick={() => openFileSelector()}
                 className={classes.btnFile}
               >
                 Browse
@@ -106,7 +106,7 @@ onChange={(e)=>setImage(e.target.value)}
               fullWidth
               name="نام"
               value={title}
-              onChange={(e)=>setTitle(e.target.value)}
+              onChange={(e) => setTitle(e.target.value)}
             />
           </Grid>
           <Grid xs={12} item>
@@ -124,9 +124,9 @@ onChange={(e)=>setImage(e.target.value)}
               <Select
                 labelId="demo-simple-select-outlined-label"
                 id="demo-simple-select-outlined"
-                  value={category}
-                
-                onChange={(e)=>setCategory(e.target.value)}
+                value={category}
+
+                onChange={(e) => setCategory(e.target.value)}
                 label="دسته بندی"
               >
                 <MenuItem value="">
@@ -148,16 +148,16 @@ onChange={(e)=>setImage(e.target.value)}
               rows={2}
               rowsMax={4}
               value={description}
-              onChange={(e)=>setDescription(e.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
           <Grid container xs={12} justify="center">
             <Button
-             
+
               type="submit"
-            
+
               variant="contained"
-             
+
 
               className={classes.btn}
             >

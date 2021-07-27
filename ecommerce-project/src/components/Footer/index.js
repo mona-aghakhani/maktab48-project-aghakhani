@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <footer
     //  style={{margin:"60vh 0 0 0"}}
-     >
+    >
       <Box bgcolor="text.secondary">
         <Container maxWidth="lg">
           <Box textAlign="center">
@@ -21,13 +21,13 @@ const Footer = () => {
             <Typography>mona.aqakhani@</Typography>
           </Box>
           <Box textAlign="center">
-          <FacebookIcon />
-          <LinkedInIcon />
-          <InstagramIcon />
+            <FacebookIcon />
+            <LinkedInIcon />
+            <InstagramIcon />
           </Box>
         </Container>
       </Box>
-     
+
     </footer>
   );
 };

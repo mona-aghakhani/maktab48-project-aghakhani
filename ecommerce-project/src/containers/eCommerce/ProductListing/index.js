@@ -32,7 +32,7 @@ const ProductListing = () => {
 
         // dispatch(getProducts());
     }, []);
-    
+
     return (
 
         <div style={{ marginBottom: "5vh" }}>

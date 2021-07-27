@@ -50,7 +50,7 @@ export const getOrders = () => async(dispatch, getState) => {
  */
   export const updateOrderById = (id,updateOrder) => async (dispatch, getState) => {
     let res = await putStatus(id,updateOrder);
-    console.log("res from put api",res);
+    // console.log("res from put api",res);
     dispatch(changeStatus(updateOrder));
   };
   /*

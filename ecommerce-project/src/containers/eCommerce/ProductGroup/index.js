@@ -16,14 +16,14 @@ const ProductGroup = () => {
     * useParams and get productCategory
     */
     const { productCategory } = useParams()
-    
+
 
     // use redux
-    
+
     // const products = useSelector((state) => state.allProducts.products);
     // const categoryData = products.filter((item) => item.category === productCategory)
     // const pageCount = Math.ceil(Number(categoryData.length) / 4)
-   
+
     const [data, setData] = useState([])
     /*
      * useState and handlePagination(use ReactPaginate)
@@ -71,10 +71,10 @@ const ProductGroup = () => {
         // dispatch(getProducts());
         getAllCategoryList(productCategory).then(res => setCategoryData(res.data))
     }, [productCategory]);
-    
+
     const pageCount = Math.ceil(Number(categoryData.length) / 4)
     useEffect(() => {
-        
+
         if (search !== '') {
             console.log("search");
             const filteredData = categoryData.filter(item => item.title.toLowerCase().includes(search.toLowerCase()))
@@ -87,23 +87,23 @@ const ProductGroup = () => {
                 setData(res.data)
             })
         }
-       
+
     }, [sortParam, page, order, search, categoryData])
-    
+
 
 
 
     return (
         <main>
-            
+
             <Grid container className={mainGrid}>
-          
+
                 <Grid className={sidebar} item xs={12} sm={3}>
                     <Divider />
                     <List>
                         <NavLink exact to={"/listProducts/لبنیات"} className={nav} activeClassName={activeNav}>
                             <ListItem>
-                                <AssignmentTurnedInIcon/>
+                                <AssignmentTurnedInIcon />
                                 <Typography variant="h6">کالاهای گروه لبنیات</Typography>
                             </ListItem>
                         </NavLink>
@@ -111,13 +111,13 @@ const ProductGroup = () => {
                         <ListItem> <Typography>پنیر  </Typography>    </ListItem>
                         <ListItem>  <Typography>شیر  </Typography> </ListItem>
                         <ListItem> <Typography>کره  </Typography>  </ListItem>
-             
+
                     </List>
                     <Divider />
                     <List>
                         <NavLink exact to={"/listProducts/شوینده"} className={nav} activeClassName={activeNav}>
                             <ListItem>
-                            <AssignmentTurnedInIcon/>
+                                <AssignmentTurnedInIcon />
                                 <Typography variant="h6">کالاهای گروه شوینده</Typography>
                             </ListItem>
                         </NavLink>
@@ -132,7 +132,7 @@ const ProductGroup = () => {
                             className={nav}
                             activeClassName={activeNav}>
                             <ListItem>
-                            <AssignmentTurnedInIcon/>
+                                <AssignmentTurnedInIcon />
                                 <Typography variant="h6">کالاهای گروه  نوشیدنی</Typography>
                             </ListItem>
                         </NavLink>
@@ -147,7 +147,7 @@ const ProductGroup = () => {
                             className={nav}
                             activeClassName={activeNav}>
                             <ListItem>
-                            <AssignmentTurnedInIcon/>
+                                <AssignmentTurnedInIcon />
                                 <Typography variant="h6">کالاهای گروه خواروبار</Typography>
                             </ListItem>
                         </NavLink>
@@ -159,7 +159,7 @@ const ProductGroup = () => {
                 </Grid>
                 <Grid item xs={12} sm={9}>
                     <Container maxWidth="xl" className={mainContainer}>
-                       
+
                         <Grid container spacing={4} alignItems="center" justify="space-between"
                         //  className={headerCategory}
                         >
@@ -172,9 +172,9 @@ const ProductGroup = () => {
                                 <FormControl variant="outlined"
                                 // className={classes.formControl}
                                 >
-                                  
+
                                     <Select
-                                       
+
                                         id="component-outlined"
                                         value={valueSort}
                                         // fullWidth
@@ -197,7 +197,7 @@ const ProductGroup = () => {
                                 <Divider />
                             </Grid>
                             <Grid item xs={12} sm={3} md={3}>
-                             
+
                                 <OutlinedInput
                                     variant="outlined"
                                     placeholder="جستجو... "
@@ -212,7 +212,7 @@ const ProductGroup = () => {
 
                         </Grid>
 
-                      
+
 
                         <Grid container spacing={8}>
                             {data?.map((card) => (
@@ -223,7 +223,7 @@ const ProductGroup = () => {
                                 //  lg={3}
                                 >
                                     <Link exact to={`/product/${card.id}`} className={link}>
-        
+
                                         <Card
                                             className={cardItem}
                                         >
@@ -241,7 +241,7 @@ const ProductGroup = () => {
                                                         alt="کالا" />
                                                 </Box>
                                             </Box>
-            
+
                                             <CardContent
                                             //   className={classes.cardContent}
                                             >
@@ -256,7 +256,7 @@ const ProductGroup = () => {
                                             </CardContent>
 
                                         </Card>
-                                       
+
                                     </Link>
                                 </Grid>
                             ))}
@@ -265,19 +265,19 @@ const ProductGroup = () => {
                             <ReactPaginate
                                 previousLabel={"قبلی"}
                                 nextLabel={"بعدی"}
-                                
+
                                 pageCount={pageCount}
                                 marginPagesDisplayed={2}
                                 pageRangeDisplayed={5}
                                 onPageChange={handlePageClick}
                                 containerClassName={pagination}
-                               
+
                                 activeClassName={active} />
                         </Grid>
                     </Container>
                 </Grid>
             </Grid>
-           
+
         </main>
     )
 }

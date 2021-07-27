@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {Table, TableBody,TableHead,TableCell,TableContainer,TableFooter,TableRow,TablePagination,
+import {
+  Table, TableBody, TableHead, TableCell, TableContainer, TableFooter, TableRow, TablePagination,
   Paper,
   Typography,
   Grid,
- 
+
   Container,
   Box,
-  TableSortLabel,Radio,RadioGroup,FormControlLabel,FormControl
+  TableSortLabel, Radio, RadioGroup, FormControlLabel, FormControl
 } from "@material-ui/core";
 import { useStyles2 } from "./styles";
 import { TablePaginationActions } from "./TablePaginationActions";
@@ -15,7 +16,7 @@ import { TablePaginationActions } from "./TablePaginationActions";
 import { CustomDialog } from "../../../components/CustomDialog";
 
 
-import {  getOrders } from "../../../store/actions/ordersActions";
+import { getOrders } from "../../../store/actions/ordersActions";
 // import { getAllProducts, deleteApiProduct, postNewProduct, putApiProduct } from "../../../api/products/products";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import OrderDetail from "../../../components/OrderDetail";
@@ -52,49 +53,35 @@ function stableSort(array, comparator) {
 const headCells = [
   { id: 'name', label: 'نام کاربر', disableSorting: true },
   { id: 'total', label: 'مجموع مبلغ', disableSorting: false },
-  { id: 'orderTime', label: 'زمان ثبت سفارش',
-   disableSorting: false
-   },
+  {
+    id: 'orderTime', label: 'زمان ثبت سفارش',
+    disableSorting: false
+  },
   { id: 'order', label: '', disableSorting: true },
 ]
 const styles = {
   activeSortIcon: {
-    // "& > :not(nth-of-child(2))": {
-      // fontSize: "1.25rem",
-      opacity:1,
-      color:"red"
-      // fontWeight: 600
-    // }
-    // opacity: 1,
-    // color:"black"
+    opacity: 1,
+    color: "red"
   },
-  // Half visible for inactive icons
+
   inactiveSortIcon: {
     opacity: 1,
   },
   icon: {
-      display: 'none',
-      color:"red"
+    display: 'none',
+    color: "red"
   },
   active: {
-      '& $icon': {
-          display: 'inline',
-      },
+    '& $icon': {
+      display: 'inline',
+    },
   },
 };
-// const styles = theme => ({
-//   // Fully visible for active icons
-//   activeSortIcon: {
-//     opacity: 1,
-//   },
-//   // Half visible for inactive icons
-//   inactiveSortIcon: {
-//     opacity: 0.4,
-//   },
-// });
+
 function EnhancedTableHead(props) {
   const {
-   
+
     order,
     orderBy,
     onRequestSort
@@ -108,27 +95,27 @@ function EnhancedTableHead(props) {
       <TableRow>
         {headCells.map(headCell => (
           <TableCell
-          olSpan={1}
+            olSpan={1}
             key={headCell.id}
             sortDirection={orderBy === headCell.id ? order : false}
           >
-             {headCell.disableSorting ? headCell.label :
-            <TableSortLabel
-              active={orderBy === headCell.id }
-              direction={orderBy === headCell.id ? order : "asc"}
-              onClick={createSortHandler(headCell.id)}
-              // style={styles}
-              // style={{ opacity: (true === headCell.disableSorting ) ? 0 :1 }}
-              classes={{
-                // Override with the active class if this is the selected column or inactive otherwise
-                icon: ((true === headCell.disableSorting) ? styles.activeSortIcon : styles.inactiveSortIcon ) 
-                // icon: ((orderBy === 'category') ? styles.activeSortIcon : styles.inactiveSortIcon ) 
-                // icon:  classes.activeSortIcon 
+            {headCell.disableSorting ? headCell.label :
+              <TableSortLabel
+                active={orderBy === headCell.id}
+                direction={orderBy === headCell.id ? order : "asc"}
+                onClick={createSortHandler(headCell.id)}
+                // style={styles}
+                // style={{ opacity: (true === headCell.disableSorting ) ? 0 :1 }}
+                classes={{
+                  // Override with the active class if this is the selected column or inactive otherwise
+                  icon: ((true === headCell.disableSorting) ? styles.activeSortIcon : styles.inactiveSortIcon)
+                  // icon: ((orderBy === 'category') ? styles.activeSortIcon : styles.inactiveSortIcon ) 
+                  // icon:  classes.activeSortIcon 
                 }}
-            >
-              {headCell.label}
-            </TableSortLabel>
-             }
+              >
+                {headCell.label}
+              </TableSortLabel>
+            }
           </TableCell>
         ))}
       </TableRow>
@@ -142,24 +129,24 @@ const Orders = () => {
    * use useselector & dispatch for get products and handle api calls
    */
   const orders = useSelector((state) => state.allOrders.orders);
-  const deliveredOrders=orders.filter((item)=>item.status === "تحویل شده")
-  const waitingOrders=orders.filter((item)=>item.status === " در انتظار ارسال")
-/*
-* initial states & functions for handle filtering with Radio
-*/
+  const deliveredOrders = orders.filter((item) => item.status === "تحویل شده")
+  const waitingOrders = orders.filter((item) => item.status === " در انتظار ارسال")
+  /*
+  * initial states & functions for handle filtering with Radio
+  */
 
   const [value, setValue] = useState("در انتظار ارسال");
-  
- 
-    const handleChange = (event) => {
-      setValue(event.target.value);
-    };
-    let data=value === "در انتظار ارسال"  ? waitingOrders : deliveredOrders;
 
 
-  
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+  let data = value === "در انتظار ارسال" ? waitingOrders : deliveredOrders;
+
+
+
   const loading = useSelector((state) => state.allOrders.loading);
- 
+
   const dispatch = useDispatch();
   /*
    * dispatch async action and get data
@@ -177,7 +164,7 @@ const Orders = () => {
   //   });
   // }, []);
 
-  
+
 
   /*
    * setState and functions for handle CustomDialog
@@ -197,7 +184,7 @@ const Orders = () => {
   const handleClose = () => {
     setIsOpen(false);
   };
-  
+
 
   /*
    * const states and function for pagination table
@@ -229,15 +216,7 @@ const Orders = () => {
     setOrderBy(property);
   };
 
-// <FormControl component="fieldset">
-//       <FormLabel component="legend">Gender</FormLabel>
-//       <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-//         <FormControlLabel value="female" control={<Radio />} label="Female" />
-//         <FormControlLabel value="male" control={<Radio />} label="Male" />
-//         <FormControlLabel value="other" control={<Radio />} label="Other" />
-//         <FormControlLabel value="disabled" disabled control={<Radio />} label="(Disabled option)" />
-//       </RadioGroup>
-//     </FormControl>
+
   /*
    *  initial states & functions without redux
    */
@@ -263,90 +242,90 @@ const Orders = () => {
             <Typography>مدیریت سفارش ها</Typography>
           </Grid>
           <Grid item >
-          <FormControl component="fieldset">
-      {/* <FormLabel component="legend">Gender</FormLabel> */}
-       <RadioGroup aria-label="فیلتر" name="gender1" value={value} onChange={handleChange}>
-         <FormControlLabel value="در انتظار ارسال" control={<Radio />} label="سفارش های در انتظار ارسال" />
-         <FormControlLabel value="تحویل شده" control={<Radio />} label="سفارش های تحویل شده" />
-         
-       </RadioGroup>
-     </FormControl>
+            <FormControl component="fieldset">
+              {/* <FormLabel component="legend">Gender</FormLabel> */}
+              <RadioGroup aria-label="فیلتر" name="gender1" value={value} onChange={handleChange}>
+                <FormControlLabel value="در انتظار ارسال" control={<Radio />} label="سفارش های در انتظار ارسال" />
+                <FormControlLabel value="تحویل شده" control={<Radio />} label="سفارش های تحویل شده" />
+
+              </RadioGroup>
+            </FormControl>
           </Grid>
         </Grid>
         <TableContainer className={classes.paper} component={Paper}>
-          {orders !== "Not found" 
-          && (
-            <Table className={classes.table}>
-              <EnhancedTableHead
-                classes={{
-                  icon: classes.icon,
-                  active: classes.active
-                }}
-                // classes={classes}
-                order={order}
-                orderBy={orderBy}
-                onRequestSort={handleRequestSort}
-                rowCount={data.length}
-              />
+          {orders !== "Not found"
+            && (
+              <Table className={classes.table}>
+                <EnhancedTableHead
+                  classes={{
+                    icon: classes.icon,
+                    active: classes.active
+                  }}
+                  // classes={classes}
+                  order={order}
+                  orderBy={orderBy}
+                  onRequestSort={handleRequestSort}
+                  rowCount={data.length}
+                />
 
 
-              <TableBody>
-                {stableSort(data, getComparator(order, orderBy))?.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
-                  // : products
-                  // )?
-                  .map((row, index) => (
-                    <TableRow key={row?.index}>
+                <TableBody>
+                  {stableSort(data, getComparator(order, orderBy))?.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
+                    // : products
+                    // )?
+                    .map((row, index) => (
+                      <TableRow key={row?.index}>
 
-                      <TableCell>
-                        {row?.fullName}
-                        {/* <img className={classes.img} src={row?.image} /> */}
-                      </TableCell>
-                      <TableCell>{Number(row?.total).toLocaleString()}</TableCell>
-                      <TableCell>{row?.orderTime}</TableCell>
-                      <TableCell>
-                        <Box onClick={() => handleOpen(row)}   className={classes.box}> بررسی سفارش </Box>
-                        {/* <Box onClick={() => { dispatch(deleteProductById(row.id)); }} className={classes.box} > حذف</Box> */}
-                      </TableCell>
+                        <TableCell>
+                          {row?.fullName}
+                          {/* <img className={classes.img} src={row?.image} /> */}
+                        </TableCell>
+                        <TableCell>{Number(row?.total).toLocaleString()}</TableCell>
+                        <TableCell>{row?.orderTime}</TableCell>
+                        <TableCell>
+                          <Box onClick={() => handleOpen(row)} className={classes.box}> بررسی سفارش </Box>
+
+                        </TableCell>
+                      </TableRow>
+
+                    ))}
+
+                  {emptyRows > 0 && (
+                    <TableRow style={{ height: 53 * emptyRows }}>
+                      <TableCell colSpan={6} />
                     </TableRow>
+                  )}
+                </TableBody>
+                <TableFooter>
+                  <TableRow>
+                    <TablePagination
+                      rowsPerPageOptions={[5, 10, 25, { label: "کل", value: -1 }]}
+                      colSpan={3}
+                      count={data?.length}
+                      rowsPerPage={rowsPerPage}
+                      page={page}
+                      labelRowsPerPage='تعداد سطر های هر صفحه'
+                      // classes={{
+                      //   toolbar: classes.toolbar,
+                      //   caption: classes.caption
+                      // }}
+                      // SelectProps={{
+                      //   inputProps: { "aria-label": "none " },
+                      //   // variant="",
+                      //   native: true,
 
-                  ))}
-
-                {emptyRows > 0 && (
-                  <TableRow style={{ height: 53 * emptyRows }}>
-                    <TableCell colSpan={6} />
+                      // }}
+                      onChangePage={handleChangePage}
+                      onChangeRowsPerPage={handleChangeRowsPerPage}
+                      ActionsComponent={TablePaginationActions}
+                    />
                   </TableRow>
-                )}
-              </TableBody>
-              <TableFooter>
-                <TableRow>
-                  <TablePagination
-                    rowsPerPageOptions={[5, 10, 25, { label: "کل", value: -1 }]}
-                    colSpan={3}
-                    count={data?.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    labelRowsPerPage='تعداد سطر های هر صفحه'
-                    // classes={{
-                    //   toolbar: classes.toolbar,
-                    //   caption: classes.caption
-                    // }}
-                    // SelectProps={{
-                    //   inputProps: { "aria-label": "none " },
-                    //   // variant="",
-                    //   native: true,
-
-                    // }}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                    ActionsComponent={TablePaginationActions}
-                  />
-                </TableRow>
-              </TableFooter>
-            </Table>
-          )}
+                </TableFooter>
+              </Table>
+            )}
         </TableContainer>
       </Container>}
       {isOpen && <CustomDialog
@@ -357,17 +336,7 @@ const Orders = () => {
       >
         <OrderDetail orderObj={orderObj} delivered={value} handleClose={handleClose} />
       </CustomDialog>}
-      {/* {isOpenUpdate && <CustomDialog
-        isOpen={isOpenUpdate}
-        handleClose={handleDialogUpdateClose}
-        className={classes.dialogTitle}
-        title="افزودن/ویرایش کالا"
-      >
-        <EditProduct
-          handleClose={handleDialogUpdateClose}
-          editedObj={editedObj} />
 
-      </CustomDialog>} */}
     </main>
   );
 };

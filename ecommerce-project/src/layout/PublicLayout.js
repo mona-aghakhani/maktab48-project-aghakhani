@@ -7,7 +7,7 @@ import { Route, Switch } from "react-router-dom";
 // import ProductDetail from "../containers/eCommerce/ProductDetail";
 import Cart from "../containers/eCommerce/Cart";
 import FinalizeCart from "../containers/eCommerce/FinalizeCart";
-import Payment from "../containers/eCommerce/Payment";
+// import Payment from "../containers/eCommerce/Payment";
 import SuccessPayment from "../containers/eCommerce/SuccessPayment";
 import FailedPayment from "../containers/eCommerce/FailedPayment";
 // import NotFound from "../containers/NotFound"
@@ -55,7 +55,7 @@ export const PublicRouters = (props) => {
         <Route path="/cart" exact component={Cart} />
         <Route exact path="/finalizeCart" component={FinalizeCart} />
         {/* <Route path="/payment" exact component={Payment} /> */}
-        <Route path="/success" exact component={SuccessPayment} />
+        <Route path="/success/:id" exact component={SuccessPayment} />
         <Route path="/failed" exact component={FailedPayment} />
         <Route path="*" component={NotFound} />
       </Switch>
@@ -64,6 +64,10 @@ export const PublicRouters = (props) => {
     </>
   );
 };
+
+/*
+* without React.lazy
+*/
 
 // import React from "react";
 // import { Route, Switch } from "react-router-dom";
