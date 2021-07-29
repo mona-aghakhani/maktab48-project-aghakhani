@@ -15,6 +15,7 @@ import rtl from "jss-rtl";
 import {theme} from "./theme/index"
 import { ToastContainer } from "react-toastify";
 import { saveState } from './localStorage';
+// implement subscription
 store.subscribe(()=>{
   let state=store.getState().cartItems;
 
