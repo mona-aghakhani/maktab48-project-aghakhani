@@ -18,20 +18,20 @@ function App() {
   return (
     // <div className="App">
     <React.Fragment>
-       
+
       <Router>
         {/* <PageLayout> */}
         {/* <ToastContainer /> */}
-          <Switch>
-         
+        <Switch>
+
           <Route path="/login" exact component={AdminLogin} />
           <Route path="/shaparak/payment" exact component={Payment} />
 
-            <Route path="/admin"  component={ProtectedRouters} />
-            <Route path="/"  component={PublicRouters} />
-            
-          
-          </Switch>
+          <Route path="/admin" component={ProtectedRouters} />
+          <Route path="/" component={PublicRouters} />
+
+
+        </Switch>
         {/* </PageLayout> */}
       </Router>
     </React.Fragment>
