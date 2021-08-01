@@ -8,7 +8,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { useStyles } from "./styles"
 import { useSelector } from 'react-redux';
-
+import { isLoggedIn } from "../../utils/auth"
 const StyledBadge = withStyles((theme) => ({
     badge: {
         left: "5px",
@@ -42,10 +42,17 @@ const PublicHeader = () => {
                     >
                     </Grid>
                     <Grid item md={2} sm={4} xs={12} className={item3} container>
-                        <NavLink to="/login" exact className={link}  >
-                            <AccountCircleIcon className={svg} />
-                            <Typography> مدیریت</Typography>
-                        </NavLink >
+                        {isLoggedIn() ? (
+                            <NavLink to="/admin/products" exact className={link}  >
+                                <AccountCircleIcon className={svg} />
+                                <Typography> مدیریت</Typography>
+                            </NavLink >
+                        ) : (
+                            <NavLink to="/login" exact className={link}  >
+                                <AccountCircleIcon className={svg} />
+                                <Typography> مدیریت</Typography>
+                            </NavLink >
+                        )}
                         <NavLink to="/cart" className={link}>
                             <IconButton aria-label="cart" color="inherit">
                                 <StyledBadge badgeContent={cartItems.length}

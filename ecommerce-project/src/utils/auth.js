@@ -11,9 +11,9 @@ export const isLoggedIn = () => {
   
   export const logout = () => {
     /*
-     * Clear localStorage
+     * Remove token of localStorage
      */
   
-    localStorage.clear();
+    localStorage.removeItem("token");
     window.location.reload();
   };
